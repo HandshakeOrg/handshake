@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-
+Model for the cities table
+maps tables to python objects and
+prints the official string representation of the class
 """
 
 
@@ -16,10 +18,11 @@ class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
     state_id = db.Column(db.Integer, db.ForeignKey('state.id'), nullable=False)
-    user = db.relationship('User', backref='city', cascade='all, delete, delete-orphan')
-    
+    user = db.relationship('User', backref='city',
+                           cascade='all, delete, delete-orphan')
+
     def __repr__(self):
         """
-
+        Prints official string representation of the City class
         """
-        return f'City({self.id}, {self.name})' 
+        return f'City({self.id}, {self.name})'
