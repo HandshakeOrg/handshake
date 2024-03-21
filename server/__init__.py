@@ -8,6 +8,8 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from flask_bcrypt import Bcrypt
+
 
 # Loads the environmental variable from the .env file
 load_dotenv()
@@ -32,3 +34,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{HANDSHAKE_MYSQ
 
 # initialize the sqlalchemy orm
 db = SQLAlchemy(app)
+
+# use flask_bcrypt for safely hashing our passwords
+flask_bcrypt = Bcrypt(app)

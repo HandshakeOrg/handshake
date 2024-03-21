@@ -4,6 +4,7 @@ Start Handshake web application
 """
 from server import app, db
 from server.views import app_views
+from flask import jsonify
 
 # Creates all tables if it does not exist
 with app.app_context():
@@ -11,6 +12,37 @@ with app.app_context():
 
 # Register blueprint
 app.register_blueprint(app_views)
+
+
+@app.teardown_appcontext
+def close_db(error):
+    """Close the database"""
+    pass
+
+
+@app.errorhandler(404)
+def not_found(error):
+    """Returns 404 error with and object indicate not found"""
+    return jsonify({'error': 'not found'}), 404
+
+
+@app.errorhandler(400)
+def bad_request(error):
+    """"Return 400 when a user sends a bad request"""
+    return jsonify({'error': 'Check the details of the information for errors'}), 400
+
+
+@app.errorhandler(401)
+def unauthorized(error):
+    """Return 401 when a user is not authorized to get an information"""
+    return jsonify({'errror': 'You are not authorized to get this information'}), 401
+
+
+@app.errorhandler(500)
+def server_error(error):
+    """When a server error occurs, send a server message"""
+    return jsonify({'error': 'A server error occured, please try again later'}), 500
+
 
 # Start the application if it was not imported
 if __name__ == '__main__':
