@@ -8,7 +8,6 @@ prints the official string representation of the class
 
 from server import db
 
-
 class State(db.Model):
     """
     creates a class State which represents the states table
