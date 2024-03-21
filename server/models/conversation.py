@@ -24,7 +24,7 @@ class Conversation(db.Model):
                              nullable=False)
     listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'))
     messages = db.relationship('Message', backref='conversations',
-                               cascade='all, delete, delete-orphan')
+                               cascade='all, delete-orphan')
 
     def __repr__(self):
         """

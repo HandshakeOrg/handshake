@@ -21,10 +21,9 @@ class Category(db.Model):
     listing_validity = db.Column(db.Integer, nullable=False)
     parent_category_id = db.Column(db.Integer, db.ForeignKey('category.id'),
                                    nullable=False)
-    listing = db.relationship('Listing', backref='category',
-                              cascade='all, delete, delete-orphan')
+    listing = db.relationship('Listing', backref='category')
     attribute = db.relationship('Attribute', backref='category',
-                                cascade='all, delete, delete-orphan')
+                                cascade='all, delete-orphan')
 
     def __repr__(self):
         """

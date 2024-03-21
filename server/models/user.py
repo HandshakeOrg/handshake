@@ -25,13 +25,13 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'), nullable=False)
     listings = db.relationship('Listing', backref='user',
-                               cascade='all, delete, delete-orphan')
+                               cascade='all, delete-orphan')
     sender = db.relationship('Conversation', backref='sender',
                              foreign_keys='Conversation.sender_id',
-                             cascade='all, delete, delete-orphan')
+                             cascade='all, delete-orphan')
     receiver = db.relationship('Conversation', backref='receiver',
                                foreign_keys='Conversation.recipient_id',
-                               cascade='all, delete, delete-orphan')
+                               cascade='all, delete-orphan')
     """messages = db.relationship('Message', backref='users',
                                   cascade='all, delete, delete-orphan')"""
 

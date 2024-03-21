@@ -18,8 +18,7 @@ class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
     state_id = db.Column(db.Integer, db.ForeignKey('state.id'), nullable=False)
-    user = db.relationship('User', backref='city',
-                           cascade='all, delete, delete-orphan')
+    user = db.relationship('User', backref='city')
 
     def __repr__(self):
         """

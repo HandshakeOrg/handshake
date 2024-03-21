@@ -31,11 +31,11 @@ class Listing(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     image = db.relationship('Listing_image', backref='listings',
-                            cascade='all, delete, delete-orphan')
+                            cascade='all, delete-orphan')
     attribute = db.relationship('Listing_attribute', backref='listings',
-                                cascade='all, delete, delete-orphan')
+                                cascade='all, delete-orphan')
     conversations = db.relationship('Conversation', backref='listings',
-                                    cascade='all, delete, delete-orphan')
+                                    cascade='all, delete-orphan')
 
     def __repr__(self):
         """
