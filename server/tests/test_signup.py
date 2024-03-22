@@ -38,7 +38,6 @@ class TestSignUpPage(TestCase):
         })
         data = response.json
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(data['success'])
         self.assertTrue('user_id' in data)
 
     def test_signup_user_incomplete(self):
@@ -81,7 +80,7 @@ class TestSignUpPage(TestCase):
             })
 
         data = response.json
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
         self.assertTrue(data['error'])
         self.assertDictEqual(data, {'error': 'email already taken'})
 

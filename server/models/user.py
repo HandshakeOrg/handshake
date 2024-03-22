@@ -6,11 +6,21 @@ prints the official string representation of the class
 """
 
 
-from server import db
+from server import db, login_manager
 from datetime import datetime
+from flask_login import UserMixin
 
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    """
+    wrapper function
+    loads a user from the database by the user_id
+    """
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
     """
     creates a class User which represents the users table
     Map the ORM to python object
