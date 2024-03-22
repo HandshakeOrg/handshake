@@ -1,10 +1,20 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Signup.module.css';
 
 function Signup() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(username, email, password);
+  };
+
   return (
     <main className={styles.main}>
-      <form className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.title}>
           <h1 className={styles.h1}>Create an account</h1>
           <p className={styles.p}>Enter your information to get started</p>
@@ -16,11 +26,19 @@ function Signup() {
               id="username"
               placeholder="Enter your username"
               type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className={styles.input_space}>
             <label htmlFor="email">Email</label>
-            <input id="email" placeholder="Enter your email" type="email" />
+            <input
+              id="email"
+              placeholder="Enter your email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className={styles.input_space}>
             <label htmlFor="password">Password</label>
@@ -28,6 +46,8 @@ function Signup() {
               id="password"
               placeholder="Enter your password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button className={styles.button}>Sign Up</button>

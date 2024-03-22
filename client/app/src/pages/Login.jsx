@@ -1,10 +1,19 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+  };
+
   return (
     <main className={styles.main}>
-      <form className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.center}>
           <h1 className={styles.title}>HANDSHAKE</h1>
           <p className={styles.sub_title}>Welcome back</p>
@@ -17,6 +26,8 @@ function Login() {
               placeholder="m@example.com"
               required
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className={styles.input_box}>
@@ -26,7 +37,13 @@ function Login() {
                 Forgot your password?
               </Link>
             </div>
-            <input id="password" required type="password" />
+            <input
+              id="password"
+              required
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <button className={styles.button}>Login</button>
         </div>
