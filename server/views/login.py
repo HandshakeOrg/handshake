@@ -19,7 +19,7 @@ def login():
     """
     email = request.form.get('email')
     password = request.form.get('password')
-    
+
     if current_user.is_authenticated:
         return redirect(url_for('list'))
     if not email:
