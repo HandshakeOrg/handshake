@@ -41,6 +41,20 @@ class TestSignUpPage(TestCase):
         self.assertTrue(data['success'])
         self.assertTrue('user_id' in data)
 
+    def test_signup_user_incomplete(self):
+        """Test that users signup not successful"""
+        with self.client:
+            response = self.client.post('/api/signup', data = {
+            'lastname': 'sRaymond',
+            'email': 'aymond@gmail.com',
+            'password': '112345',
+            'confirm_password': '112345',
+            'phone_number': '233455632'
+        })
+        data = response.json
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(data, {'error': f"Provide the firstname fields!"})
+
     def test_signup_user_failure(self):
         """Test that users signup successfully"""
         with self.app.app_context():

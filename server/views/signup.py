@@ -27,12 +27,19 @@ def signupUser():
         phone_number = request.form.get('phone_number')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
+    else:
+        return jsonify({'error': 'You need to specify the header for the data'}), 403
 
-    data = [firstname, lastname, email, phone_number, password, confirm_password]
+    data = {'firstname': firstname,
+            'lastname': lastname,
+            'email': email,
+            'phone_number': phone_number,
+            'password': password,
+            'confirm_password': confirm_password}
 
-    for datum in data:
-        if not datum:
-            return jsonify({'error': f"Provide the {datum} fields!"})
+    for datum in data.keys():
+        if not data[datum]:
+            return jsonify({'error': f"Provide the {datum} fields!"}), 403
     try:
         # No two user can have the same email
         user = User.query.filter_by(email=email).first()
@@ -62,4 +69,5 @@ def signupUser():
         db.session.commit()
         return jsonify({'success': True, 'user_id': user.id })
     except Exception as e:
+        print(e)
         abort(400)
