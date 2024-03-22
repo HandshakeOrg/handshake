@@ -10,12 +10,23 @@ def signupUser():
     # For a user to signup, the:
     # firstname, lastname, email, phone_number, password, confirm_password
     # fields must be provided
-    firstname = request.form.get('firstname')
-    lastname = request.form.get('lastname')
-    email = request.form.get('email')
-    phone_number = request.form.get('phone_number')
-    password = request.form.get('password')
-    confirm_password = request.form.get('confirm_password')
+    # 
+    # if the content type is application/json use request.json
+    # if it is a form data use reques.form "application/x-www-form-urlencoded"
+    if request.headers['Content-Type'] == 'application/json':
+        firstname = request.json.get('firstname')
+        lastname = request.json.get('lastname')
+        email = request.json.get('email')
+        phone_number = request.json.get('phone_number')
+        password = request.json.get('password')
+        confirm_password = request.json.get('confirm_password')
+    elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
+        firstname = request.form.get('firstname')
+        lastname = request.form.get('lastname')
+        email = request.form.get('email')
+        phone_number = request.form.get('phone_number')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
 
     data = [firstname, lastname, email, phone_number, password, confirm_password]
 
