@@ -30,11 +30,11 @@ function Signup() {
               type="password"
             />
           </div>
-          <button className="w-full">Sign Up</button>
+          <button className={styles.button}>Sign Up</button>
           <div className={(styles.input_space, styles.center)}>
             <p className={styles.footer_p}>
-              Already have an account?
-              <Link to="#" className="underline">
+              Already have an account? &nbsp;
+              <Link to="#" className={styles.underline}>
                 Login
               </Link>
             </p>

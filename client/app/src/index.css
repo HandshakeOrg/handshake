@@ -1,3 +1,14 @@
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+  --text: #0b0d15;
+  --background: #f6f7fa;
+  --primary: #5e72a8;
+  --secondary: #b4a1cc;
+  --accent: #af8abf;
+}
+
 /* Reset default margin and padding */
 body,
 h1,
@@ -22,13 +33,19 @@ textarea {
 
 /* Set default font-family and font-size */
 body {
-  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
+  font-variation-settings: 'slnt' 0;
   font-size: 16px;
 }
 
 /* Style links */
 a {
-  color: #007bff;
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -41,12 +58,17 @@ ol {
 /* Style buttons */
 button,
 input[type='submit'] {
-  background-color: #007bff;
+  background-color: var(--primary);
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
+}
+button:hover,
+input[type='submit'] {
+  background-color: var(--secondary);
+  color: var(--text);
 }
 
 /* Style form inputs */
