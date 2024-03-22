@@ -9,6 +9,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 
 # Loads the environmental variable from the .env file
@@ -21,8 +22,18 @@ HANDSHAKE_MYSQL_USER = os.environ.get('HANDSHAKE_MYSQL_USER')
 HANDSHAKE_MYSQL_PWD = os.environ.get('HANDSHAKE_MYSQL_PWD')
 HANDSHAKE_MYSQL_ENV = os.environ.get('HANDSHAKE_MYSQL_ENV')
 
+# Create an instance of LoginManager
+login_manager = LoginManager()
+
 # Initialize flask application
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
+login_manager.init_app(app)
+
+# Customize login process
+login_manager.login_view = 'views.login.login'
+login_manager.login_message_category = 'info'
+login_manager.login_message = 'Please log in to access this page.'
 
 # Set up secret key for signing sessions
 # import secrets
