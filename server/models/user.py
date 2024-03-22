@@ -23,7 +23,7 @@ class User(db.Model):
     password = db.Column(db.String(120), nullable=False)
     phone_number = db.Column(db.String(60), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-    city_id = db.Column(db.Integer, db.ForeignKey('city.id'), nullable=False)
+    city_id = db.Column(db.Integer, db.ForeignKey('city.id'), nullable=True)
     listings = db.relationship('Listing', backref='user',
                                cascade='all, delete-orphan')
     sender = db.relationship('Conversation', backref='sender',
