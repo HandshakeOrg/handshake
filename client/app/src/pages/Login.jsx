@@ -49,7 +49,7 @@ function Login() {
         </div>
         <div className={styles.pass}>
           Don't have an account? &nbsp;
-          <Link className={styles.underline} href="#">
+          <Link className={styles.underline} to="/signup">
             Sign up
           </Link>
         </div>

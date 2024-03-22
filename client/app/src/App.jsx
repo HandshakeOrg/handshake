@@ -1,12 +1,21 @@
-import { BrowserRouter } from 'react-router-dom';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import SpinnerFullPage from './components/SpinnerFullPage';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const Signup = lazy(() => import('./pages/Signup'));
+const Login = lazy(() => import('./pages/Login'));
 
 function App() {
   return (
     <BrowserRouter>
-      <Signup />
-      {/* <Login /> */}
+      <Suspense fallback={<SpinnerFullPage />}>
+        <Routes>
+          <Route index element={<HomePage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

@@ -54,7 +54,7 @@ function Signup() {
           <div className={(styles.input_space, styles.center)}>
             <p className={styles.footer_p}>
               Already have an account? &nbsp;
-              <Link to="#" className={styles.underline}>
+              <Link to="/login" className={styles.underline}>
                 Login
               </Link>
             </p>
