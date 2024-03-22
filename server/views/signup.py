@@ -17,11 +17,16 @@ def signupUser():
     password = request.form.get('password')
     confirm_password = request.form.get('confirm_password')
 
-    data = [firstname, lastname, email, phone_number, password, confirm_password]
+    data = {'firstname': firstname,
+            'lastname': lastname,
+            'email': email,
+            'phone_number': phone_number,
+            'password': password,
+            'confirm_password': confirm_password}
 
-    for i, datum in enumerate(data):
-        if not datum:
-            return jsonify({'error': f"Provide the {data[i]} fields!"})
+    for datum in data.keys():
+        if not data[datum]:
+            return jsonify({'error': f"Provide the {datum} fields!"})
     try:
         # No two user can have the same email
         user = User.query.filter_by(email=email).first()
