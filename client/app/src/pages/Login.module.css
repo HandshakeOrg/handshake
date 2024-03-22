@@ -1,0 +1,58 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+.center {
+  text-align: center;
+}
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+}
+.sub_title {
+  color: var(--primary);
+}
+.input_box {
+  margin-bottom: 1rem;
+}
+.input_space {
+  margin-bottom: 0.5rem;
+}
+.underline {
+  text-decoration: underline;
+}
+.forgot_container {
+  display: flex;
+  align-items: center;
+}
+.forgot {
+  margin-left: auto;
+  display: inline-block;
+  font-size: 0.875rem;
+}
+
+.button {
+  width: 100%;
+}
+
+.pass {
+  text-align: center;
+  font-size: 0.875rem;
+}
