@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Login.module.css';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./Login.module.css";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function Login() {
           <div className={styles.input_box}>
             <div className={styles.forgot_container}>
               <label htmlFor="password">Password</label>
-              <Link className={styles.forgot} href="#">
+              <Link className={styles.forgot} to="#">
                 Forgot your password?
               </Link>
             </div>
@@ -48,7 +48,7 @@ function Login() {
           <button className={styles.button}>Login</button>
         </div>
         <div className={styles.pass}>
-          Don't have an account? &nbsp;
+          Don&apos;t have an account? &nbsp;
           <Link className={styles.underline} to="/signup">
             Sign up
           </Link>
