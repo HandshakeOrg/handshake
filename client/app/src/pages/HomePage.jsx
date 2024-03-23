@@ -1,9 +1,9 @@
-import PostJob from '../components/PostJob';
+import Header from "../components/Header/Header";
 
 function HomePage() {
   return (
     <div>
-      <PostJob />
+      <Header />
     </div>
   );
 }

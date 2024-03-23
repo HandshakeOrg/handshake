@@ -1,10 +1,10 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
-import SpinnerFullPage from './components/SpinnerFullPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import SpinnerFullPage from "./components/Spinners/SpinnerFullPage";
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const Signup = lazy(() => import('./pages/Signup'));
-const Login = lazy(() => import('./pages/Login'));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Login = lazy(() => import("./pages/Login"));
 
 function App() {
   return (
