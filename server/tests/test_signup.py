@@ -1,5 +1,5 @@
 import unittest
-from flask import Flask
+from flask import Flask, json
 from flask_testing import TestCase
 from server.views import app_views
 from server.models import User
@@ -28,14 +28,15 @@ class TestSignUpPage(TestCase):
     def test_signup_user_success(self):
         """Test that users signup successfully"""
         with self.client:
-            response = self.client.post('/api/signup', data = {
+            data2 = {
             'firstname': 'sdominic',
             'lastname': 'sRaymond',
             'email': 'aymond@gmail.com',
             'password': '112345',
             'confirm_password': '112345',
             'phone_number': '233455632'
-        })
+            }
+            response = self.client.post('/api/signup', data=data2)
         data = response.json
         self.assertEqual(response.status_code, 200)
         self.assertTrue('user_id' in data)
@@ -52,7 +53,7 @@ class TestSignUpPage(TestCase):
         })
         data = response.json
         self.assertEqual(response.status_code, 403)
-        self.assertEqual(data, {'error': f"Provide the firstname fields!"})
+        self.assertEqual(data, {'error': f"Provide the firstname field!"})
 
     def test_signup_user_failure(self):
         """Test that users signup successfully"""

@@ -13,22 +13,25 @@ def signupUser():
     # 
     # if the content type is application/json use request.json
     # if it is a form data use reques.form "application/x-www-form-urlencoded"
-    if request.headers['Content-Type'] == 'application/json':
-        firstname = request.json.get('firstname')
-        lastname = request.json.get('lastname')
-        email = request.json.get('email')
-        phone_number = request.json.get('phone_number')
-        password = request.json.get('password')
-        confirm_password = request.json.get('confirm_password')
-    elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
-        firstname = request.form.get('firstname')
-        lastname = request.form.get('lastname')
-        email = request.form.get('email')
-        phone_number = request.form.get('phone_number')
-        password = request.form.get('password')
-        confirm_password = request.form.get('confirm_password')
-    else:
-        return jsonify({'error': 'You need to specify the header for the data'}), 403
+    try:
+        if request.headers['Content-Type'] == 'application/json':
+            firstname = request.json.get('firstname')
+            lastname = request.json.get('lastname')
+            email = request.json.get('email')
+            phone_number = request.json.get('phone_number')
+            password = request.json.get('password')
+            confirm_password = request.json.get('confirm_password')
+        elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
+            firstname = request.form.get('firstname')
+            lastname = request.form.get('lastname')
+            email = request.form.get('email')
+            phone_number = request.form.get('phone_number')
+            password = request.form.get('password')
+            confirm_password = request.form.get('confirm_password')
+        else:
+            return jsonify({'error': 'You need to specify the header for the data'}), 403
+    except Exception:
+        abort(400)
 
     data = {'firstname': firstname,
             'lastname': lastname,
@@ -39,7 +42,7 @@ def signupUser():
 
     for datum in data.keys():
         if not data[datum]:
-            return jsonify({'error': f"Provide the {datum} fields!"}), 403
+            return jsonify({'error': f"Provide the {datum} field!"}), 403
     try:
         # No two user can have the same email
         user = User.query.filter_by(email=email).first()
