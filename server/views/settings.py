@@ -8,7 +8,7 @@ update contact information and password
 from server import db, bcrypt
 from server.models.user import User
 from server.views import app_views
-from flask import jsonify
+from flask import jsonify, request
 from flask_login import current_user, login_required
 
 
@@ -44,7 +44,7 @@ def load_settings():
 
 
 @login_required
-@app_views.route('settings/changepass', methods=['POST'], strict_slashes=False)
+@app_views.route('/settings/changepass', methods=['POST'], strict_slashes=False)
 def change_password():
     """
     change a user's password
@@ -59,7 +59,7 @@ def change_password():
 
 
 @login_required
-@app_views.route('settings/update/email', methods=['POST'], strict_slashes=False)
+@app_views.route('/settings/changeemail', methods=['POST'], strict_slashes=False)
 def update_email():
     """
     change/update a user email address
@@ -77,7 +77,7 @@ def update_email():
 
 
 @login_required
-@app_views.route('settings/update/phone', methods=['POST'], strict_slashes=False)
+@app_views.route('/settings/changephone', methods=['POST'], strict_slashes=False)
 def update_phone():
     """
     change/update a user phone number
@@ -92,3 +92,16 @@ def update_phone():
         return jsonify('success': 'Your phone number has been updated'}), 200
     else:
         return jsonify({'error': 'This phone number has already been registered by another user'})
+
+
+@login_required
+@app_views.route('/settings/delete', methods=['DELETE'], strict_slashes=False)
+def delete_account():
+    """
+    deletes a user account
+    """
+    user = User.query.get(current_user.id)
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({'You account has been deleted.'}), 200
+

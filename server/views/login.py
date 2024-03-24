@@ -30,7 +30,15 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
-            return jsonify({'current_user': current_user}), 200
+            return jsonify({'current_user': {
+                            'id': current_user.id,
+                            'firstname': current_user.firstname,
+                            'lastname': current_user.lastname,
+                            'email': current_user.email,
+                            'phone_number': current_user.phone_number,
+                            'city_id': current_user.city_id
+                            }
+            }), 200
         else:
             return jsonify({'error': 'Login unsuccessful, \
                             please check email or password'}), 400
