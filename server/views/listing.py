@@ -240,7 +240,7 @@ def get_listings():
 
     # This sets the number of listings per page
     listing_per_page = 10
-    listings = Listing.query.paginate(page, listing_per_page, False)
+    listings = Listing.query.paginate(page=page, per_page=listing_per_page, count=False)
     total_pages = listings.pages
 
     if listings.has_next:

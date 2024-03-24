@@ -5,6 +5,7 @@ from server.views import app_views
 from server.models import User, Listing
 from server import db
 from flask_login import LoginManager, current_user, login_user
+from datetime import datetime
 
 
 class TestSignUpPage(TestCase):
@@ -109,7 +110,7 @@ class TestSignUpPage(TestCase):
                             location='Nigeria',
                             status='active',
                             price_negotiable='$1000',
-                            expiry_date='2024-03-22 12:34:56',
+                            expiry_date=datetime.strptime('2024-03-22 12:34:56', '%Y-%m-%d %H:%M:%S'),
                             user_id=user.id,
                             category_id='fakeId')
                 db.session.add(listing)
@@ -125,8 +126,8 @@ class TestSignUpPage(TestCase):
                             'user_id': user.id,
                             'category_id': 'fakeId'
                         }
-            #  send request to the server
-                response = self.client.post('/api/update_listings', 
+            #  send request to the test server
+                response = self.client.put(f'/api/update_listings/{listing.id}', 
                                 data=json.dumps(data2),
                                 headers={'Content-Type': 'application/json'},
                                 environ_base={'REMOTE_ADDR': '127.0.0.1'},
@@ -136,6 +137,18 @@ class TestSignUpPage(TestCase):
         data = response.json
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(data, {'success': 'Listing was updated successfully!'})
+
+
+    def test_listing_get(self):
+        """Test the listing get request"""
+        with self.client:
+            response = self.client.get('/api/get_listings')
+        data = response.json
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('listings' in data)
+        self.assertTrue('total_pages' in data)
+        self.assertTrue('prev_page' in data)
+        self.assertTrue('next_page' in data)
 
 
 if __name__ == '__main__':
