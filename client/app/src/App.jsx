@@ -5,6 +5,7 @@ import SpinnerFullPage from "./components/Spinners/SpinnerFullPage";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Login"));
+// const PostJob = lazy(() => import("./components/PostJob/PostJob"));
 
 function App() {
   return (
