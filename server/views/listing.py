@@ -185,7 +185,7 @@ def update_listings(listing_id):
             file_path = os.path.join(UPLOAD_LIST_IMAGE_FOLDER, image_filename)
             image_file.save(file_path)
             image = True
-    listing = Listing.query.get(int(listing_id))
+    listing = db.session.query(Listing).filter_by(id=listing_id).first()
     if not listing:
         return jsonify({'error': 'Listing is not found'}), 400
 
@@ -206,6 +206,7 @@ def update_listings(listing_id):
         return jsonify({'success': 'Listing was updated successfully!'}), 200
 
     except Exception as e:
+        print(e)
         db.session.rollback()
         if image and os.path.exists(file_path):
             os.remove(file_path)
@@ -220,15 +221,16 @@ def delete_listings(listing_id):
     # Users must be logged in to make a post
     if not current_user.is_authenticated:
         return jsonify({'error': 'Please login to your account!'}), 403
-    listing = Listing.query.get_or_404(listing_id)
+    listing = db.session.query(Listing).filter_by(id=listing_id).first()
     if listing:
         try:
-            db.session.delete()
+            db.session.delete(listing)
             db.session.commit()
+            return jsonify({'success': 'Deleted successfully'}), 200
         except Exception as e:
             db.session.rollback()
             return jsonify({'error': 'An error occured while trying to delete listing!'}), 500
-
+    return jsonify({'error': 'Could not find the listing id!'})
 
 # Users must be able to get all the listings page by page
 @app_views.route('/get_listings', strict_slashes=False, methods=['GET'])

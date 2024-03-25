@@ -151,5 +151,41 @@ class TestSignUpPage(TestCase):
         self.assertTrue('next_page' in data)
 
 
+    def test_listing_delete(self):
+        """Test the listing if it will delete"""
+        with self.app.app_context():
+            # Example: Add a user to the database
+            user = User(
+                firstname='sdominic',
+                lastname='sRaymond',
+                email='saymond@gmail.com',
+                phone_number='233455632',
+                password='112345',
+                city_id=None
+            )
+            # Login the user
+            login_user(user)
+            db.session.add(user)
+
+            with self.client:
+                listing = Listing(user_type='seller',
+                            title='Software Product',
+                            description='This laptop is the',
+                            location='Nigeria',
+                            status='active',
+                            price_negotiable='$1000',
+                            expiry_date=datetime.strptime('2024-03-22 12:34:56', '%Y-%m-%d %H:%M:%S'),
+                            user_id='fake_id',
+                            category_id='fakeId')
+                db.session.add(listing)
+                db.session.commit()
+
+                 #  send request to the test server
+                response = self.client.delete(f'/api/delete_listings/{listing.id}')
+            data = response.json
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue('success' in data)
+
+
 if __name__ == '__main__':
     unittest.main()
