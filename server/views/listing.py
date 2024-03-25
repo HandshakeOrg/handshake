@@ -277,10 +277,3 @@ def get_listings():
         'prev_page': prev_page,
         'next_page': next_page
     }), 200
-
-# Users must be able to get all the listing 
-#   based on location in the query parameter
-#   based on age of the listing
-#   based on category of the listing
-#   based on attribute
-

@@ -9,3 +9,4 @@ from server.views.listing import *
 from server.views.signup import *
 from server.views.login import *
 from server.views.logout import *
+from server.views.listing_search import *
