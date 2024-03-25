@@ -1,19 +1,18 @@
-import React from 'react';
-import './BodySection.css';
-import JobCard from './JobCard';
-import JobDescription from './JobDescription';
+import "./BodySection.css";
+import JobCard from "./JobCard";
+import JobDescription from "./JobDescription";
 export default function BodySection() {
   return (
     <div>
-      <section className='search'>
-        <div className='form-container'>
-          <form action=''>
-            <div class='form'>
-              <div className='search-field'>
-                <input type='text' />
+      <section className="search">
+        <div className="form-container">
+          <form action="">
+            <div className="form">
+              <div className="search-field">
+                <input type="text" />
               </div>
-              <div className='search-button-box'>
-                <button type='submit' className='search-button'>
+              <div className="search-button-box">
+                <button type="submit" className="search-button">
                   Find jobs
                 </button>
               </div>
@@ -22,8 +21,8 @@ export default function BodySection() {
         </div>
       </section>
 
-      <section className='jobs'>
-        <div className='job-listings'>
+      <section className="jobs">
+        <div className="job-listings">
           <JobCard />
           <JobCard />
           <JobCard />
@@ -34,7 +33,7 @@ export default function BodySection() {
           <JobCard />
           <JobCard />
         </div>
-        <div className='job-description'>
+        <div className="job-description">
           <JobDescription />
         </div>
       </section>
