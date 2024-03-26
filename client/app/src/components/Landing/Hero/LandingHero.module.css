@@ -36,3 +36,99 @@
 .btns:hover {
   background-color: var(--accent);
 }
+/* apply btns */
+.apply_btns {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--background);
+  color: var(--text);
+  border: 1px solid transparent;
+}
+.apply_btns:hover {
+  border: 1px solid black;
+  background: none;
+}
+
+/* first */
+.first {
+  padding: 1.5rem 40px;
+  text-align: center;
+  color: var(--text);
+}
+.first .wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.first h2 {
+  font-size: (1.5rem, 3vw, 3rem);
+  font-size: clamp(2.25rem, 0.5vw + 1rem, 4rem);
+  padding: 0.5rem 0;
+}
+.first p {
+  font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+  padding: 0.5rem 0;
+}
+
+.second {
+  padding: 40px;
+  background-color: var(--secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.seek_text,
+.seek_img {
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+.seek_text {
+  padding: 20px 0;
+}
+.seek_text p:nth-child(2) {
+  font-size: 1rem;
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+.seek_text p:nth-child(3) {
+  line-height: 1.5;
+  letter-spacing: -0.05em;
+  margin-bottom: 2rem;
+}
+
+.seek_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* third */
+.third {
+  margin-top: 2rem;
+  padding: 40px;
+  background-color: var(--accent);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.employers,
+.seek_img {
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+.employers {
+  padding: 20px 0;
+}
+.employers p:nth-child(2) {
+  font-size: 1rem;
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+.employers p:nth-child(3) {
+  line-height: 1.5;
+  letter-spacing: -0.05em;
+  margin-bottom: 2rem;
+}

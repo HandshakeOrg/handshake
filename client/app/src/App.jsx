@@ -1,19 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import SpinnerFullPage from "./components/Spinners/SpinnerFullPage";
-import Landing from "./components/Landing/Landing";
 
-// const HomePage = lazy(() => import("./pages/HomePage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Login"));
-// const PostJob = lazy(() => import("./components/PostJob/PostJob"));
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<SpinnerFullPage />}>
         <Routes>
-          <Route index element={<Landing />} />
+          <Route index element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
