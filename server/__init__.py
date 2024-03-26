@@ -48,3 +48,18 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://handshake_test_db_user:8xhja22cqBQJkeOFd4FsI6ZoRDgolouE@dpg-co0trv7jbltc73955hsg-a/handshake_test_db'
 # initialize the sqlalchemy orm
 db = SQLAlchemy(app)
+
+# Configure the file upload
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+# Determines the absolute path for the upload folder
+UPLOAD_LIST_IMAGE_FOLDER = os.path.join(app.root_path, 'static', 'uploads', 'listing_images')
+app.config['UPLOAD_LIST_IMAGE_FOLDER'] = UPLOAD_LIST_IMAGE_FOLDER
+
+# Create the upload folder if it doesn't exist
+if not os.path.exists(UPLOAD_LIST_IMAGE_FOLDER):
+    os.makedirs(UPLOAD_LIST_IMAGE_FOLDER)
