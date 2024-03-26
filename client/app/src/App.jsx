@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import SpinnerFullPage from "./components/Spinners/SpinnerFullPage";
-import LandNav from "./components/Landing/LandNav";
+import Landing from "./components/Landing/Landing";
 
 // const HomePage = lazy(() => import("./pages/HomePage"));
 const Signup = lazy(() => import("./pages/Signup"));
@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<SpinnerFullPage />}>
         <Routes>
-          <Route index element={<LandNav />} />
+          <Route index element={<Landing />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>

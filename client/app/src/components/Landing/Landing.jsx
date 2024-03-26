@@ -1,7 +1,14 @@
+import LandingHero from "./Hero/LandingHero";
 import styles from "./Landing.module.css";
+import LandNav from "./Nav/LandNav";
 
 function Landing() {
-  return <main className={styles.main}></main>;
+  return (
+    <main className={styles.main}>
+      <LandNav />
+      <LandingHero />
+    </main>
+  );
 }
 
 export default Landing;
@@ -16,40 +23,11 @@ export default Landing;
 // export default function Component() {
 //   return (
 //     <div className="flex flex-col min-h-[100dvh]">
-//       <header className="px-4 lg:px-6 py-4 lg:py-8 flex items-center">
-//         <div className="flex items-center space-x-4">
-//           <Link className="flex items-center space-x-2" href="#">
-//             <BriefcaseIcon className="h-6 w-6" />
-//             <span className="font-bold text-2xl tracking-tighter sm:text-3xl">Classifieds</span>
-//           </Link>
-//         </div>
-//         <nav className="ml-auto flex gap-4 sm:gap-6 lg:gap-8">
-//           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-//             Real Estate
-//           </Link>
-//           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-//             Jobs
-//           </Link>
-//           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-//             Vehicles
-//           </Link>
-//           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-//             Electronics
-//           </Link>
-//         </nav>
-//       </header>
+//
 //       <main className="flex-1">
 //         <section className="w-full py-6 md:py-12 xl:py-16 bg-gray-100 dark:bg-gray-800">
 //           <div className="container flex flex-col items-center justify-center gap-4 px-4 md:px-6 text-center">
-//             <div className="space-y-2">
-//               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-//                 Find what you're looking for
-//               </h1>
-//               <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-//                 The best place to find your next adventure. From job postings to real estate listings, we've got you
-//                 covered.
-//               </p>
-//             </div>
+//
 //             <div className="mx-auto max-w-sm space-y-2">
 //               <form className="flex flex-col gap-2 md:flex-row md:gap-4 lg:gap-2">
 //                 <Input className="max-w-md" placeholder="Enter a keyword" type="text" />
