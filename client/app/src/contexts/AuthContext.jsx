@@ -14,6 +14,8 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case "createAccount":
+      return { ...state, user: action.payload };
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
@@ -29,6 +31,30 @@ function AuthProvider({ children }) {
     initialState,
   );
   const [loading, setLoading] = useState(false);
+
+  async function createAccount(data) {
+    try {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: "createAccount", payload: data.user });
+      } else {
+        setLoading(false);
+        throw new Error("Invalid credentials");
+      }
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      toast.error("Invalid credentials. Please try again.");
+    }
+  }
 
   async function login(credentials) {
     try {
@@ -63,6 +89,7 @@ function AuthProvider({ children }) {
       value={{
         user,
         isAuthenticated,
+        createAccount,
         login,
         logout,
         loading,

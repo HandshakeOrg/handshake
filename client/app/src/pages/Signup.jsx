@@ -1,14 +1,25 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./Signup.module.css";
+import {
+  isEmpty,
+  isEmail,
+  isLength,
+  isMatch,
+} from "../utils/validation/AuthValidation";
+import { toast } from "react-toastify";
+import Spinner from "../components/Spinners/Spinner";
 
 function Signup() {
+  const { createAccount, user, loading } = useAuth();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_password] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,8 +31,40 @@ function Signup() {
       password,
       confirm_password,
     };
-    console.log(data);
+
+    if (isEmpty(firstname)) {
+      toast.error("Please enter your first name.");
+      return;
+    }
+    if (isEmpty(lastname)) {
+      toast.error("Please enter your last name.");
+      return;
+    }
+    if (!isEmail(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    if (!isLength(password)) {
+      toast.error("Please enter a password with at least 8 characters.");
+      return;
+    }
+    if (!isMatch(password, confirm_password)) {
+      toast.error("The passwords you entered do not match.");
+      return;
+    }
+    if (isEmpty(phone_number)) {
+      toast.error("Please enter your phone number.");
+      return;
+    }
+
+    createAccount(data);
   };
+  useEffect(
+    function () {
+      if (user) navigate("/app", { replace: true });
+    },
+    [user, navigate],
+  );
 
   return (
     <main className={styles.main}>
@@ -108,6 +151,7 @@ function Signup() {
           </div>
         </div>
       </form>
+      {loading && <Spinner />}
     </main>
   );
 }

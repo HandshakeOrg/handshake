@@ -8,7 +8,7 @@ export const isEmpty = (value) => {
 export const isEmail = (email) => {
   // Regular expression to match a valid email address
   const regex =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   // test method returns true if the email matches the regex, and false otherwise
   return regex.test(email);
 };
@@ -16,7 +16,7 @@ export const isEmail = (email) => {
 // isLength function to check if the given password is at least 6 characters long
 export const isLength = (password) => {
   // Using the optional chaining operator (?.) to safely check the length of the password
-  return password?.length >= 6;
+  return password?.length >= 8;
 };
 
 // isMatch function to check if the given password and confirmation password match

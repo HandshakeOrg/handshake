@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./components/Spinners/Spinner";
 import { AuthProvider } from "./contexts/AuthContext";
+import MainApp from "./pages/MainApp";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Signup = lazy(() => import("./pages/Signup"));
@@ -20,6 +21,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/app" element={<MainApp />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
