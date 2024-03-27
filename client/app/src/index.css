@@ -1,5 +1,5 @@
 /* FONT */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 :root {
   --text: #0b0d15;
@@ -35,10 +35,10 @@ textarea {
 body {
   background: var(--background);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings: 'slnt' 0;
+  font-variation-settings: "slnt" 0;
   font-size: 16px;
 }
 
@@ -56,7 +56,7 @@ ol {
 
 /* Style buttons */
 button,
-input[type='submit'] {
+input[type="submit"] {
   background-color: var(--primary);
   color: #fff;
   border: none;
@@ -65,19 +65,21 @@ input[type='submit'] {
   cursor: pointer;
 }
 button:hover,
-input[type='submit'] {
+input[type="submit"] {
   background-color: var(--secondary);
   color: var(--text);
 }
 
 /* Style form inputs */
-input[type='text'],
-input[type='email'],
-input[type='password'],
+input[type="text"],
+input[type="email"],
+input[type="password"],
 textarea {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid transparent;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
+  border-image: url(https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=400)
+    30 round;
 }
