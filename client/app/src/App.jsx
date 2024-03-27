@@ -19,9 +19,9 @@ function App() {
         <Suspense fallback={<Spinner />}>
           <Routes>
             <Route index element={<HomePage />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/app" element={<MainApp />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
+            <Route path="app" element={<MainApp />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
