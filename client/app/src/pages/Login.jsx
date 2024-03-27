@@ -1,15 +1,32 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./Login.module.css";
+import { useAuth } from "../contexts/AuthContext";
+import Spinner from "../components/Spinners/Spinner";
 
 function Login() {
+  const { login, isAuthenticated, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    if (!email || !password) {
+      toast.error("Email and password cannot be empty.");
+      return;
+    }
+    login(email, password);
   };
+
+  useEffect(
+    function () {
+      if (isAuthenticated === true) navigate("/app", { replace: true });
+    },
+    [isAuthenticated, navigate],
+  );
 
   return (
     <main className={styles.main}>
@@ -54,6 +71,7 @@ function Login() {
           </Link>
         </div>
       </form>
+      {loading && <Spinner />}
     </main>
   );
 }

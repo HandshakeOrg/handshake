@@ -1,22 +1,30 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import SpinnerFullPage from "./components/Spinners/SpinnerFullPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Spinner from "./components/Spinners/Spinner";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Login"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<SpinnerFullPage />}>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <ToastContainer />
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
