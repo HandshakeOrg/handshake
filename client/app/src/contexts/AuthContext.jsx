@@ -69,6 +69,7 @@ function AuthProvider({ children }) {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         dispatch({ type: "login", payload: data.user });
       } else {
         setLoading(false);
