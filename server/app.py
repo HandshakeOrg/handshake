@@ -3,6 +3,7 @@
 Start Handshake web application
 """
 from server import app, db
+from flask_cors import CORS
 from server.views import app_views
 from flask import jsonify
 
@@ -12,7 +13,7 @@ with app.app_context():
 
 # Register blueprint
 app.register_blueprint(app_views)
-
+cors = CORS(app, resources={r'/api/*': {'origins': ['http://localhost:5000', 'https://handshake-sage.vercel.app']}})
 
 @app.teardown_appcontext
 def close_db(error):
