@@ -19,7 +19,7 @@ def login():
     """
 
     if current_user.is_authenticated:
-        return jsonify({'success': 'User is already logged in'})
+        return jsonify({'success': 'User is already logged in'}), 200
     else:
         email = request.form.get('email')
         password = request.form.get('password')

@@ -27,7 +27,7 @@ def validate_phone(phone_number):
     checks if the phone number is already registered in the database
     """
     if phone != current_user.phone_number:
-        user = User.query.filter_by(phone_number = phone)
+        user = User.query.filter_by(phone_number=phone).first()
         if user:
             return True
         return False
@@ -40,7 +40,21 @@ def load_settings():
     loads up the settings page
     with the current_user data
     """
-    return jsonify ({'current_user': current_user}), 200
+    return jsonify ({
+            'current_user': {
+            'id': current_user.id,
+            'firstname': current_user.firstname,
+            'lastname': current_user.lastname,
+            'email': current_user.email,
+            'city': current_user.city.name,
+            'state': current_user.state.name,
+            'country': current_user.country.name
+            }
+        }), 200
+
+
+@login_required
+@app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
 
 
 @login_required
@@ -53,7 +67,7 @@ def change_password():
     if not password:
         return jsonify({'error': 'You did not enter a password'}), 400
     hashed_pwd = bcrypt.generate_password_hash(password)
-    current_user.password = password
+    current_user.password = hashed_pwd
     db.session.commit()
     return jsonify('success': 'Your password has been changed'}), 200
 
