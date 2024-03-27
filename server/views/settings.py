@@ -55,6 +55,25 @@ def load_settings():
 
 @login_required
 @app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
+def change_location():
+    """
+    change the location of a user
+    """
+    city = request.form.get('city')
+    if not city:
+        return jsonify({'error': 'Please enter a city'}), 400
+    state = request.form.get('state')
+    if not state:
+        return jsonify({'error': 'Please enter a valid state'}), 400
+    country = request.form.get('country')
+    if not country:
+        return jsonify('error', 'Please choose a country'}), 400
+ 
+    current_user.city.name = city
+    current_user.state.name = state
+    current_user.country.name = country
+    db.session.commit()
+    return jsonify({'success': 'Your location has been updated'}), 200
 
 
 @login_required
