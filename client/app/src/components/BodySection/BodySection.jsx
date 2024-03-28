@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import './BodySection.css';
-import ListingCard from './ListingCard';
-import ListingDescription from './ListingDescription';
+import { useEffect, useState } from "react";
+import "./BodySection.css";
+import ListingCard from "./ListingCard";
+import ListingDescription from "./ListingDescription";
+import Spinner from "../Spinners/Spinner";
 export default function BodySection() {
+  const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState([]);
   const [selectedListingId, setSelectedListingId] = useState(null);
   const [selectedListing, setSelectedListing] = useState(null);
@@ -10,16 +12,19 @@ export default function BodySection() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
+        setLoading(true);
         const response = await fetch(
-          'https://handshake-edac.onrender.com/api/get_listings'
+          "https://handshake-edac.onrender.com/api/get_listings",
         );
         if (!response.ok) {
-          throw new Error('Failed to fetch listings');
+          throw new Error("Failed to fetch listings");
         }
         const data = await response.json();
+        setLoading(false);
         setListings(data.listings);
       } catch (error) {
-        console.error('Error fetching listings:', error);
+        setLoading(false);
+        console.error("Error fetching listings:", error);
       }
     };
 
@@ -28,7 +33,7 @@ export default function BodySection() {
   useEffect(() => {
     if (selectedListingId) {
       const listing = listings.find(
-        (listing) => listing.user_id === selectedListingId
+        (listing) => listing.user_id === selectedListingId,
       );
       setSelectedListing(listing);
     } else {
@@ -41,15 +46,15 @@ export default function BodySection() {
   };
   return (
     <div>
-      <section className='search'>
-        <div className='form-container'>
-          <form action=''>
-            <div className='form'>
-              <div className='search-field'>
-                <input type='text' />
+      <section className="search">
+        <div className="form-container">
+          <form action="">
+            <div className="form">
+              <div className="search-field">
+                <input type="text" />
               </div>
-              <div className='search-button-box'>
-                <button type='submit' className='search-button'>
+              <div className="search-button-box">
+                <button type="submit" className="search-button">
                   Find listings
                 </button>
               </div>
@@ -58,8 +63,8 @@ export default function BodySection() {
         </div>
       </section>
 
-      <section className='jobs'>
-        <div className='job-listings'>
+      <section className="jobs">
+        <div className="job-listings">
           {listings.map((listing) => (
             <ListingCard
               key={listing.user_id}
@@ -74,10 +79,11 @@ export default function BodySection() {
             />
           ))}
         </div>
-        <div className='job-description'>
+        <div className="job-description">
           {selectedListing && <ListingDescription listing={selectedListing} />}
         </div>
       </section>
+      {loading && <Spinner />}
     </div>
   );
 }
