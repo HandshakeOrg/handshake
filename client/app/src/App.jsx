@@ -21,7 +21,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/app' element={<MainApp />} />
             <Route path='/' element={<HomePage />} />
-            <Route path='*' element={<PageNotFound />} />
+            <Route path='/*' element={<PageNotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
