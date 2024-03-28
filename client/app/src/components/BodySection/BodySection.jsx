@@ -45,45 +45,49 @@ export default function BodySection() {
     setSelectedListingId(listingId);
   };
   return (
-    <div>
-      <section className="search">
-        <div className="form-container">
-          <form action="">
-            <div className="form">
-              <div className="search-field">
-                <input type="text" />
+    <main className="main">
+      <div>
+        <section className="search">
+          <div className="form-container">
+            <form action="">
+              <div className="form">
+                <div className="search-field">
+                  <input type="text" />
+                </div>
+                <div className="search-button-box">
+                  <button type="submit" className="search-button">
+                    Find listings
+                  </button>
+                </div>
               </div>
-              <div className="search-button-box">
-                <button type="submit" className="search-button">
-                  Find listings
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </section>
+            </form>
+          </div>
+        </section>
 
-      <section className="jobs">
-        <div className="job-listings">
-          {listings.map((listing) => (
-            <ListingCard
-              key={listing.user_id}
-              title={listing.title}
-              user_type={listing.user_type}
-              location={listing.location}
-              price_negotiable={listing.price_negotiable}
-              status={listing.status}
-              description={[listing.description]}
-              expiry_date={listing.expiry_date}
-              onSelect={handleListingSelect}
-            />
-          ))}
-        </div>
-        <div className="job-description">
-          {selectedListing && <ListingDescription listing={selectedListing} />}
-        </div>
-      </section>
-      {loading && <Spinner />}
-    </div>
+        <section className="jobs">
+          <div className="job-listings">
+            {listings.map((listing) => (
+              <ListingCard
+                key={listing.user_id}
+                title={listing.title}
+                user_type={listing.user_type}
+                location={listing.location}
+                price_negotiable={listing.price_negotiable}
+                status={listing.status}
+                description={[listing.description]}
+                expiry_date={listing.expiry_date}
+                onSelect={handleListingSelect}
+              />
+            ))}
+          </div>
+          <div className="job-description">
+            {selectedListing && (
+              <ListingDescription listing={selectedListing} />
+            )}
+          </div>
+        </section>
+        {loading && <Spinner />}
+      </div>
+    </main>
   );
 }

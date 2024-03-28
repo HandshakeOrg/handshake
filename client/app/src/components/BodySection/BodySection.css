@@ -8,12 +8,16 @@
 html,
 body {
   font-size: 62.5%;
-  font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h2 {
   font-size: 2rem;
 }
+
 /** Search field**/
+.main {
+  margin-top: 7rem;
+}
 .search-field:focus-within {
   border: 0.01rem solid #2557a7;
 }

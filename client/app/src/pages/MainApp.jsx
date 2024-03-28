@@ -1,13 +1,16 @@
 import Header from "../components/Header/Header";
 import BodySection from "../components/BodySection/BodySection";
 import Footer from "../components/Footer/Footer";
+import styles from "./MainApp.module.css";
 
 function MainApp() {
   return (
     <>
       <Header />
-      <BodySection />
-      <Footer />
+      <main className={styles.main}>
+        <BodySection />
+        <Footer />
+      </main>
     </>
   );
 }
