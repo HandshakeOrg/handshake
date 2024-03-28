@@ -1,18 +1,18 @@
-import "./BodySection.css";
-import JobCard from "./JobCard";
-import JobDescription from "./JobDescription";
+import './BodySection.css';
+import ListingCard from './ListingCard';
+import ListingDescription from './ListingDescription';
 export default function BodySection() {
   return (
     <div>
-      <section className="search">
-        <div className="form-container">
-          <form action="">
-            <div className="form">
-              <div className="search-field">
-                <input type="text" />
+      <section className='search'>
+        <div className='form-container'>
+          <form action=''>
+            <div className='form'>
+              <div className='search-field'>
+                <input type='text' />
               </div>
-              <div className="search-button-box">
-                <button type="submit" className="search-button">
+              <div className='search-button-box'>
+                <button type='submit' className='search-button'>
                   Find jobs
                 </button>
               </div>
@@ -21,20 +21,18 @@ export default function BodySection() {
         </div>
       </section>
 
-      <section className="jobs">
-        <div className="job-listings">
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
+      <section className='jobs'>
+        <div className='job-listings'>
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
         </div>
-        <div className="job-description">
-          <JobDescription />
+        <div className='job-description'>
+          <ListingDescription />
         </div>
       </section>
     </div>
