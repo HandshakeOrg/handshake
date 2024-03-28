@@ -17,10 +17,10 @@ function App() {
         <ToastContainer />
         <Suspense fallback={<Spinner />}>
           <Routes>
-            <Route path='/' element={<HomePage />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path='/app' element={<MainApp />} />
+            <Route path='/' element={<HomePage />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>
