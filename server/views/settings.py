@@ -7,6 +7,9 @@ update contact information and password
 
 from server import db, bcrypt
 from server.models.user import User
+from server.models.city import City
+from server.models.state import State
+from server.models.country import Country
 from server.views import app_views
 from flask import jsonify, request
 from flask_login import current_user, login_required
@@ -59,19 +62,29 @@ def change_location():
     """
     change the location of a user
     """
-    city = request.form.get('city')
+    city_name = request.form.get('city')
     if not city:
         return jsonify({'error': 'Please enter a city'}), 400
-    state = request.form.get('state')
+    state_name = request.form.get('state')
     if not state:
         return jsonify({'error': 'Please enter a valid state'}), 400
-    country = request.form.get('country')
+    country_name = request.form.get('country')
     if not country:
         return jsonify('error', 'Please choose a country'}), 400
+
+    city = City.query.filter_by(name=city_name).first()
+    if not city:
+        return jsonify({'error': 'The city entered does not exist'}), 400
+
+    state = State.query.filter_by(name=state_name).first()
+    if not state:
+        return jsonify({'error': 'The state entered does not exist'}), 400
+
+    country = Country.query.filter_by(name=country_name).first()
+    if not country:
+        return jsonify({'error': 'The country entered does not exist'}), 200
  
-    current_user.city.name = city
-    current_user.state.name = state
-    current_user.country.name = country
+    current_user.city_id = city.id
     db.session.commit()
     return jsonify({'success': 'Your location has been updated'}), 200
 
