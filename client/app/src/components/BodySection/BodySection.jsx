@@ -13,7 +13,7 @@ export default function BodySection() {
               </div>
               <div className='search-button-box'>
                 <button type='submit' className='search-button'>
-                  Find jobs
+                  Find listings
                 </button>
               </div>
             </div>
