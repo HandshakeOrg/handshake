@@ -1,6 +1,8 @@
 import styles from './PostJob.module.css';
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { toast } from 'react-toastify';
+import { isEmpty } from '../utils/validation/AuthValidation';
 function PostJob() {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
@@ -11,7 +13,7 @@ function PostJob() {
     price_negotiable: '',
     status: '',
     expiry_date: '',
-    user_id: 1,
+    user_id: user,
     category_id: 1,
   });
   const handleChange = (e) => {
@@ -21,6 +23,34 @@ function PostJob() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isEmpty(formData.title)) {
+      toast.error('Please enter a title');
+      return;
+    }
+    if (isEmpty(formData.user_type)) {
+      toast.error('Please enter a user_type.');
+      return;
+    }
+    if (isEmpty(formData.location)) {
+      toast.error('Please enter a location.');
+      return;
+    }
+    if (isEmpty(formData.description)) {
+      toast.error('Please enter a description');
+      return;
+    }
+    if (isEmpty(formData.price_negotiable)) {
+      toast.error('Please enter price.');
+      return;
+    }
+    if (isEmpty(formData.status)) {
+      toast.error('Please select a status');
+      return;
+    }
+    if (isEmpty(formData.expiry_date)) {
+      toast.error('Please set expiry date.');
+      return;
+    }
     try {
       const formBody = Object.keys(formData)
         .map(
