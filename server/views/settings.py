@@ -5,7 +5,7 @@ update contact information and password
 """
 
 
-from server import db, bcrypt
+from server import db, bcrypt, login_manager
 from server.models.user import User
 from server.models.city import City
 from server.models.state import State
@@ -13,6 +13,15 @@ from server.models.country import Country
 from server.views import app_views
 from flask import jsonify, request
 from flask_login import current_user, login_required
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    """
+    wrapper function
+    loads a user from the database by the user_id
+    """
+    return User.query.get(int(user_id))
 
 
 def validate_email(email):
@@ -25,6 +34,7 @@ def validate_email(email):
             return True
         return False
 
+
 def validate_phone(phone_number):
     """
     checks if the phone number is already registered in the database
@@ -36,8 +46,8 @@ def validate_phone(phone_number):
         return False
 
 
-@login_required
 @app_views.route('/settings', methods=['GET'], strict_slashes=False)
+@login_required
 def load_settings():
     """
     loads up the settings page
@@ -56,8 +66,8 @@ def load_settings():
         }), 200
 
 
-@login_required
 @app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
+@login_required
 def change_location():
     """
     change the location of a user
@@ -89,8 +99,8 @@ def change_location():
     return jsonify({'success': 'Your location has been updated'}), 200
 
 
-@login_required
 @app_views.route('/settings/changepass', methods=['POST'], strict_slashes=False)
+@login_required
 def change_password():
     """
     change a user's password
@@ -104,8 +114,8 @@ def change_password():
     return jsonify({'success': 'Your password has been changed'}), 200
 
 
-@login_required
 @app_views.route('/settings/changeemail', methods=['POST'], strict_slashes=False)
+@login_required
 def update_email():
     """
     change/update a user email address
@@ -122,8 +132,8 @@ def update_email():
         return jsonify({'error': 'Email has already been taken'}), 400
 
 
-@login_required
 @app_views.route('/settings/changephone', methods=['POST'], strict_slashes=False)
+@login_required
 def update_phone():
     """
     change/update a user phone number
@@ -140,15 +150,14 @@ def update_phone():
         return jsonify({'error': 'This phone number has already been registered by another user'})
 
 
-@login_required
 @app_views.route('/settings/delete', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_account():
     """
     deletes a user account
     """
     print(current_user.__dict__)
-    user = User.query.get(current_user.user_id)
+    user = User.query.get(current_user.id)
     db.session.delete(user)
     db.session.commit()
     return jsonify({'You account has been deleted.'}), 200
-
