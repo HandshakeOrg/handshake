@@ -10,3 +10,5 @@ from server.views.signup import *
 from server.views.login import *
 from server.views.logout import *
 from server.views.listing_search import *
+from server.views.settings import *
+from server.views.dashboard import *
