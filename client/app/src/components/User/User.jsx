@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./User.module.css";
 
@@ -12,6 +13,7 @@ function User() {
   }
   function handleDelete(user) {
     deleteAccount(user);
+    toast.success("Account deleted successfully");
   }
 
   useEffect(
