@@ -18,7 +18,7 @@ function Login() {
       toast.error("Email and password cannot be empty.");
       return;
     }
-    login(email, password);
+    login({ email, password });
   };
 
   useEffect(

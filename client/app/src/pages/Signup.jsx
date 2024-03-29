@@ -61,7 +61,7 @@ function Signup() {
   };
   useEffect(
     function () {
-      if (user) navigate("/app", { replace: true });
+      if (user) navigate("/login", { replace: true });
     },
     [user, navigate],
   );

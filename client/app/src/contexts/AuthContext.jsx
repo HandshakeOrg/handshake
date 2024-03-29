@@ -53,7 +53,9 @@ function AuthProvider({ children }) {
       }
 
       const ResponseData = await response.json();
+      console.log(ResponseData);
       dispatch({ type: "createAccount", payload: ResponseData });
+      toast.success("Account created successfully");
     } catch (error) {
       console.error(error);
       toast.error(error);
@@ -61,23 +63,51 @@ function AuthProvider({ children }) {
     }
   }
 
-  // async function createAccount(data) {
+  async function login({ email, password }) {
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+
+      const response = await fetch(`${BASE_URL}/login`, {
+        method: "POST",
+        body: formData, // FormData will set the Content-Type to 'multipart/form-data' automatically
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        dispatch({ type: "login", payload: data.current_user });
+      } else {
+        const errorData = await response.json();
+        console.log(errorData);
+        const errorMessage = errorData?.error;
+        setLoading(false);
+        toast.error(errorMessage);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      toast.error("Invalid credentials. Please try again.");
+    }
+  }
+
+  // async function deleteAccount(user) {
   //   try {
-  //     console.log(data);
   //     setLoading(true);
-  //     const response = await fetch(`${BASE_URL}/signup`, {
-  //       method: "POST",
+  //     const response = await fetch(`${BASE_URL}/settings/delete`, {
+  //       method: "DELETE",
   //       headers: {
   //         "Content-Type": "application/json",
   //       },
-  //       body: JSON.stringify(data),
+  //       body: JSON.stringify({ user: user.id }),
   //     });
+
   //     if (response.ok) {
-  //       const data = await response.json();
-  //       dispatch({ type: "createAccount", payload: data.user });
+  //       dispatch({ type: "deleteAccount" });
   //     } else {
   //       const errorData = await response.json();
-  //       console.log(errorData);
   //       const errorMessage = errorData?.error?.message || "An error occurred";
   //       setLoading(false);
   //       toast.error(errorMessage);
@@ -89,45 +119,19 @@ function AuthProvider({ children }) {
   //   }
   // }
 
-  async function login(credentials) {
+  async function deleteAccount(user) {
     try {
       setLoading(true);
-      const response = await fetch(`${BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      });
+      const formData = new FormData();
+      formData.append("user", user.id);
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        dispatch({ type: "login", payload: data.user });
-      } else {
-        const errorData = await response.json();
-        const errorMessage = errorData?.error?.message || "An error occurred";
-        setLoading(false);
-        toast.error(errorMessage);
-      }
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-      toast.error("Invalid credentials. Please try again.");
-    }
-  }
-  async function deleteAccount() {
-    try {
-      setLoading(true);
       const response = await fetch(`${BASE_URL}/settings/delete`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user }),
+        body: formData,
       });
-
       if (response.ok) {
+        const result = await response.json();
+        console.log(result);
         dispatch({ type: "deleteAccount" });
       } else {
         const errorData = await response.json();
