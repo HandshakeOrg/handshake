@@ -2,7 +2,7 @@ import styles from './PostJob.module.css';
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
-import { isEmpty } from '../utils/validation/AuthValidation';
+import { isEmpty } from '../../utils/validation/AuthValidation';
 function PostJob() {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
