@@ -5,14 +5,20 @@ import { useAuth } from "../../contexts/AuthContext";
 import styles from "./User.module.css";
 
 function User() {
-  const { user, logout, deleteAccount } = useAuth();
+  const { user, logout, deleteAccount, isAuthenticated } = useAuth();
+  console.log(user);
   const navigate = useNavigate();
 
   function handleLogOut() {
     logout();
   }
   function handleDelete(user) {
+    if (!isAuthenticated) {
+      toast.error("You are not authenticated");
+      return;
+    }
     deleteAccount(user);
+    if (user === null) navigate("/", { replace: true });
     toast.success("Account deleted successfully");
   }
 
@@ -29,7 +35,7 @@ function User() {
         <div>
           <h1 className={styles.h1}>User Profile</h1>
           <p>
-            {user?.firstName} {user?.lastName}
+            {user?.firstname} {user?.lastname}
           </p>
         </div>
         <div>
@@ -40,12 +46,12 @@ function User() {
                 id="first-name"
                 readOnly
                 disabled
-                value={user?.firstName}
+                value={user?.firstname}
               />
             </div>
             <div className={styles.item}>
               <label htmlFor="last-name">Last name</label>
-              <input id="last-name" readOnly disabled value={user?.lastName} />
+              <input id="last-name" readOnly disabled value={user?.lastname} />
             </div>
             <div className={styles.item}>
               <label htmlFor="email">Email</label>
