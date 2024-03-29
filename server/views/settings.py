@@ -146,7 +146,7 @@ def delete_account():
     """
     deletes a user account
     """
-    print(current_user)
+    print(current_user.__dict__)
     user = User.query.get(current_user.user_id)
     db.session.delete(user)
     db.session.commit()
