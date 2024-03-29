@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { ToastContainer } from "react-toastify";
@@ -16,6 +17,7 @@ const PostJob = lazy(() => import("./components/PostJob/PostJob"));
 // import BodySection from "../components/BodySection/BodySection";
 const BodySection = lazy(() => import("./components/BodySection/BodySection"));
 
+
 function App() {
   return (
     <AuthProvider>
@@ -23,6 +25,7 @@ function App() {
         <ToastContainer />
         <Suspense fallback={<Spinner />}>
           <Routes>
+
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
             <Route
@@ -40,6 +43,7 @@ function App() {
 
             <Route index element={<HomePage />} />
             <Route path="*" element={<PageNotFound />} />
+
           </Routes>
         </Suspense>
       </BrowserRouter>

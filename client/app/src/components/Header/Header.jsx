@@ -28,6 +28,7 @@ function LandNav() {
             <li>
               <NavLink to="/app/profile" className="active">
                 Account
+
               </NavLink>
             </li>
           </ul>

@@ -66,7 +66,7 @@ def signupUser():
             lastname=lastname,
             email=email,
             phone_number=phone_number,
-            password=hashed_password,
+            password=hashed_password.decode('utf-8'),
             city_id=None)
         db.session.add(user)
         db.session.commit()

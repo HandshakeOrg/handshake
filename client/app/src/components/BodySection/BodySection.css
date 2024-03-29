@@ -20,7 +20,12 @@ h2 {
 }
 .search-field:focus-within {
   border: 0.01rem solid #2557a7;
+  border-radius: 0.5rem;
 }
+.search-field {
+  display: flex;
+}
+
 .search-button {
   cursor: pointer;
   background: none;
@@ -44,30 +49,34 @@ h2 {
 .form-container {
   /* display: flex;
   justify-content: space-between; */
+  width: 60rem;
   margin: 0 auto;
   margin-top: 2rem;
   margin-bottom: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid #949494;
   /* border-color: ; */
-  box-shadow: 0 0.5rem 1rem rgba(45, 45, 45, 0.12),
+  box-shadow: 0 0.5rem 1rem rgba(103, 85, 85, 0.12),
     0 0.25rem 0.5rem rgba(45, 45, 45, 0.16), 0 0 0.125rem rgba(45, 45, 45, 0.2);
-  width: 50rem;
 }
 .search .form {
   display: flex;
   justify-content: space-between;
 }
 
-.search input {
+.search input,
+select {
   color: #2d2d2d;
   padding-top: 0.8rem;
   padding-right: 0.8rem;
   padding-bottom: 0.8rem;
   padding-left: 0.4rem;
-  width: 35rem;
+  width: 25rem;
   border: none;
   font-size: 1.6rem;
+  outline: none;
+  margin-bottom: 0;
+  background: none;
 }
 .search input:focus {
   border: none;
@@ -335,7 +344,8 @@ section.jobs {
     display: block;
   }
   .search input {
-    width: 100%;
+    width: 70%;
+    margin-bottom: 0;
   }
   .search .form {
     display: block;
