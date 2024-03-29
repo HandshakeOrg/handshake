@@ -13,7 +13,7 @@ with app.app_context():
 
 # Register blueprint
 app.register_blueprint(app_views)
-cors = CORS(app, resources={r'/api/*': {'origins': ['http://localhost:5173', 'https://handshake-sage.vercel.app']}})
+cors = CORS(app, resources={'/': {'origins': ['*']}})
 
 @app.teardown_appcontext
 def close_db(error):
