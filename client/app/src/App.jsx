@@ -30,7 +30,7 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route path="/postjob" element={<PostJob />} />
+              <Route path="/app/postjob" element={<PostJob />} />
             </Route>
 
             <Route path="/" element={<HomePage />} />
