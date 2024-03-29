@@ -11,6 +11,7 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Login"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const PostJob = lazy(() => import("./components/PostJob/PostJob"));
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
                   <MainApp />
                 </ProtectedRoute>
               }
-            ></Route>
+            >
+              <Route path="/postjob" element={<PostJob />} />
+            </Route>
 
             <Route path="/" element={<HomePage />} />
             <Route path="/*" element={<PageNotFound />} />
