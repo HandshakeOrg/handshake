@@ -1,6 +1,8 @@
 import styles from './PostJob.module.css';
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 function PostJob() {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     title: '',
     user_type: '',
