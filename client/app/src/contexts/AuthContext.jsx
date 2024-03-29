@@ -20,6 +20,8 @@ function reducer(state, action) {
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
       return { ...state, user: null, isAuthenticated: false };
+    case "deleteAccount":
+      return { ...state, user: null, isAuthenticated: false };
     default:
       throw new Error("Unknown action");
   }
@@ -114,6 +116,31 @@ function AuthProvider({ children }) {
       toast.error("Invalid credentials. Please try again.");
     }
   }
+  async function deleteAccount() {
+    try {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/settings/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }),
+      });
+
+      if (response.ok) {
+        dispatch({ type: "deleteAccount" });
+      } else {
+        const errorData = await response.json();
+        const errorMessage = errorData?.error?.message || "An error occurred";
+        setLoading(false);
+        toast.error(errorMessage);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      toast.error("Invalid credentials. Please try again.");
+    }
+  }
 
   function logout() {
     dispatch({ type: "logout" });
@@ -127,6 +154,7 @@ function AuthProvider({ children }) {
         login,
         logout,
         loading,
+        deleteAccount,
       }}
     >
       {children}

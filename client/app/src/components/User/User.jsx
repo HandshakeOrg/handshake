@@ -1,8 +1,26 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./User.module.css";
 
 function User() {
-  const { user } = useAuth();
+  const { user, logout, deleteAccount } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogOut() {
+    logout();
+  }
+  function handleDelete(user) {
+    deleteAccount(user);
+  }
+
+  useEffect(
+    function () {
+      if (user === null) navigate("/", { replace: true });
+    },
+    [user, navigate],
+  );
+
   return (
     <>
       <main className={styles.main}>
@@ -48,8 +66,8 @@ function User() {
           </div>
         </div>
         <div className={styles.footer}>
-          <button>Logout</button>
-          <button>Delete Account</button>
+          <button onClick={handleLogOut}>Logout</button>
+          <button onClick={handleDelete}>Delete Account</button>
         </div>
       </main>
     </>
