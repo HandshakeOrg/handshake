@@ -34,7 +34,6 @@ function AuthProvider({ children }) {
 
   async function createAccount(data) {
     try {
-      console.log(data);
       setLoading(true);
       const response = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
@@ -43,7 +42,7 @@ function AuthProvider({ children }) {
         },
         body: JSON.stringify(data),
       });
-
+      console.log(response);
       if (!response.ok) {
         const errorData = await response.json();
         console.log("Server error:", errorData);
@@ -55,6 +54,7 @@ function AuthProvider({ children }) {
       dispatch({ type: "createAccount", payload: ResponseData });
     } catch (error) {
       console.error(error);
+      toast.error(error);
       setLoading(false);
     }
   }

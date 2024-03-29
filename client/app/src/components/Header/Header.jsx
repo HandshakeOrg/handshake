@@ -21,12 +21,12 @@ function LandNav() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/postjob" className="active">
+              <NavLink to="/app/postjob" className="active">
                 Post Jobs
               </NavLink>
             </li>
             <li>
-              <NavLink to="/profile" className="active">
+              <NavLink to="/app/profile" className="active">
                 Account
               </NavLink>
             </li>

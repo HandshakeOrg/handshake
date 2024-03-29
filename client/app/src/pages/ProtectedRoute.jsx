@@ -1,4 +1,5 @@
 import PropTypes from "prop-types"; // Use prop-types import
+import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -14,7 +15,10 @@ function ProtectedRoute({ children }) {
 
   useEffect(
     function () {
-      if (!isAuthenticated) navigate("/");
+      if (!isAuthenticated) {
+        toast.error("Please login to access this page.");
+        navigate("/");
+      }
     },
     [isAuthenticated, navigate],
   );
