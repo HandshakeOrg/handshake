@@ -4,7 +4,7 @@
 """
 
 
-from flask import jsonify
+from flask import jsonify, abort
 from flask_login import current_user
 from server import db
 from server.models.user import User
