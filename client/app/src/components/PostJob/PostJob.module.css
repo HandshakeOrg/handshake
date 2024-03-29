@@ -1,13 +1,13 @@
 .main {
+  margin-top: 7rem !important;
   color: var(--text);
-  max-width: 37rem;
+  /* max-width: 37rem; */
   padding: 1rem;
-  margin: 1rem auto;
+  margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
-/* .form {
-} */
+
 .h1 {
   font-size: 1.875rem;
   font-weight: bold;
@@ -15,7 +15,7 @@
 .p {
   text-align: center;
 }
-.input_box {
+.item {
   margin: 0.5rem 0;
 }
 .button {

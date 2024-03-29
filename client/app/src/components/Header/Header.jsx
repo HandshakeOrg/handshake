@@ -1,22 +1,34 @@
-import './Header.css';
-import { NavLink } from 'react-router-dom';
-export default function Header() {
+import "./Header.css";
+import { NavLink } from "react-router-dom";
+
+function LandNav() {
   return (
     <nav>
-      <header className='header'>
-        <div className='container'>
-          <NavLink to='/' className='logo'>
+      <header className="header">
+        <div className="container">
+          <NavLink to="/" className="logo">
             HANDSHAKE
           </NavLink>
 
-          <input className='menu-btn' type='checkbox' id='menu-btn' />
-          <label className='menu-icon' htmlFor='menu-btn'>
-            <span className='navicon'></span>
+          <input className="menu-btn" type="checkbox" id="menu-btn" />
+          <label className="menu-icon" htmlFor="menu-btn">
+            <span className="navicon"></span>
           </label>
-          <ul className='menu'>
+          <ul className="menu">
             <li>
-              <NavLink to='/post' className='active'>
-                Post List
+              <NavLink to="/app" className="active">
+                Listings
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/app/postjob" className="active">
+                Post Jobs
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/app/profile" className="active">
+                Account
+
               </NavLink>
             </li>
           </ul>
@@ -25,3 +37,5 @@ export default function Header() {
     </nav>
   );
 }
+
+export default LandNav;

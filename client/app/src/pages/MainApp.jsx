@@ -1,13 +1,16 @@
 import Header from "../components/Header/Header";
-import BodySection from "../components/BodySection/BodySection";
-import Footer from "../components/Footer/Footer";
+import Footer from "../Footer/Footer";
+import styles from "./MainApp.module.css";
+import { Outlet } from "react-router-dom";
 
 function MainApp() {
   return (
     <>
       <Header />
-      <BodySection />
-      <Footer />
+      <main className={styles.main}>
+        <Outlet />
+        <Footer />
+      </main>
     </>
   );
 }

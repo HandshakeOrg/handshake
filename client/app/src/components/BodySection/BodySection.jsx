@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import './BodySection.css';
-import ListingCard from './ListingCard';
-import ListingDescription from './ListingDescription';
+import { useEffect, useState } from "react";
+import "./BodySection.css";
+import ListingCard from "./ListingCard";
+import ListingDescription from "./ListingDescription";
+import Spinner from "../Spinners/Spinner";
 export default function BodySection() {
+  const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState([]);
   const [selectedListingId, setSelectedListingId] = useState(null);
   const [selectedListing, setSelectedListing] = useState(null);
@@ -12,16 +14,19 @@ export default function BodySection() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
+        setLoading(true);
         const response = await fetch(
-          'https://handshake-edac.onrender.com/api/get_listings'
+          "https://handshake-edac.onrender.com/api/get_listings",
         );
         if (!response.ok) {
-          throw new Error('Failed to fetch listings');
+          throw new Error("Failed to fetch listings");
         }
         const data = await response.json();
+        setLoading(false);
         setListings(data.listings);
       } catch (error) {
-        console.error('Error fetching listings:', error);
+        setLoading(false);
+        console.error("Error fetching listings:", error);
       }
     };
 
@@ -30,7 +35,7 @@ export default function BodySection() {
   useEffect(() => {
     if (selectedListingId) {
       const listing = listings.find(
-        (listing) => listing.user_id === selectedListingId
+        (listing) => listing.user_id === selectedListingId,
       );
       setSelectedListing(listing);
     } else {
@@ -68,8 +73,10 @@ export default function BodySection() {
     setSearchType(event.target.value);
   };
   return (
-    <div>
-      <section className='search'>
+
+    <main className="main">
+      <div>
+       <section className='search'>
         <div className='form-container'>
           <form onSubmit={handleSubmit}>
             <div className='form'>
@@ -96,26 +103,30 @@ export default function BodySection() {
         </div>
       </section>
 
-      <section className='jobs'>
-        <div className='job-listings'>
-          {listings.map((listing) => (
-            <ListingCard
-              key={listing.user_id}
-              title={listing.title}
-              user_type={listing.user_type}
-              location={listing.location}
-              price_negotiable={listing.price_negotiable}
-              status={listing.status}
-              description={[listing.description]}
-              expiry_date={listing.expiry_date}
-              onSelect={handleListingSelect}
-            />
-          ))}
-        </div>
-        <div className='job-description'>
-          {selectedListing && <ListingDescription listing={selectedListing} />}
-        </div>
-      </section>
-    </div>
+        <section className="jobs">
+          <div className="job-listings">
+            {listings.map((listing) => (
+              <ListingCard
+                key={listing.user_id}
+                title={listing.title}
+                user_type={listing.user_type}
+                location={listing.location}
+                price_negotiable={listing.price_negotiable}
+                status={listing.status}
+                description={[listing.description]}
+                expiry_date={listing.expiry_date}
+                onSelect={handleListingSelect}
+              />
+            ))}
+          </div>
+          <div className="job-description">
+            {selectedListing && (
+              <ListingDescription listing={selectedListing} />
+            )}
+          </div>
+        </section>
+        {loading && <Spinner />}
+      </div>
+    </main>
   );
 }

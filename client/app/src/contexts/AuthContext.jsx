@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
-const BASE_URL = "https://handshake-edac.onrender.com/api/";
+const BASE_URL = "https://handshake-edac.onrender.com/api";
 
 const initialState = {
   user: null,
@@ -19,6 +19,8 @@ function reducer(state, action) {
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
+      return { ...state, user: null, isAuthenticated: false };
+    case "deleteAccount":
       return { ...state, user: null, isAuthenticated: false };
     default:
       throw new Error("Unknown action");
@@ -42,19 +44,50 @@ function AuthProvider({ children }) {
         },
         body: JSON.stringify(data),
       });
-      if (response.ok) {
-        const data = await response.json();
-        dispatch({ type: "createAccount", payload: data.user });
-      } else {
-        setLoading(false);
-        throw new Error("Invalid credentials");
+      console.log(response);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log("Server error:", errorData);
+        toast.error(errorData.error);
+        throw new Error(errorData.error.message);
       }
+
+      const ResponseData = await response.json();
+      dispatch({ type: "createAccount", payload: ResponseData });
     } catch (error) {
       console.error(error);
+      toast.error(error);
       setLoading(false);
-      toast.error("Invalid credentials. Please try again.");
     }
   }
+
+  // async function createAccount(data) {
+  //   try {
+  //     console.log(data);
+  //     setLoading(true);
+  //     const response = await fetch(`${BASE_URL}/signup`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       dispatch({ type: "createAccount", payload: data.user });
+  //     } else {
+  //       const errorData = await response.json();
+  //       console.log(errorData);
+  //       const errorMessage = errorData?.error?.message || "An error occurred";
+  //       setLoading(false);
+  //       toast.error(errorMessage);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setLoading(false);
+  //     toast.error("Invalid credentials. Please try again.");
+  //   }
+  // }
 
   async function login(credentials) {
     try {
@@ -72,8 +105,35 @@ function AuthProvider({ children }) {
         console.log(data);
         dispatch({ type: "login", payload: data.user });
       } else {
+        const errorData = await response.json();
+        const errorMessage = errorData?.error?.message || "An error occurred";
         setLoading(false);
-        throw new Error("Invalid credentials");
+        toast.error(errorMessage);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      toast.error("Invalid credentials. Please try again.");
+    }
+  }
+  async function deleteAccount() {
+    try {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/settings/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }),
+      });
+
+      if (response.ok) {
+        dispatch({ type: "deleteAccount" });
+      } else {
+        const errorData = await response.json();
+        const errorMessage = errorData?.error?.message || "An error occurred";
+        setLoading(false);
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error(error);
@@ -94,6 +154,7 @@ function AuthProvider({ children }) {
         login,
         logout,
         loading,
+        deleteAccount,
       }}
     >
       {children}

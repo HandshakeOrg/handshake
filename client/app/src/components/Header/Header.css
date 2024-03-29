@@ -5,14 +5,13 @@
 .header {
   background-color: var(--background);
   box-shadow: 1px 1px 4px 0 var(--accent);
-  /* position: fixed; */
+
+  position: fixed;
   width: 100%;
+  top: 0;
   z-index: 3;
 }
-.header .container {
-  display: flex;
-  justify-content: space-between;
-}
+
 .header ul {
   margin: 0;
   padding: 0;
@@ -36,7 +35,8 @@
 
 .header .logo {
   display: block;
-  /* float: left; */
+  float: left;
+
   font-size: 2em;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
@@ -55,7 +55,9 @@
 .header .menu-icon {
   cursor: pointer;
   display: inline-block;
-  /* float: right; */
+
+  float: right;
+
   padding: 28px 20px;
   position: relative;
   user-select: none;
@@ -73,7 +75,9 @@
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #333;
-  content: '';
+
+  content: "";
+
   display: block;
   height: 100%;
   position: absolute;
