@@ -29,8 +29,8 @@ def validate_phone(phone_number):
     """
     checks if the phone number is already registered in the database
     """
-    if phone != current_user.phone_number:
-        user = User.query.filter_by(phone_number=phone).first()
+    if phone_number != current_user.phone_number:
+        user = User.query.filter_by(phone_number=phone_number).first()
         if user:
             return True
         return False
@@ -70,7 +70,7 @@ def change_location():
         return jsonify({'error': 'Please enter a valid state'}), 400
     country_name = request.form.get('country')
     if not country:
-        return jsonify('error', 'Please choose a country'}), 400
+        return jsonify({'error', 'Please choose a country'}), 400
 
     city = City.query.filter_by(name=city_name).first()
     if not city:
@@ -101,7 +101,7 @@ def change_password():
     hashed_pwd = bcrypt.generate_password_hash(password)
     current_user.password = hashed_pwd
     db.session.commit()
-    return jsonify('success': 'Your password has been changed'}), 200
+    return jsonify({'success': 'Your password has been changed'}), 200
 
 
 @login_required
@@ -114,10 +114,10 @@ def update_email():
     if not email:
         return jsonify({'error': 'Please provide an email address'}), 400
     check_email = validate_email(email)
-    if !check_email:
+    if not check_email:
         current_user.email = email
         db.session.commit()
-        return jsonify('success': 'Your email has been updated'}), 200
+        return jsonify({'success': 'Your email has been updated'}), 200
     else:
         return jsonify({'error': 'Email has already been taken'}), 400
 
@@ -132,10 +132,10 @@ def update_phone():
     if not phone:
         return jsonify({'error': 'Please provide a valid phone number'}), 400
     check_phone = validate_phone(phone)
-    if !check_phone:
+    if not check_phone:
         current_user.phone_numer = phone
         db.session.commit()
-        return jsonify('success': 'Your phone number has been updated'}), 200
+        return jsonify({'success': 'Your phone number has been updated'}), 200
     else:
         return jsonify({'error': 'This phone number has already been registered by another user'})
 
