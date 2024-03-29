@@ -6,6 +6,8 @@ export default function BodySection() {
   const [listings, setListings] = useState([]);
   const [selectedListingId, setSelectedListingId] = useState(null);
   const [selectedListing, setSelectedListing] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchType, setSearchType] = useState('title');
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -39,14 +41,50 @@ export default function BodySection() {
   const handleListingSelect = (listingId) => {
     setSelectedListingId(listingId);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(
+        `https://handshake-edac.onrender.com/api/listings_search?${searchType}=${searchQuery}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setListings(data.listings);
+      } else {
+        console.error('Failed to search listings:', response.statusText);
+      }
+    } catch (error) {
+      console.error('An error occurred while searching listings:', error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSelectChange = (event) => {
+    setSearchType(event.target.value);
+  };
   return (
     <div>
       <section className='search'>
         <div className='form-container'>
-          <form action=''>
+          <form onSubmit={handleSubmit}>
             <div className='form'>
               <div className='search-field'>
-                <input type='text' />
+                <input
+                  type='text'
+                  placeholder='Search listings'
+                  value={searchQuery}
+                  onChange={handleInputChange}
+                />
+                <select value={searchType} onChange={handleSelectChange}>
+                  <option value='title'>By Title</option>
+                  <option value='status'>By Status</option>
+                  <option value='location'>By Location</option>
+                </select>
               </div>
               <div className='search-button-box'>
                 <button type='submit' className='search-button'>
