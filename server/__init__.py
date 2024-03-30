@@ -49,14 +49,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://handshake_test_db_user:8xh
 # initialize the sqlalchemy orm
 db = SQLAlchemy(app)
 
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
-
 # Configure the file upload
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
