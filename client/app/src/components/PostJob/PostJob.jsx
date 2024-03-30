@@ -188,7 +188,7 @@ function PostJob() {
             </label>
           </div>
           <div className={styles.input}>
-            <select id='status' name='status' onSelect={handleChange}>
+            <select id='status' name='status' onChange={handleChange}>
               <option value='Active'>Active</option>
               <option value='Inactive'>Inactive</option>
             </select>
