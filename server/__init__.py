@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-
+from server.models import User
 
 # Loads the environmental variable from the .env file
 load_dotenv()
@@ -48,6 +48,14 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://handshake_test_db_user:8xhja22cqBQJkeOFd4FsI6ZoRDgolouE@dpg-co0trv7jbltc73955hsg-a/handshake_test_db'
 # initialize the sqlalchemy orm
 db = SQLAlchemy(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    """
+    wrapper function
+    loads a user from the database by the user_id
+    """
+    return User.query.get(int(user_id))
 
 # Configure the file upload
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
