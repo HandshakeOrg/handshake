@@ -56,8 +56,8 @@
   justify-content: space-between;
 }
 
-.search input,
-select {
+.search .input,
+.select {
   color: #2d2d2d;
   padding: 0.5rem;
   width: 25rem;

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import "./BodySection.css";
-import ListingCard from "./ListingCard";
-import ListingDescription from "./ListingDescription";
-import Spinner from "../Spinners/Spinner";
+import { useEffect, useState } from 'react';
+import './BodySection.css';
+import ListingCard from './ListingCard';
+import ListingDescription from './ListingDescription';
+import Spinner from '../Spinners/Spinner';
 export default function BodySection() {
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState([]);
@@ -16,17 +16,17 @@ export default function BodySection() {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://handshake-edac.onrender.com/api/get_listings",
+          'https://handshake-edac.onrender.com/api/get_listings'
         );
         if (!response.ok) {
-          throw new Error("Failed to fetch listings");
+          throw new Error('Failed to fetch listings');
         }
         const data = await response.json();
         setLoading(false);
         setListings(data.listings);
       } catch (error) {
         setLoading(false);
-        console.error("Error fetching listings:", error);
+        console.error('Error fetching listings:', error);
       }
     };
 
@@ -35,7 +35,7 @@ export default function BodySection() {
   useEffect(() => {
     if (selectedListingId) {
       const listing = listings.find(
-        (listing) => listing.user_id === selectedListingId,
+        (listing) => listing.user_id === selectedListingId
       );
       setSelectedListing(listing);
     } else {
@@ -73,38 +73,42 @@ export default function BodySection() {
     setSearchType(event.target.value);
   };
   return (
-
-    <main className="main">
+    <main className='main'>
       <div>
-       <section className='search'>
-        <div className='form-container'>
-          <form onSubmit={handleSubmit}>
-            <div className='form'>
-              <div className='search-field'>
-                <input
-                  type='text'
-                  placeholder='Search listings'
-                  value={searchQuery}
-                  onChange={handleInputChange}
-                />
-                <select value={searchType} onChange={handleSelectChange}>
-                  <option value='title'>By Title</option>
-                  <option value='status'>By Status</option>
-                  <option value='location'>By Location</option>
-                </select>
+        <section className='search'>
+          <div className='form-container'>
+            <form onSubmit={handleSubmit}>
+              <div className='form'>
+                <div className='search-field'>
+                  <input
+                    type='text'
+                    placeholder='Search listings'
+                    value={searchQuery}
+                    onChange={handleInputChange}
+                    className='input'
+                  />
+                  <select
+                    value={searchType}
+                    onChange={handleSelectChange}
+                    className='select'
+                  >
+                    <option value='title'>By Title</option>
+                    <option value='status'>By Status</option>
+                    <option value='location'>By Location</option>
+                  </select>
+                </div>
+                <div className='search-button-box'>
+                  <button type='submit' className='search-button'>
+                    Find listings
+                  </button>
+                </div>
               </div>
-              <div className='search-button-box'>
-                <button type='submit' className='search-button'>
-                  Find listings
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </section>
+            </form>
+          </div>
+        </section>
 
-        <section className="jobs">
-          <div className="job-listings">
+        <section className='jobs'>
+          <div className='job-listings'>
             {listings.map((listing) => (
               <ListingCard
                 key={listing.user_id}
@@ -119,7 +123,7 @@ export default function BodySection() {
               />
             ))}
           </div>
-          <div className="job-description">
+          <div className='job-description'>
             {selectedListing && (
               <ListingDescription listing={selectedListing} />
             )}
