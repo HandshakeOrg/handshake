@@ -5,23 +5,14 @@ update contact information and password
 """
 
 
-from server import db, bcrypt, login_manager
+from flask import jsonify, request, abort
+from flask_login import current_user, login_required
+from server.views import app_views
+from server import db, bcrypt
 from server.models.user import User
 from server.models.city import City
 from server.models.state import State
 from server.models.country import Country
-from server.views import app_views
-from flask import jsonify, request
-from flask_login import current_user, login_required
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
 
 
 def validate_email(email):
@@ -46,14 +37,15 @@ def validate_phone(phone_number):
         return False
 
 
-@app_views.route('/settings', methods=['GET'], strict_slashes=False)
 @login_required
+@app_views.route('/settings', methods=['GET'], strict_slashes=False)
 def load_settings():
     """
     loads up the settings page
     with the current_user data
     """
-    return jsonify ({
+    if current_user.is_authenticated:
+        return jsonify ({
             'current_user': {
             'id': current_user.id,
             'firstname': current_user.firstname,
@@ -64,6 +56,8 @@ def load_settings():
             'country': current_user.country.name
             }
         }), 200
+    else:
+        abort(401)
 
 
 @app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
@@ -99,23 +93,26 @@ def change_location():
     return jsonify({'success': 'Your location has been updated'}), 200
 
 
-@app_views.route('/settings/changepass', methods=['POST'], strict_slashes=False)
 @login_required
+@app_views.route('/settings/changepass', methods=['POST'], strict_slashes=False)
 def change_password():
     """
     change a user's password
     """
+    passwd = current_user.password
+    print(passwd)
     password = request.form.get('password')
     if not password:
         return jsonify({'error': 'You did not enter a password'}), 400
     hashed_pwd = bcrypt.generate_password_hash(password)
+    print(hashed_pwd)
     current_user.password = hashed_pwd
     db.session.commit()
     return jsonify({'success': 'Your password has been changed'}), 200
 
 
-@app_views.route('/settings/changeemail', methods=['POST'], strict_slashes=False)
 @login_required
+@app_views.route('/settings/changeemail', methods=['POST'], strict_slashes=False)
 def update_email():
     """
     change/update a user email address

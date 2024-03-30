@@ -5,25 +5,17 @@
 
 
 from flask import jsonify, abort
-from flask_login import current_user
-from server import db, login_manager
+from flask_login import current_user, login_required
+from server import db
+from server.views import app_views
 from server.models.user import User
 from server.models.category import Category
 from server.models.listing import Listing
 from server.models.conversation import Conversation
 from server.models.message import Message
-from server.views import app_views
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
-
-
+@login_required
 @app_views.route('/dashboard', methods=['GET'], strict_slashes=False)
 def profile():
     """
@@ -41,6 +33,7 @@ def profile():
         abort(401)
 
 
+@login_required
 @app_views.route('/dashboard/listings', methods=['GET'], strict_slashes=False)
 def profile_listings():
     """
@@ -63,6 +56,7 @@ def profile_listings():
         abort(401)
 
 
+@login_required
 @app_views.route('/dashboard/messages', methods=['GET'], strict_slashes=False)
 def profile_messages():
     """

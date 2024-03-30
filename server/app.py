@@ -8,6 +8,7 @@ from flask_cors import CORS
 from server.views import app_views
 from flask import jsonify
 
+
 @login_manager.user_loader
 def load_user(user_id):
     """
