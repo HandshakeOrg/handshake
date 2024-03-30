@@ -16,6 +16,7 @@ function PostJob() {
     user_id: user,
     category_id: 1,
   });
+  console.log(user);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
