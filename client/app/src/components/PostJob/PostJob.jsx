@@ -17,6 +17,7 @@ function PostJob() {
     category_id: 1,
   });
   console.log(user);
+  console.log(formData.title);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -86,120 +87,130 @@ function PostJob() {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className='space-y-2'>
           <h1 className={styles.h1}>Post a listing</h1>
-          <p className={styles.p}>
+          {/* <p className={styles.p}>
             Fill out the form below to post a listing to the list board.
-          </p>
+          </p> */}
         </div>
         <div className={styles.input_box}>
-          <label htmlFor='title' className={styles.label}>
-            Listing Title
-          </label>
-          <input
-            id='title'
-            type='text'
-            name='title'
-            placeholder='Enter the listing title'
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.input_box}>
-          <label htmlFor='user_type' className={styles.label}>
-            Organisation
-          </label>
-          <input
-            id='user_type'
-            type='text'
-            name='user_type'
-            placeholder='Enter the organisation name'
-            value={formData.user_type}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.input_box}>
-          <label htmlFor='location' className={styles.label}>
-            Location
-          </label>
-          <input
-            id='location'
-            type='text'
-            name='location'
-            placeholder='Enter the location'
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.input_box}>
-          <label htmlFor='description' className={styles.label}>
-            Job description
-          </label>
-          <textarea
-            id='description'
-            placeholder='Enter the job description'
-            name='description'
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.input_box}>
-          <label htmlFor='price_negotiable' className={styles.label}>
-            Price
-          </label>
-          <input
-            id='price_negotiable'
-            type='text'
-            placeholder='Enter the price'
-            name='price_negotiable'
-            value={formData.price_negotiable}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.radio_box}>
-          <div className=''>
+          <div className={styles.label_box}>
+            <label htmlFor='title' className={styles.label}>
+              Title
+            </label>
+          </div>
+          <div className={styles.input}>
             <input
-              id='active'
-              type='radio'
-              name='status'
-              value='Active'
+              id='title'
+              type='text'
+              name='title'
+              placeholder='Enter the listing title'
+              value={formData.title}
               onChange={handleChange}
               required
             />
-            <label htmlFor='active' className={styles.label_radio}>
-              Active
-            </label>
-          </div>
-          <div className=''>
-            <input
-              id='inactive'
-              type='radio'
-              name='status'
-              value='Inactive'
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor='inactive' className={styles.label_radio}>
-              Inactive
-            </label>
           </div>
         </div>
         <div className={styles.input_box}>
-          <label htmlFor='expiry_date' className={styles.label}>
-            Expiry Date
-          </label>
-          <input
-            id='expiry_date'
-            type='date'
-            name='expiry_date'
-            placeholder='Enter the expiry date'
-            value={formData.expiry_date}
-            onChange={handleChange}
-            required
-          />
+          <div className={styles.label_box}>
+            <label htmlFor='user_type' className={styles.label}>
+              Organisation
+            </label>
+          </div>
+          <div className={styles.input}>
+            <input
+              id='user_type'
+              type='text'
+              name='user_type'
+              placeholder='Enter the organisation name'
+              value={formData.user_type}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className={styles.input_box}>
+          <div className={styles.label_box}>
+            <label htmlFor='location' className={styles.label}>
+              Location
+            </label>
+          </div>
+          <div className={styles.input}>
+            <input
+              id='location'
+              type='text'
+              name='location'
+              placeholder='Enter the location'
+              value={formData.location}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className={styles.input_box}>
+          <div className={styles.label_box}>
+            <label htmlFor='description' className={styles.label}>
+              Job description
+            </label>
+          </div>
+          <div className={styles.input}>
+            <textarea
+              id='description'
+              placeholder='Enter the job description'
+              name='description'
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className={styles.input_box}>
+          <div className={styles.label_box}>
+            <label htmlFor='price_negotiable' className={styles.label}>
+              Price
+            </label>
+          </div>
+          <div className={styles.input}>
+            <input
+              id='price_negotiable'
+              type='text'
+              placeholder='Enter the price'
+              name='price_negotiable'
+              value={formData.price_negotiable}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className={styles.input_box}>
+          <div className={styles.label_box}>
+            <label htmlFor='status' className={styles.label}>
+              Status
+            </label>
+          </div>
+          <div className={styles.input}>
+            <select id='status' name='status' onSelect={handleChange}>
+              <option value='Active'>Active</option>
+              <option value='Inactive'>Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div className={styles.input_box}>
+          <div className={styles.label_box}>
+            <label htmlFor='expiry_date' className={styles.label}>
+              Expiry Date
+            </label>
+          </div>
+          <div className={styles.input}>
+            <input
+              id='expiry_date'
+              type='date'
+              name='expiry_date'
+              placeholder='Enter the expiry date'
+              value={formData.expiry_date}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
         <input type='hidden' name='user_id' value={formData.user_id} />
         <input type='hidden' name='category_id' value={formData.category_id} />
