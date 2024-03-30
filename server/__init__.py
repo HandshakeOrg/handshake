@@ -10,7 +10,6 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from server.models import User
 
 # Loads the environmental variable from the .env file
 load_dotenv()
