@@ -32,6 +32,12 @@ function Login() {
     [isAuthenticated, location.state, navigate]
   );
 
+  useEffect(() => {
+    // Clear location state on logout
+    if (!isAuthenticated && location.state) {
+      navigate('', { replace: true });
+    }
+  }, [isAuthenticated, location.state, navigate]);
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit} className={styles.form}>
