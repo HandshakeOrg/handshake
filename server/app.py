@@ -18,11 +18,12 @@ def load_user(user_id):
 
 # Creates all tables if it does not exist
 with app.app_context():
+    # db.drop_all()
     db.create_all()
 
 # Register blueprint
 app.register_blueprint(app_views)
-cors = CORS(app, resources={r'/api/*': {'origins': ['*']}})
+cors = CORS(app, resources={r'/api/*': {'origins': ['*'], "supports_credentials": True}})
 # cors = CORS(app, resources={r'/api/*': {'origins': ['http://localhost:5173', 'https://handshake-sage.vercel.app']}})
 
 @app.teardown_appcontext

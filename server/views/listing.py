@@ -100,7 +100,7 @@ def create_listings():
             location=location,
             status=status,
             price_negotiable=price_negotiable,
-            expiry_date=datetime.strptime(expiry_date, '%Y-%m-%d %H:%M:%S'),
+            expiry_date=datetime.strptime(expiry_date, '%Y-%m-%d'),
             user_id=user_id,
             category_id=category_id)
     except ValueError:

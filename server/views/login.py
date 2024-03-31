@@ -27,27 +27,25 @@ def login():
     Log in a user
     """
 
-    if current_user.is_authenticated:
-        return jsonify({'success': 'User is already logged in'}), 200
-    else:
-        email = request.form.get('email')
-        password = request.form.get('password')
-        if not email:
-            return jsonify({'error': 'Please enter your email!'}), 400
-        if not password:
-            return jsonify({'error': 'Please enter your password'}), 400
-        user = User.query.filter_by(email=email).first()
-        if user and bcrypt.check_password_hash(user.password, password):
-            login_user(user)
-            return jsonify({
-                'current_user': {
-                'id': current_user.id,
-                'firstname': current_user.firstname,
-                'lastname': current_user.lastname,
-                'email': current_user.email,
-                'phone_number': current_user.phone_number,
-                'city_id': current_user.city_id
+    # if current_user.is_authenticated:
+    #     return jsonify({'success': 'User is already logged in'}), 200
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if not email or not password:
+        return jsonify({'error': 'Please provide both email and password'}), 400
+    user = User.query.filter_by(email=email).first()
+    if user and bcrypt.check_password_hash(user.password, password):
+        login_user(user)
+        return jsonify({
+            'current_user': {
+            'id': current_user.id,
+            'firstname': current_user.firstname,
+            'lastname': current_user.lastname,
+            'email': current_user.email,
+            'phone_number': current_user.phone_number,
+            'city_id': current_user.city_id
             }
         }), 200
-        else:
-            return jsonify({'error': 'Login unsuccessful, please check email or password'}), 400
+    else:
+        return jsonify({'error': 'Login unsuccessful, please check email or password'}), 400

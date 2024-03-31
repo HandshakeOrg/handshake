@@ -10,8 +10,8 @@ export default function BodySection() {
   const [selectedListing, setSelectedListing] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
-  const BASE_URL = 'https://handshake-edac.onrender.com/api';
-  // const BASE_URL = 'http://127.0.0.1:5000/api';
+  // const BASE_URL = 'https://handshake-edac.onrender.com/api';
+  const BASE_URL = 'http://127.0.0.1:5000/api';
   useEffect(() => {
     const fetchListings = async () => {
       try {
