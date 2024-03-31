@@ -2,20 +2,11 @@
 """
 Start Handshake web application
 """
-from server import app, db, login_manager
+from server import app, db
 from flask_cors import CORS
 from server.views import app_views
 from flask import jsonify
 from server.models import User
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
 
 
 # Creates all tables if it does not exist
