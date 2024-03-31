@@ -15,13 +15,14 @@ from server.models.conversation import Conversation
 from server.models.message import Message
 
 
-@login_required
+#@login_required
 @app_views.route('/dashboard', methods=['GET'], strict_slashes=False)
 def profile():
     """
     Displays the user's dashboard
     """
     if current_user.is_authenticated:
+        print(f"This is the current user's email: {current_user.email}")
         return jsonify({
             'id': current_user.id,
             'firstname': current_user.firstname,
@@ -30,10 +31,10 @@ def profile():
             'phone_number': current_user.email,
         }), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 
-@login_required
+#@login_required
 @app_views.route('/dashboard/listings', methods=['GET'], strict_slashes=False)
 def profile_listings():
     """
@@ -53,10 +54,10 @@ def profile_listings():
             listings.append(user_listings)
         return jsonify({'user_listings': user_listings}), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 
-@login_required
+#@login_required
 @app_views.route('/dashboard/messages', methods=['GET'], strict_slashes=False)
 def profile_messages():
     """
@@ -66,7 +67,7 @@ def profile_messages():
 
         # Listings the user had conversations on
         conversation_list = []
-        for listing in current_user.conversation.listings:
+        for listing in current_user.conversations.listings:
             listings = {
                     'id': listing.id,
                     'title': listing.title,
@@ -96,4 +97,4 @@ def profile_messages():
                 'user_messages': user_messages
                 }), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401 

@@ -24,6 +24,8 @@ HANDSHAKE_MYSQL_ENV = os.environ.get('HANDSHAKE_MYSQL_ENV')
 
 # Create an instance of LoginManager
 login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+
 
 # Initialize flask application
 app = Flask(__name__)
@@ -32,6 +34,13 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    from server.models.user import User
+    user = User.query.get(int(user_id))
+    print(f'Loaded user from session: {user}')
+    return user
 
 # Customize login process
 login_manager.login_view = 'app_views.login'

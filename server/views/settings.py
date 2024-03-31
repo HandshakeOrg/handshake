@@ -6,7 +6,7 @@ update contact information and password
 
 
 from flask import jsonify, request, abort
-from flask_login import current_user, login_required
+from flask_login import login_required, current_user
 from server import db, bcrypt
 from server.views import app_views
 from server.models.user import User
@@ -57,7 +57,7 @@ def load_settings():
             }
         }), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 
 @login_required
@@ -102,8 +102,7 @@ def change_password():
     password = request.form.get('password')
     if not password:
         return jsonify({'error': 'You did not enter a password'}), 400
-    hashed_pwd = bcrypt.generate_password_hash(password)
-    print(hashed_pwd)
+    hashed_pwd = bcrypt.generate_password_hash(password).decode('utf-8')
     current_user.password = hashed_pwd
     db.session.commit()
     return jsonify({'success': 'Your password has been changed'}), 200
