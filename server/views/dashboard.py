@@ -3,19 +3,19 @@
 
 """
 
-
 from flask import jsonify, abort
-from flask_login import current_user
-from server import db, login_manager
+from flask_login import current_user, login_required
+from server import db
+from server.views import app_views
 from server.models.user import User
 from server.models.category import Category
 from server.models.listing import Listing
 from server.models.conversation import Conversation
 from server.models.message import Message
-from server.views import app_views
 
 
 @app_views.route('/dashboard', methods=['GET'], strict_slashes=False)
+@login_required
 def profile():
     """
     Displays the user's dashboard
@@ -29,10 +29,10 @@ def profile():
             'phone_number': current_user.email,
         }), 200
     else:
-        abort(401)
-
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 @app_views.route('/dashboard/listings', methods=['GET'], strict_slashes=False)
+@login_required
 def profile_listings():
     """
     displays all the listings  posted by the user
@@ -51,21 +51,31 @@ def profile_listings():
             listings.append(user_listings)
         return jsonify({'user_listings': user_listings}), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 
 @app_views.route('/dashboard/messages', methods=['GET'], strict_slashes=False)
+@login_required
 def profile_messages():
     """
     display all conversations under a listing
     """
     if current_user.is_authenticated:
 
-        # Listings the user had conversations on
-        conversation_list = []
-        for listing in current_user.conversation.listings:
-            listings = {
-                    'id': listing.id,
+        # Messages sent and recieved by user
+        messages = []
+        for conversation in current_user.sent_conversations:
+            for message in conversation.messages:
+                msg = {'conversation':
+                        {
+                            'id': conversation.id,
+                            'title': conversation.title,
+                            'sender_id': conversation.sender_id,
+                            'recipient_id
+
+                    {'message': {
+                    'id': message.id,
+
                     'title': listing.title,
                     'description': listing.description,
                     'status': listing.status,
@@ -93,4 +103,4 @@ def profile_messages():
                 'user_messages': user_messages
                 }), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401

@@ -20,6 +20,10 @@ class Message(db.Model):
     message = db.Column(db.Text, nullable=False)
     message_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
     conversation_id = db.Column(db.Integer, db.ForeignKey('conversations.id'))
+    sender_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                          nullable=False)
+    recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                          nullable=False)
 
     def __repr__(self):
         """

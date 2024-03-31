@@ -11,6 +11,7 @@ from server.views import app_views
 
 
 @app_views.route('/logout', methods=['GET'], strict_slashes=False)
+@login_required
 def logout():
     """
     Logs out a current user
