@@ -34,7 +34,7 @@ bcrypt = Bcrypt(app)
 login_manager.init_app(app)
 
 # Customize login process
-login_manager.login_view = 'views.login.login'
+login_manager.login_view = 'app_views.login'
 login_manager.login_message_category = 'info'
 login_manager.login_message = 'Please log in to access this page.'
 

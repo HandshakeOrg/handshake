@@ -7,8 +7,8 @@ update contact information and password
 
 from flask import jsonify, request, abort
 from flask_login import current_user, login_required
-from server.views import app_views
 from server import db, bcrypt
+from server.views import app_views
 from server.models.user import User
 from server.models.city import City
 from server.models.state import State
@@ -60,8 +60,8 @@ def load_settings():
         abort(401)
 
 
-@app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
 @login_required
+@app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
 def change_location():
     """
     change the location of a user
@@ -99,8 +99,6 @@ def change_password():
     """
     change a user's password
     """
-    passwd = current_user.password
-    print(passwd)
     password = request.form.get('password')
     if not password:
         return jsonify({'error': 'You did not enter a password'}), 400
@@ -147,14 +145,13 @@ def update_phone():
         return jsonify({'error': 'This phone number has already been registered by another user'})
 
 
-@app_views.route('/settings/delete', methods=['DELETE'], strict_slashes=False)
 @login_required
+@app_views.route('/settings/delete', methods=['DELETE'], strict_slashes=False)
 def delete_account():
     """
     deletes a user account
     """
-    print(current_user.__dict__)
-    user = User.query.get(current_user.id)
-    db.session.delete(user)
+    # user = User.query.get(current_user.id)
+    db.session.delete(current_user)
     db.session.commit()
     return jsonify({'You account has been deleted.'}), 200
