@@ -4,10 +4,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './Login.module.css';
 import { useAuth } from '../contexts/AuthContext';
-import Spinner from '../components/Spinners/Spinner';
+// import Spinner from '../components/Spinners/Spinner';
 
 function Login() {
-  const { login, isAuthenticated, loading } = useAuth();
+  // const { login, isAuthenticated, loading } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -32,12 +33,6 @@ function Login() {
     [isAuthenticated, location.state, navigate]
   );
 
-  useEffect(() => {
-    // Clear location state on logout
-    if (!isAuthenticated && location.state) {
-      navigate('', { replace: true });
-    }
-  }, [isAuthenticated, location.state, navigate]);
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -81,7 +76,7 @@ function Login() {
           </Link>
         </div>
       </form>
-      {loading && <Spinner />}
+      {/* {loading && <Spinner />} */}
     </main>
   );
 }
