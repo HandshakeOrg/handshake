@@ -6,14 +6,13 @@ import Spinner from './components/Spinners/Spinner';
 import { AuthProvider } from './contexts/AuthContext';
 import MainApp from './pages/MainApp';
 import User from './components/User/User';
+import ProtectedRoute from './pages/ProtectedRoute';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Login = lazy(() => import('./pages/Login'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 const PostJob = lazy(() => import('./components/PostJob/PostJob'));
-// import BodySection from "../components/BodySection/BodySection";
 const BodySection = lazy(() => import('./components/BodySection/BodySection'));
-
 function App() {
   return (
     <AuthProvider>
@@ -23,18 +22,18 @@ function App() {
           <Routes>
             <Route path='signup' element={<Signup />} />
             <Route path='login' element={<Login />} />
-            <Route
-              path='/app'
-              element={
-                // <ProtectedRoute>
-                <MainApp />
-                // </ProtectedRoute>
-              }
-            >
+            <Route path='/app' element={<MainApp />}>
               <Route index element={<BodySection />} />
-              <Route path='/app/postjob' element={<PostJob />} />
-              <Route path='/app/profile' element={<User />} />
+              <Route
+                path='/app/postjob'
+                element={<ProtectedRoute element={<PostJob />} />}
+              />
+              <Route
+                path='/app/profile'
+                element={<ProtectedRoute element={<User />} />}
+              />
             </Route>
+
             <Route index element={<HomePage />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
@@ -43,5 +42,4 @@ function App() {
     </AuthProvider>
   );
 }
-
 export default App;

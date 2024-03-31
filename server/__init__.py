@@ -33,9 +33,14 @@ bcrypt = Bcrypt(app)
 
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):
-    from server.models.user import User
+    from server.models import User
+    """
+    wrapper function
+    loads a user from the database by the user_id
+    """
     return User.query.get(int(user_id))
 
 
