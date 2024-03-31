@@ -15,15 +15,6 @@ from server.models.message import Message
 from server.views import app_views
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
-
-
 @app_views.route('/dashboard', methods=['GET'], strict_slashes=False)
 def profile():
     """

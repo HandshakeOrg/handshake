@@ -6,19 +6,10 @@ otherwise returns error
 """
 
 from flask import request, jsonify, abort
-from server import db, bcrypt, login_manager
+from server import db, bcrypt
 from server.models import User
 from server.views import app_views
 from flask_login import login_user, current_user
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
 
 
 @app_views.route('/login', methods=['POST'], strict_slashes=False)

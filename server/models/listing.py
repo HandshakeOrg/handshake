@@ -29,7 +29,7 @@ class Listing(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     expiry_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=True)
     image = db.relationship('Listing_image', backref='listings',
                             cascade='all, delete-orphan')
     attribute = db.relationship('Listing_attribute', backref='listings',
