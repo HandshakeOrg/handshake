@@ -4,8 +4,7 @@ Account settings
 update contact information and password
 """
 
-
-from server import db, bcrypt, login_manager
+from server import db, bcrypt
 from server.models.user import User
 from server.models.city import City
 from server.models.state import State
@@ -13,15 +12,6 @@ from server.models.country import Country
 from server.views import app_views
 from flask import jsonify, request
 from flask_login import current_user, login_required
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
 
 
 def validate_email(email):
@@ -92,7 +82,7 @@ def change_location():
 
     country = Country.query.filter_by(name=country_name).first()
     if not country:
-        return jsonify({'error': 'The country entered does not exist'}), 200
+        return jsonify({'error': 'The country entered does not exist'}), 400
  
     current_user.city_id = city.id
     db.session.commit()
@@ -143,11 +133,11 @@ def update_phone():
         return jsonify({'error': 'Please provide a valid phone number'}), 400
     check_phone = validate_phone(phone)
     if not check_phone:
-        current_user.phone_numer = phone
+        current_user.phone_number = phone
         db.session.commit()
         return jsonify({'success': 'Your phone number has been updated'}), 200
     else:
-        return jsonify({'error': 'This phone number has already been registered by another user'})
+        return jsonify({'error': 'This phone number has already been registered by another user'}), 400
 
 
 @app_views.route('/settings/delete', methods=['DELETE'], strict_slashes=False)
@@ -156,7 +146,6 @@ def delete_account():
     """
     deletes a user account
     """
-    print(current_user.__dict__)
     user = User.query.get(current_user.id)
     db.session.delete(user)
     db.session.commit()

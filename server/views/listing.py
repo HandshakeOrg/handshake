@@ -8,18 +8,9 @@ from server.models import Listing, User, Listing_attribute, Listing_image, conve
 from flask import request, jsonify, abort
 from flask_login import current_user
 from werkzeug.utils import secure_filename
-from server import allowed_file, UPLOAD_LIST_IMAGE_FOLDER, db, login_manager
+from server import allowed_file, UPLOAD_LIST_IMAGE_FOLDER, db
 import os
 from datetime import datetime
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    wrapper function
-    loads a user from the database by the user_id
-    """
-    return User.query.get(int(user_id))
 
 
 # Users must be able to create a listing
@@ -100,11 +91,11 @@ def create_listings():
             location=location,
             status=status,
             price_negotiable=price_negotiable,
-            expiry_date=datetime.strptime(expiry_date, '%Y-%m-%d %H:%M:%S'),
+            expiry_date=datetime.strptime(expiry_date, '%Y-%m-%d'),
             user_id=user_id,
             category_id=category_id)
-    except ValueError:
-        return jsonify({'error': 'Format the expiry date to look like this: 2024-03-22 12:34:56'})
+    except Exception:
+        return jsonify({'error': 'Format the expiry date to look like this: 2024-03-22'})
 
     if image:
         listing_image = Listing_image(listing_id=listing.id, image=image_filename)
