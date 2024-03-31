@@ -13,11 +13,11 @@ function PostJob() {
     price_negotiable: '',
     status: '',
     expiry_date: '',
-    user_id: user,
+    user_id: user.id,
     category_id: 1,
   });
   console.log(user);
-  console.log(formData.title);
+  // console.log(formData.status);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -189,6 +189,9 @@ function PostJob() {
           </div>
           <div className={styles.input}>
             <select id='status' name='status' onChange={handleChange}>
+              <option selected value=''>
+                Select Status
+              </option>
               <option value='Active'>Active</option>
               <option value='Inactive'>Inactive</option>
             </select>

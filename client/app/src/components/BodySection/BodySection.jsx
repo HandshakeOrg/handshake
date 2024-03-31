@@ -10,14 +10,12 @@ export default function BodySection() {
   const [selectedListing, setSelectedListing] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
-
+  const BASE_URL = 'https://handshake-edac.onrender.com/api';
   useEffect(() => {
     const fetchListings = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          'https://handshake-edac.onrender.com/api/get_listings'
-        );
+        const response = await fetch(`${BASE_URL}/get_listings`);
         if (!response.ok) {
           throw new Error('Failed to fetch listings');
         }
@@ -52,7 +50,7 @@ export default function BodySection() {
 
     try {
       const response = await fetch(
-        `https://handshake-edac.onrender.com/api/listings_search?${searchType}=${searchQuery}`
+        `${BASE_URL}/listings_search?${searchType}=${searchQuery}`
       );
       if (response.ok) {
         const data = await response.json();
