@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { isEmpty } from '../../utils/validation/AuthValidation';
+// const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://handshake-edac.onrender.com/api';
 function PostJob() {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
@@ -53,31 +55,35 @@ function PostJob() {
       toast.error('Please set expiry date.');
       return;
     }
-    try {
-      const formBody = Object.keys(formData)
-        .map(
-          (key) =>
-            encodeURIComponent(key) + '=' + encodeURIComponent(formData[key])
-        )
-        .join('&');
 
-      const response = await fetch(
-        'https://handshake-edac.onrender.com/api/create_listings',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: formBody,
-        }
-      );
+    try {
+      const response = await fetch(`${BASE_URL}/create_listings`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json', // Change content type to JSON
+        },
+        body: JSON.stringify(formData), // Stringify formData object
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error);
       }
+      // Clear the form
+      setFormData({
+        title: '',
+        user_type: '',
+        location: '',
+        description: '',
+        price_negotiable: '',
+        status: '',
+        expiry_date: '',
+        user_id: user.id,
+        category_id: 1,
+      });
       // Handle successful response
-      console.log('Listing created successfully');
+      toast.success('Listing created successfully');
     } catch (error) {
       console.error('Error creating listing:', error.message);
     }
@@ -188,10 +194,8 @@ function PostJob() {
             </label>
           </div>
           <div className={styles.input}>
-            <select id='status' name='status' onChange={handleChange}>
-              <option selected value=''>
-                Select Status
-              </option>
+            <select id='status' name='status' onChange={handleChange} required>
+              <option value=''>Select Status</option>
               <option value='Active'>Active</option>
               <option value='Inactive'>Inactive</option>
             </select>
