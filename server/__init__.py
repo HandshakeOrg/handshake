@@ -53,7 +53,7 @@ login_manager.login_message = 'Please log in to access this page.'
 # import secrets
 # secrets.token_hex() will generate a new token
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-
+print(os.environ.get('SECRET_KEY'))
 # Prevent JavaScript access to the cookie
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 
