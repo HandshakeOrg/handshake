@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     phone_number = db.Column(db.String(60), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'), nullable=True)
+    state_id = db.Column(db.Integer, db.ForeignKey('state.id'), nullable=True)
     listings = db.relationship('Listing', backref='user',
                                cascade='all, delete-orphan')
     sent_conversations = db.relationship('Conversation', backref='sender',

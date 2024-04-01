@@ -6,7 +6,7 @@ returns status 200 if success
 
 
 from flask import jsonify
-from flask_login import logout_user
+from flask_login import login_required, logout_user
 from server.views import app_views
 
 
