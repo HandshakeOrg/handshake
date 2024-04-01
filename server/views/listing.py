@@ -160,7 +160,7 @@ def update_listings(listing_id):
             'location': location,
             'status': status,
             'price_negotiable': price_negotiable,
-            'expiry_date': datetime.strptime(expiry_date, '%Y-%m-%d %H:%M:%S'),
+            'expiry_date': datetime.strptime(expiry_date, '%Y-%m-%d'),
             'user_id': user_id,
             'category_id': category_id,
             'price': price,
@@ -269,7 +269,7 @@ def get_listings():
             'category_id': listing.category_id,
             'price': listing.price,
             'salary': listing.salary,
-            'image_name': listing.image.image
+            'image_name': listing.image.image if listing.image else []
         }
         listings_data.append(data)
     return jsonify({

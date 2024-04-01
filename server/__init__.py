@@ -53,13 +53,13 @@ login_manager.login_message = 'Please log in to access this page.'
 # import secrets
 # secrets.token_hex() will generate a new token
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-print(os.environ.get('SECRET_KEY'))
+# print(os.environ.get('SECRET_KEY'))
 # Prevent JavaScript access to the cookie
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 
 # Defines the database uri for the sqlalchemy connection the mysql and also use a dialect
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{HANDSHAKE_MYSQL_USER}:{HANDSHAKE_MYSQL_PWD}@{HANDSHAKE_MYSQL_HOST}:3306/{HANDSHAKE_MYSQL_DB}'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://handshake_test_db_user:8xhja22cqBQJkeOFd4FsI6ZoRDgolouE@dpg-co0trv7jbltc73955hsg-a/handshake_test_db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://handshake_test_db_user:8xhja22cqBQJkeOFd4FsI6ZoRDgolouE@dpg-co0trv7jbltc73955hsg-a/handshake_test_db'
 # initialize the sqlalchemy orm
 db = SQLAlchemy(app)
 
