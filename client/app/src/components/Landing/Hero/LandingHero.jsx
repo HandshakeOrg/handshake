@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import styles from "./LandingHero.module.css";
+import { Link } from 'react-router-dom';
+import styles from './LandingHero.module.css';
 
 function LandingHero() {
   return (
@@ -11,7 +11,7 @@ function LandingHero() {
             The best place to find your next adventure. From job postings to
             real estate listings, we&apos;ve got you covered.
           </p>
-          <Link to="/signup" className={styles.btns}>
+          <Link to='/signup' className={styles.btns}>
             GET STARTED
           </Link>
         </div>
@@ -43,14 +43,14 @@ function LandingHero() {
             website allows you to effortlessly browse for jobs, save your
             favourite ads, and apply directly to employers—all in one location.
           </p>
-          <Link to="/signup" className={styles.apply_btns}>
-            Apply to Jobs
+          <Link to='/signup' className={styles.apply_btns}>
+            Apply to Listing/Job
           </Link>
         </div>
         <div className={styles.seek_img}>
           <img
-            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGpvYiUyMHNlZWtlcnxlbnwwfHwwfHx8MA%3D%3D"
-            alt="job seeker"
+            src='https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGpvYiUyMHNlZWtlcnxlbnwwfHwwfHx8MA%3D%3D'
+            alt='job seeker'
           />
         </div>
       </section>
@@ -66,14 +66,14 @@ function LandingHero() {
             examine candidate profiles, and expedite the recruiting process, all
             while saving time and resources.
           </p>
-          <Link to="/signup" className={styles.apply_btns}>
-            Post a Job
+          <Link to='/signup' className={styles.apply_btns}>
+            Post a Listing
           </Link>
         </div>
         <div className={styles.seek_img}>
           <img
-            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGpvYiUyMHNlZWtlcnxlbnwwfHwwfHx8MA%3D%3D"
-            alt="job seeker"
+            src='https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGpvYiUyMHNlZWtlcnxlbnwwfHwwfHx8MA%3D%3D'
+            alt='job seeker'
           />
         </div>
       </section>

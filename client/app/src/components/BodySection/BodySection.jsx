@@ -10,8 +10,8 @@ export default function BodySection() {
   const [selectedListing, setSelectedListing] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
-  const BASE_URL = 'https://handshake-edac.onrender.com/api';
-  // const BASE_URL = 'http://127.0.0.1:5000/api';
+  // const BASE_URL = 'https://handshake-edac.onrender.com/api';
+  const BASE_URL = 'http://127.0.0.1:5000/api';
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -114,13 +114,13 @@ export default function BodySection() {
           <div className='job-listings'>
             {listings.map((listing) => (
               <ListingCard
-                key={listing.user_id}
+                key={listing.id}
                 title={listing.title}
                 user_type={listing.user_type}
                 location={listing.location}
                 price_negotiable={listing.price_negotiable}
                 status={listing.status}
-                description={[listing.description]}
+                description={listing.description}
                 expiry_date={listing.expiry_date}
                 onSelect={handleListingSelect}
               />

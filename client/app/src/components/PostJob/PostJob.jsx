@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { isEmpty } from '../../utils/validation/AuthValidation';
-// const BASE_URL = 'http://localhost:5000/api';
-const BASE_URL = 'https://handshake-edac.onrender.com/api';
+const BASE_URL = 'http://localhost:5000/api';
+// const BASE_URL = 'https://handshake-edac.onrender.com/api';
 function PostJob() {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
