@@ -4,14 +4,14 @@ Account settings
 update contact information and password
 """
 
+from flask import jsonify, request
+from flask_login import login_required, current_user
 from server import db, bcrypt
+from server.views import app_views
 from server.models.user import User
 from server.models.city import City
 from server.models.state import State
 from server.models.country import Country
-from server.views import app_views
-from flask import jsonify, request
-from flask_login import current_user, login_required
 
 
 def validate_email(email):
@@ -43,17 +43,19 @@ def load_settings():
     loads up the settings page
     with the current_user data
     """
-    return jsonify ({
+    if current_user.is_authenticated:
+        return jsonify ({
             'current_user': {
             'id': current_user.id,
             'firstname': current_user.firstname,
             'lastname': current_user.lastname,
             'email': current_user.email,
-            'city': current_user.city.name,
-            'state': current_user.state.name,
-            'country': current_user.country.name
+            'city': current_user.city.name if current_user.city else None,
+            'state': current_user.state.name if current_user.state else None,
             }
         }), 200
+    else:
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 
 @app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
@@ -84,7 +86,7 @@ def change_location():
     if not country:
         return jsonify({'error': 'The country entered does not exist'}), 400
  
-    current_user.city_id = city.id
+    current_user.state_id = state.id
     db.session.commit()
     return jsonify({'success': 'Your location has been updated'}), 200
 
@@ -98,7 +100,7 @@ def change_password():
     password = request.form.get('password')
     if not password:
         return jsonify({'error': 'You did not enter a password'}), 400
-    hashed_pwd = bcrypt.generate_password_hash(password)
+    hashed_pwd = bcrypt.generate_password_hash(password).decode('utf-8')
     current_user.password = hashed_pwd
     db.session.commit()
     return jsonify({'success': 'Your password has been changed'}), 200
@@ -149,4 +151,4 @@ def delete_account():
     user = User.query.get(current_user.id)
     db.session.delete(user)
     db.session.commit()
-    return jsonify({'You account has been deleted.'}), 200
+    return jsonify({'error': 'You account has been deleted.'}), 200

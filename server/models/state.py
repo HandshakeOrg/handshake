@@ -20,6 +20,8 @@ class State(db.Model):
                            nullable=False)
     city = db.relationship('City', backref='state',
                            cascade='all, delete, delete-orphan')
+    user = db.relationship('User', backref='state',
+                           cascade='all, delete-orphan')
 
     def __repr__(self):
         """

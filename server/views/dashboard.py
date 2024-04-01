@@ -3,19 +3,19 @@
 
 """
 
-
 from flask import jsonify, abort
-from flask_login import current_user
-from server import db, login_manager
+from flask_login import current_user, login_required
+from server import db
+from server.views import app_views
 from server.models.user import User
 from server.models.category import Category
 from server.models.listing import Listing
 from server.models.conversation import Conversation
 from server.models.message import Message
-from server.views import app_views
 
 
 @app_views.route('/dashboard', methods=['GET'], strict_slashes=False)
+@login_required
 def profile():
     """
     Displays the user's dashboard
@@ -29,10 +29,10 @@ def profile():
             'phone_number': current_user.email,
         }), 200
     else:
-        abort(401)
-
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 @app_views.route('/dashboard/listings', methods=['GET'], strict_slashes=False)
+@login_required
 def profile_listings():
     """
     displays all the listings  posted by the user
@@ -49,48 +49,66 @@ def profile_listings():
                     'posted_at': list.posted_at
                     }
             listings.append(user_listings)
-        return jsonify({'user_listings': user_listings}), 200
+        return jsonify({'user_listings': listings}), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 
 @app_views.route('/dashboard/messages', methods=['GET'], strict_slashes=False)
+@login_required
 def profile_messages():
     """
     display all conversations under a listing
     """
     if current_user.is_authenticated:
 
-        # Listings the user had conversations on
-        conversation_list = []
-        for listing in current_user.conversation.listings:
-            listings = {
-                    'id': listing.id,
-                    'title': listing.title,
-                    'description': listing.description,
-                    'status': listing.status,
-                    'price': listing.price,
-                    'salary': listing.salary,
-                    'posted_at': listing.posted_at
+        # Messages sent and recieved by user
+        sent_messages = []
+        for conversation in current_user.sent_conversations:
+            for message in conversation.messages:
+                msg = {'conversation':
+                        {
+                            'id': conversation.id,
+                            'title': conversation.title,
+                            'sender_id': conversation.sender_id,
+                            'recipient_id': conversation.recipient_id,
+                            'status': conversation.status,
+                            'message': {
+                                'id': message.id,
+                                'content': message.message,
+                                'sender_id': message.sender_id,
+                                'recipient_id': message.recipient_id,
+                                'message_date': message.message_date
+                            }
+                        }
                     }
-            conversation_list.append(listings)
+            sent_messages.append(msg)
 
-        # conversations made by user
-        user_messages = []
-        for conversation in current_user.conversations:
-            user_conversations = {
-                    'id': conversation.id,
-                    'title': conversation.title,
-                    'sender_id': conversation.sender_id,
-                    'recipient_id': conversation.recipient_id,
-                    'listing': conversation_list,
-                    'messages': conversation.messages.message,
-                    'message_date': conversation.messages.message_date
+        # Messages sent and recieved by user
+        received_messages = []
+        for conversation in current_user.received_conversations:
+            for message in conversation.messages:
+                msg = {'conversation':
+                        {
+                            'id': conversation.id,
+                            'title': conversation.title,
+                            'sender_id': conversation.sender_id,
+                            'recipient_id': conversation.recipient_id,
+                            'status': conversation.status,
+                            'message': {
+                                'id': message.id,
+                                'content': message.message,
+                                'sender_id': message.sender_id,
+                                'recipient_id': message.recipient_id,
+                                'message_date': message.message_date
+                            }
+                        }
                     }
-            user_messages.append(user_conversations)
+            received_messages.append(msg)
+
         return jsonify({
-                'conversation_list': conversation_list,
-                'user_messages': user_messages
+                'sent_messages': sent_messages,
+                'received_messages': received_messages
                 }), 200
     else:
-        abort(401)
+        return jsonify({'error': 'You are not authorized to get this information'}), 401

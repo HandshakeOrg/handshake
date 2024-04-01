@@ -23,6 +23,7 @@ HANDSHAKE_MYSQL_ENV = os.environ.get('HANDSHAKE_MYSQL_ENV')
 
 # Create an instance of LoginManager
 login_manager = LoginManager()
+login_manager.session_protection = 'strong'
 
 # Initialize flask application
 app = Flask(__name__)
@@ -44,7 +45,7 @@ def load_user(user_id):
 
 
 # Customize login process
-login_manager.login_view = 'views.login.login'
+login_manager.login_view = 'app_views.login'
 login_manager.login_message_category = 'info'
 login_manager.login_message = 'Please log in to access this page.'
 
@@ -57,7 +58,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 
 # Defines the database uri for the sqlalchemy connection the mysql and also use a dialect
-# app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{HANDSHAKE_MYSQL_USER}:{HANDSHAKE_MYSQL_PWD}@{HANDSHAKE_MYSQL_HOST}:3306/{HANDSHAKE_MYSQL_DB}'
+#app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{HANDSHAKE_MYSQL_USER}:{HANDSHAKE_MYSQL_PWD}@{HANDSHAKE_MYSQL_HOST}:3306/{HANDSHAKE_MYSQL_DB}'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://handshake_test_db_user:8xhja22cqBQJkeOFd4FsI6ZoRDgolouE@dpg-co0trv7jbltc73955hsg-a/handshake_test_db'
 # initialize the sqlalchemy orm
 db = SQLAlchemy(app)
