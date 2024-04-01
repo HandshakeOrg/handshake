@@ -50,9 +50,8 @@ def load_settings():
             'firstname': current_user.firstname,
             'lastname': current_user.lastname,
             'email': current_user.email,
-            'city': current_user.city.name,
-            'state': current_user.state.name,
-            'country': current_user.country.name
+            'city': current_user.city.name if current_user.city else None,
+            'state': current_user.state.name if current_user.state else None,
             }
         }), 200
     else:
@@ -87,7 +86,7 @@ def change_location():
     if not country:
         return jsonify({'error': 'The country entered does not exist'}), 400
  
-    current_user.city_id = city.id
+    current_user.state_id = state.id
     db.session.commit()
     return jsonify({'success': 'Your location has been updated'}), 200
 
@@ -152,4 +151,4 @@ def delete_account():
     user = User.query.get(current_user.id)
     db.session.delete(user)
     db.session.commit()
-    return jsonify({'You account has been deleted.'}), 200
+    return jsonify({'error': 'You account has been deleted.'}), 200

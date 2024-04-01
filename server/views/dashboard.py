@@ -49,7 +49,7 @@ def profile_listings():
                     'posted_at': list.posted_at
                     }
             listings.append(user_listings)
-        return jsonify({'user_listings': user_listings}), 200
+        return jsonify({'user_listings': listings}), 200
     else:
         return jsonify({'error': 'You are not authorized to get this information'}), 401
 
@@ -63,7 +63,7 @@ def profile_messages():
     if current_user.is_authenticated:
 
         # Messages sent and recieved by user
-        messages = []
+        sent_messages = []
         for conversation in current_user.sent_conversations:
             for message in conversation.messages:
                 msg = {'conversation':
@@ -71,36 +71,44 @@ def profile_messages():
                             'id': conversation.id,
                             'title': conversation.title,
                             'sender_id': conversation.sender_id,
-                            'recipient_id
-
-                    {'message': {
-                    'id': message.id,
-
-                    'title': listing.title,
-                    'description': listing.description,
-                    'status': listing.status,
-                    'price': listing.price,
-                    'salary': listing.salary,
-                    'posted_at': listing.posted_at
+                            'recipient_id': conversation.recipient_id,
+                            'status': conversation.status,
+                            'message': {
+                                'id': message.id,
+                                'content': message.message,
+                                'sender_id': message.sender_id,
+                                'recipient_id': message.recipient_id,
+                                'message_date': message.message_date
+                            }
+                        }
                     }
-            conversation_list.append(listings)
+            sent_messages.append(msg)
 
-        # conversations made by user
-        user_messages = []
-        for conversation in current_user.conversations:
-            user_conversations = {
-                    'id': conversation.id,
-                    'title': conversation.title,
-                    'sender_id': conversation.sender_id,
-                    'recipient_id': conversation.recipient_id,
-                    'listing': conversation_list,
-                    'messages': conversation.messages.message,
-                    'message_date': conversation.messages.message_date
+        # Messages sent and recieved by user
+        received_messages = []
+        for conversation in current_user.received_conversations:
+            for message in conversation.messages:
+                msg = {'conversation':
+                        {
+                            'id': conversation.id,
+                            'title': conversation.title,
+                            'sender_id': conversation.sender_id,
+                            'recipient_id': conversation.recipient_id,
+                            'status': conversation.status,
+                            'message': {
+                                'id': message.id,
+                                'content': message.message,
+                                'sender_id': message.sender_id,
+                                'recipient_id': message.recipient_id,
+                                'message_date': message.message_date
+                            }
+                        }
                     }
-            user_messages.append(user_conversations)
+            received_messages.append(msg)
+
         return jsonify({
-                'conversation_list': conversation_list,
-                'user_messages': user_messages
+                'sent_messages': sent_messages,
+                'received_messages': received_messages
                 }), 200
     else:
         return jsonify({'error': 'You are not authorized to get this information'}), 401
