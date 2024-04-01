@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 
 const AuthContext = createContext();
 
-const BASE_URL = 'https://handshake-edac.onrender.com/api';
-// const BASE_URL = 'http://localhost:5000/api';
+// const BASE_URL = 'https://handshake-edac.onrender.com/api';
+const BASE_URL = 'http://localhost:5000/api';
 
 const initialState = {
   user: null,
