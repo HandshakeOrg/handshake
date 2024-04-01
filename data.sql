@@ -1,0 +1,57 @@
+INSERT INTO `country` (name, currency) VALUES 
+('Nigeria', 'NGN');
+
+
+INSERT INTO `state` (name, country_id) VALUES 
+('Abia', 1),
+('Adamawa', 1),
+('Akwa Ibom', 1),
+('Anambra', 1),
+('Bauchi', 1),
+('Bayelsa', 1),
+('Benue', 1),
+('Borno', 1),
+('Cross River', 1),
+('Delta', 1),
+('Ebonyi', 1),
+('Edo', 1),
+('Ekiti', 1),
+('Enugu', 1),
+('Gombe', 1),
+('Imo', 1),
+('Jigawa', 1),
+('Kaduna', 1),
+('Kano', 1),
+('Katsina', 1),
+('Kebbi', 1),
+('Kogi', 1),
+('Kwara', 1),
+('Lagos', 1),
+('Nasarawa', 1),
+('Niger', 1),
+('Ogun', 1),
+('Ondo', 1),
+('Osun', 1),
+('Oyo', 1),
+('Plateau', 1),
+('Rivers', 1),
+('Sokoto', 1),
+('Taraba', 1),
+('Yobe', 1),
+('Zamfara', 1),
+('FCT', 1);
+
+
+INSERT INTO category (category_name, listing_validity, maximum_images, parent_category_id) VALUES
+('Agriculture', 30, 5, NULL),
+('Arts & Crafts', 30, 5, NULL),
+('Education', 30, 5, NULL),
+('Electronics & Gadgets', 30, 5, NULL),
+('Fashion & Beauty', 30, 5, NULL),
+('Food & Groceries', 30, 5, NULL),
+('For Sale', 30, 5, NULL),
+('Health & Wellness', 30, 5, NULL),
+('Home Appliances', 30, 5, NULL),
+('Jobs', 30, 5, NULL),
+('Real Estate', 30, 5, NULL),
+('Services', 30, 5, NULL);

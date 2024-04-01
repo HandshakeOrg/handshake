@@ -20,7 +20,7 @@ class Category(db.Model):
     maximum_images = db.Column(db.Integer, default=1)
     listing_validity = db.Column(db.Integer, nullable=False)
     parent_category_id = db.Column(db.Integer, db.ForeignKey('category.id'),
-                                   nullable=False)
+                                   nullable=True)
     listing = db.relationship('Listing', backref='category')
     attribute = db.relationship('Attribute', backref='category',
                                 cascade='all, delete-orphan')
