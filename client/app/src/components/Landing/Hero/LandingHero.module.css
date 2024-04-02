@@ -13,6 +13,12 @@
   font-size: clamp(2.25rem, 0.5vw + 1rem, 4rem);
   font-weight: 700;
   letter-spacing: -0.05em;
+  text-transform: capitalize;
+}
+.h3 {
+  font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
 }
 .sub_title {
   color: #6b7280;
@@ -32,9 +38,11 @@
   border-radius: 1rem;
   background-color: var(--background);
   color: var(--text);
+  transition: all 0.5s ease-in;
 }
 .btns:hover {
   background-color: var(--accent);
+  transition: all 0.3s ease;
 }
 /* apply btns */
 .apply_btns {
@@ -43,29 +51,59 @@
   background-color: var(--background);
   color: var(--text);
   border: 1px solid transparent;
+  transition: all 0.5s ease-in;
 }
 .apply_btns:hover {
-  border: 1px solid black;
-  background: none;
+  opacity: 0.8;
+  transition: all 0.5s ease-in;
 }
 
 /* first */
 .first {
-  padding: 1.5rem 40px;
+  /* padding: 1.5rem 40px; */
   text-align: center;
   color: var(--text);
 }
 .first .wrapper {
-  max-width: 700px;
   margin: 0 auto;
+  padding: 2rem 1rem;
 }
 .first h2 {
   font-size: (1.5rem, 3vw, 3rem);
   font-size: clamp(2.25rem, 0.5vw + 1rem, 4rem);
-  padding: 0.5rem 0;
+  padding: 2rem 0;
 }
 .first p {
   font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+  padding: 0.5rem 0;
+}
+
+.card_wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.card {
+  padding: 20px;
+  flex-basis: 200px;
+  flex-grow: 1;
+  transition: all 0.5s ease-in;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 1rem;
+
+  /* background: url(https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=400); */
+}
+/* .card:hover {
+  transform: translateY(-1px);
+  transition: all 0.5s ease-in;
+} */
+.card h3 {
+  font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+  padding: 0.5rem 0;
+}
+.card p {
+  font-size: clamp(0.75rem, 0.5vw + 1rem, 1rem);
   padding: 0.5rem 0;
 }
 
@@ -101,6 +139,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 20px;
 }
 
 /* third */

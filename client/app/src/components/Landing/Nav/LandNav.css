@@ -12,6 +12,7 @@
   position: fixed;
   width: 100%;
   z-index: 3;
+  padding: 0 0.3rem;
 }
 
 .header ul {
@@ -33,6 +34,7 @@
 .header li a:hover,
 .header .menu-btn:hover {
   background-color: var(--accent);
+  transition: all 0.3s ease-in;
 }
 
 .header .logo {
@@ -74,7 +76,7 @@
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #333;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   position: absolute;
