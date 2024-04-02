@@ -82,6 +82,22 @@ export default function BodySection() {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  function formatDateFromString(dateString) {
+    // Parse the string date into a Date object
+    const date = new Date(dateString);
+
+    // Get the day, month, and year from the date object
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' }); // Get month as a string
+    const year = date.getFullYear();
+
+    // Format the date as "day month year"
+    const formattedDate = `${day} ${month} ${year}`;
+
+    return formattedDate;
+  }
+
   return (
     <main className='main'>
       <div>
@@ -128,7 +144,7 @@ export default function BodySection() {
                 price_negotiable={listing.price_negotiable}
                 status={listing.status}
                 description={listing.description}
-                expiry_date={listing.expiry_date}
+                expiry_date={formatDateFromString(listing.expiry_date)}
               />
             ))}
           </div>

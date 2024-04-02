@@ -125,6 +125,7 @@ section.jobs {
   flex-wrap: wrap;
   /* left: 50%; */
   gap: 1rem;
+  justify-content: center;
 }
 
 .job-card .title {
@@ -186,6 +187,7 @@ section.jobs {
   position: absolute;
   left: 2rem;
   bottom: 2rem;
+  right: 2rem;
 }
 .job-title-box {
   border-bottom: 2px solid #00000014;
@@ -247,26 +249,17 @@ section.jobs {
     padding: 0;
     /* display: none; */
   }
-  /* .job-description {
-    position: absolute;
-    display: none;
-    top: 0;
-    right: 0;
-    left: 0;
-    background-color: #fff;
-    width: 100%;
-    margin: 1rem;
-    height: 100vh;
-    margin-bottom: 3rem;
-  } */
+
   section.jobs {
     width: 100%;
-    padding: 2rem;
+    /* padding: 2rem; */
   }
   .job-card {
     width: 46%;
   }
-  /* .job-description-fixed {
-    height: 50vh;
-  } */
+}
+@media screen and (max-width: 560px) {
+  .job-card {
+    width: 90%;
+  }
 }
