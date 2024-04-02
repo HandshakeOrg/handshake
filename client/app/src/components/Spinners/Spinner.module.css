@@ -17,7 +17,7 @@
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #014da3 transparent #014da3 transparent;
+  border-color: var(--accent) transparent var(--accent) transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }

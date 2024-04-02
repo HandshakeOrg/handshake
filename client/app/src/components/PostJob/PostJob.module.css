@@ -4,10 +4,6 @@
   align-items: center;
   min-height: 100vh;
   padding: 0 1rem;
-  box-sizing: border-box;
-  background: url(https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=400);
-  background-size: cover;
-  /* margin-top: 2rem; */
 }
 .form {
   background: var(--background);
@@ -26,7 +22,6 @@
 }
 .h1 {
   font-size: 1.875rem;
-  /* font-weight: bold; */
   text-align: center;
 }
 .p {
@@ -69,8 +64,5 @@
     margin-right: auto;
     max-width: 90%;
     margin-top: 5rem;
-  }
-  .main {
-    /* margin-top: 10rem; */
   }
 }

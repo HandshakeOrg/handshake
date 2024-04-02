@@ -1,11 +1,11 @@
 .hero {
   margin-top: 4rem;
   background-color: var(--background);
-  background: url(https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=400);
   background-size: cover;
   background-repeat: no-repeat;
   color: var(--text);
   padding: 3rem 20px;
+  text-align: center;
 }
 
 .h1 {
@@ -13,122 +13,139 @@
   font-size: clamp(2.25rem, 0.5vw + 1rem, 4rem);
   font-weight: 700;
   letter-spacing: -0.05em;
+  text-transform: capitalize;
+  color: var(--accent);
+}
+.h3 {
+  font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
 }
 .sub_title {
-  color: #6b7280;
+  color: var(--accent);
   font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
   line-height: 1.75;
   margin: 1rem 0 2rem 0;
 }
 
 .top {
-  max-width: 600px;
-  padding: 20px;
+  margin: 0 auto;
 }
 
 .btns {
   margin-top: 2em !important;
   padding: 1rem;
   border-radius: 1rem;
-  background-color: var(--background);
-  color: var(--text);
+  background-color: var(--accent);
+  color: var(--background);
+  transition: all 0.5s ease-in;
 }
 .btns:hover {
-  background-color: var(--accent);
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 /* apply btns */
 .apply_btns {
   padding: 1rem;
   border-radius: 1rem;
-  background-color: var(--background);
-  color: var(--text);
+  background-color: var(--accent);
+  color: var(--background);
   border: 1px solid transparent;
+  transition: all 0.5s ease-in;
 }
 .apply_btns:hover {
-  border: 1px solid black;
-  background: none;
+  opacity: 0.8;
+  transition: all 0.5s ease-in;
 }
 
 /* first */
 .first {
-  padding: 1.5rem 40px;
   text-align: center;
   color: var(--text);
 }
 .first .wrapper {
-  max-width: 700px;
   margin: 0 auto;
+  padding: 2rem 1rem;
 }
 .first h2 {
   font-size: (1.5rem, 3vw, 3rem);
   font-size: clamp(2.25rem, 0.5vw + 1rem, 4rem);
-  padding: 0.5rem 0;
+  padding: 2rem 0;
+  color: var(--accent);
 }
 .first p {
   font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
   padding: 0.5rem 0;
 }
+.features {
+  font-size: (1.5rem, 3vw, 3rem);
+  font-size: clamp(2.25rem, 0.5vw + 1rem, 4rem);
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--accent);
+}
+
+.card_wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.card {
+  padding: 20px;
+  flex-basis: 200px;
+  flex-grow: 1;
+  transition: all 0.5s ease-in;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 1rem;
+}
+
+.card h3 {
+  font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+  padding: 0.5rem 0;
+  color: var(--accent);
+}
+.card p {
+  font-size: clamp(0.75rem, 0.5vw + 1rem, 1rem);
+  padding: 0.5rem 0;
+}
 
 .second {
   padding: 40px;
-  background-color: var(--secondary);
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
-.seek_text,
-.seek_img {
-  flex-basis: 400px;
-  flex-grow: 1;
-}
-
-.seek_text {
-  padding: 20px 0;
-}
-.seek_text p:nth-child(2) {
-  font-size: 1rem;
-  font-style: italic;
-  padding: 0.5rem 0;
-}
-
-.seek_text p:nth-child(3) {
-  line-height: 1.5;
-  letter-spacing: -0.05em;
-  margin-bottom: 2rem;
-}
-
-.seek_img img {
+.full_width {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-color: #f7fafc;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-/* third */
-.third {
-  margin-top: 2rem;
-  padding: 40px;
-  background-color: var(--accent);
+.second_container {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
-.employers,
-.seek_img {
-  flex-basis: 400px;
+
+.flex_container {
+  flex-basis: 200px;
   flex-grow: 1;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  gap: 1rem;
+  padding: 1rem;
 }
-
-.employers {
-  padding: 20px 0;
-}
-.employers p:nth-child(2) {
-  font-size: 1rem;
-  font-style: italic;
-  padding: 0.5rem 0;
-}
-
-.employers p:nth-child(3) {
-  line-height: 1.5;
-  letter-spacing: -0.05em;
-  margin-bottom: 2rem;
+.flex_container h2 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: var(--accent);
 }

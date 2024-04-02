@@ -1,12 +1,11 @@
 /* FONT */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 :root {
   --text: #0b0d15;
   --background: #f6f7fa;
-  --primary: #5e72a8;
-  --secondary: #b4a1cc;
-  --accent: #af8abf;
+  --secondary: #233055;
+  --accent: #233055;
 }
 
 /* Reset default margin and padding */
@@ -35,16 +34,14 @@ textarea {
 body {
   background: var(--background);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: "Roboto Mono", monospace;
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings: 'slnt' 0;
-  font-size: 16px;
 }
 
 /* Style links */
 a {
-  color: var(--primary);
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -56,24 +53,26 @@ ol {
 
 /* Style buttons */
 button,
-input[type='submit'] {
-  background-color: var(--primary);
+input[type="submit"] {
+  background-color: var(--accent);
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 button:hover,
-input[type='submit'] {
-  background-color: var(--secondary);
-  color: var(--text);
+input[type="submit"] {
+  opacity: 0.8;
+  color: var(--background);
 }
 
 /* Style form inputs */
-input[type='text'],
-input[type='email'],
-input[type='password'],
+input[type="text"],
+input[type="email"],
+input[type="password"],
 input,
 textarea,
 select {
@@ -81,9 +80,7 @@ select {
   padding: 0.5rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
-  /* margin-bottom: 1rem; */
-  border-image: url(https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=400)
-    30 round;
+  border-color: var(--accent);
 }
 select,
 option {

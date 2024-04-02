@@ -12,6 +12,7 @@
   position: fixed;
   width: 100%;
   z-index: 3;
+  padding: 0 0.3rem;
 }
 
 .header ul {
@@ -26,20 +27,21 @@
   display: block;
   padding: 20px 20px;
   text-decoration: none;
-  color: var(--text);
+  color: var(--accent);
   font-weight: 600;
 }
 
 .header li a:hover,
 .header .menu-btn:hover {
   background-color: var(--accent);
+  transition: all 0.3s ease-in;
+  color: var(--background);
 }
 
 .header .logo {
   display: block;
   float: left;
   font-size: 2em;
-  /* padding: 10px 20px 10px 20px; */
   text-decoration: none;
 }
 
@@ -63,18 +65,18 @@
 }
 
 .header .menu-icon .navicon {
-  background: #333;
+  background: var(--accent);
   display: block;
   height: 2px;
   position: relative;
-  transition: background 0.2s ease-out;
+  transition: var(--background) 0.2s ease-out;
   width: 18px;
 }
 
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
-  background: #333;
-  content: '';
+  background: var(--accent);
+  content: "";
   display: block;
   height: 100%;
   position: absolute;

@@ -10,6 +10,7 @@ import {
 } from "../utils/validation/AuthValidation";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinners/Spinner";
+import logo from "../assets/logo_white_bg.jpg";
 
 function Signup() {
   const { createAccount, user, loading } = useAuth();
@@ -69,6 +70,9 @@ function Signup() {
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.center}>
+          <img src={logo} alt="Handshake" className={styles.logo_img} />
+        </div>
         <div className={styles.title}>
           <h1 className={styles.h1}>Create an account</h1>
           <p className={styles.p}>Enter your information to get started</p>
