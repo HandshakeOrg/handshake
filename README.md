@@ -8,13 +8,13 @@ Handshake is a dynamic and versatile web-based application poised to redefine th
 
 # Getting Started
 - Clone this repository to your local machine.
-- Ensure that python and node is install on your system
+- Ensure that Python and Node is installed on your system
 
 # Setting up the backend
 - Use the terminal or command prompt and navigate to the server directory
 - Create a virtual environment in handshake directory using this code:
 
-**For windows**
+**For Windows**
 ```bash
 python -m venv venv
 .\venv\Scripts\activate.bat
@@ -28,23 +28,28 @@ source venv/bin/activate
 ```bash
 pip install -r requirement.txt
 ```
-- Set up your mysql server
-- Update the sql uri in the __init__ file by commenting line 48 and commenting out line 47
-- copy the code in setup_mysql_test.sql and run it in your running mysql server
+- Set up your MySQL server
+- Update the SQL uri in the __init__ file by commenting line 48 and commenting out line 47
+- copy the code in setup_mysql_test.sql and run it in your running MySQL server
 - Or
 ```bash
 mysql -u your_username -p < setup_mysql_test.sql
+```
+- copy the code in data.sql and run it in your running MySQL server, _This will prepopulate you database with important data which is very important for the software to function_
+- Or
+```bash
+mysql -u your_username -p < data.sql
 ```
 - Start the flask app, (cd to the handshake directory, very important!)
 ```bash
 python -m server.app
 ```
 **Usage**
-- Your server api is now accessible on port 5000, http://localhost:5000/api/{endpoint}
+- Your server API is now accessible on port 5000, http://localhost:5000/api/{endpoint}
 
 # Setting up the frontend
 
-- Use the terminal or command prompt and navigate the the client directory
+- Use the terminal or command prompt and navigate the client directory
 - Install dependencies using
 ```
 npm install
@@ -56,8 +61,8 @@ npm run dev
 - Access the application in your browser at http://localhost:5173.
 
 # Endpoints
-Below is an endpoints available in handshake:
-- /api/signup: This endpoint signs up user.
+Below is the endpoints available in handshake:
+- /api/signup: This endpoint signs up the user.
 
 Method: POST
 URL: localhost:5000/api/signup
