@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './Login.module.css';
 import { useAuth } from '../contexts/AuthContext';
+import logo from '../assets/logo_white_bg.jpg';
 // import Spinner from '../components/Spinners/Spinner';
 
 function Login() {
@@ -37,7 +38,9 @@ function Login() {
     <main className={styles.main}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.center}>
-          <h1 className={styles.title}>HANDSHAKE</h1>
+          <h1 className={styles.title}>
+            <img src={logo} alt='Handshake' className={styles.logo_img} />
+          </h1>
           <p className={styles.sub_title}>Welcome back</p>
         </div>
         <div className={styles.input_box}>

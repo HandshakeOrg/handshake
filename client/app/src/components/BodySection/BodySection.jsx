@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import './BodySection.css';
 import ListingCard from './ListingCard';
-import ListingDescription from './ListingDescription';
+// import ListingDescription from './ListingDescription';
 import Spinner from '../Spinners/Spinner';
 export default function BodySection() {
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState([]);
-  const [selectedListingId, setSelectedListingId] = useState(null);
-  const [selectedListing, setSelectedListing] = useState(null);
+  // const [selectedListingId, setSelectedListingId] = useState(null);
+  // const [selectedListing, setSelectedListing] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
   // const BASE_URL = 'https://handshake-edac.onrender.com/api';
@@ -34,21 +34,21 @@ export default function BodySection() {
 
     fetchListings();
   }, []);
-  useEffect(() => {
-    if (selectedListingId) {
-      const listing = listings.find(
-        (listing) => listing.user_id === selectedListingId
-      );
-      setSelectedListing(listing);
-    } else {
-      setSelectedListing(null);
-    }
-  }, [selectedListingId, listings]);
+  // useEffect(() => {
+  //   if (selectedListingId) {
+  //     const listing = listings.find(
+  //       (listing) => listing.user_id === selectedListingId
+  //     );
+  //     setSelectedListing(listing);
+  //   } else {
+  //     setSelectedListing(null);
+  //   }
+  // }, [selectedListingId, listings]);
 
-  const handleListingSelect = (listingId) => {
-    setSelectedListingId(listingId);
-  };
-
+  // const handleListingSelect = (listingId) => {
+  //   setSelectedListingId(listingId);
+  // };
+  // For search listings
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -122,15 +122,15 @@ export default function BodySection() {
                 status={listing.status}
                 description={listing.description}
                 expiry_date={listing.expiry_date}
-                onSelect={handleListingSelect}
+                // onSelect={handleListingSelect}
               />
             ))}
           </div>
-          <div className='job-description'>
+          {/* <div className='job-description'>
             {selectedListing && (
               <ListingDescription listing={selectedListing} />
             )}
-          </div>
+          </div> */}
         </section>
         {loading && <Spinner />}
       </div>

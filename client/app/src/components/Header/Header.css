@@ -2,6 +2,10 @@
   color: var(--text);
   display: inline-lock;
 }
+.logo-img {
+  width: 3.5rem;
+  height: 3.5rem;
+}
 .header {
   background-color: var(--background);
   box-shadow: 1px 1px 4px 0 var(--accent);
@@ -38,7 +42,7 @@
   float: left;
 
   font-size: 2em;
-  padding: 10px 20px 10px 20px;
+  /* padding: 10px 20px 10px 20px; */
   text-decoration: none;
 }
 
@@ -76,7 +80,7 @@
 .header .menu-icon .navicon:after {
   background: #333;
 
-  content: "";
+  content: '';
 
   display: block;
   height: 100%;
