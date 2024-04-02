@@ -9,7 +9,6 @@
 .header {
   background-color: var(--background);
   box-shadow: 1px 1px 4px 0 var(--accent);
-
   position: fixed;
   width: 100%;
   top: 0;
@@ -28,21 +27,20 @@
   display: block;
   padding: 20px 20px;
   text-decoration: none;
-  color: var(--text);
+  color: var(--accent);
   font-weight: 600;
 }
 
 .header li a:hover,
 .header .menu-btn:hover {
   background-color: var(--accent);
+  color: var(--background);
 }
 
 .header .logo {
   display: block;
   float: left;
-
   font-size: 2em;
-  /* padding: 10px 20px 10px 20px; */
   text-decoration: none;
 }
 
@@ -59,28 +57,26 @@
 .header .menu-icon {
   cursor: pointer;
   display: inline-block;
-
   float: right;
-
   padding: 28px 20px;
   position: relative;
   user-select: none;
 }
 
 .header .menu-icon .navicon {
-  background: #333;
+  background: var(--accent);
   display: block;
   height: 2px;
   position: relative;
-  transition: background 0.2s ease-out;
+  transition: var(--background) 0.2s ease-out;
   width: 18px;
 }
 
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
-  background: #333;
+  background: var(--accent);
 
-  content: '';
+  content: "";
 
   display: block;
   height: 100%;

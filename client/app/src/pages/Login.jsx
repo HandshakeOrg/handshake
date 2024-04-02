@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import styles from './Login.module.css';
-import { useAuth } from '../contexts/AuthContext';
-import logo from '../assets/logo_white_bg.jpg';
-// import Spinner from '../components/Spinners/Spinner';
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./Login.module.css";
+import { useAuth } from "../contexts/AuthContext";
+import logo from "../assets/logo_white_bg.jpg";
+import Spinner from "../components/Spinners/Spinner";
 
 function Login() {
-  // const { login, isAuthenticated, loading } = useAuth();
-  const { login, isAuthenticated } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { login, isAuthenticated, loading } = useAuth();
+  // const { login, isAuthenticated } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error('Email and password cannot be empty.');
+      toast.error("Email and password cannot be empty.");
       return;
     }
     login({ email, password });
@@ -27,11 +27,11 @@ function Login() {
   useEffect(
     function () {
       if (isAuthenticated === true) {
-        const from = location.state?.from || '/app'; // Retrieve the original path or default to '/app'
+        const from = location.state?.from || "/app"; // Retrieve the original path or default to '/app'
         navigate(from, { replace: true });
       }
     },
-    [isAuthenticated, location.state, navigate]
+    [isAuthenticated, location.state, navigate],
   );
 
   return (
@@ -39,33 +39,33 @@ function Login() {
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.center}>
           <h1 className={styles.title}>
-            <img src={logo} alt='Handshake' className={styles.logo_img} />
+            <img src={logo} alt="Handshake" className={styles.logo_img} />
           </h1>
           <p className={styles.sub_title}>Welcome back</p>
         </div>
         <div className={styles.input_box}>
           <div className={styles.input_box}>
-            <label htmlFor='email'>Email</label>
+            <label htmlFor="email">Email</label>
             <input
-              id='email'
-              placeholder='m@example.com'
+              id="email"
+              placeholder="m@example.com"
               required
-              type='email'
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className={styles.input_box}>
             <div className={styles.forgot_container}>
-              <label htmlFor='password'>Password</label>
-              <Link className={styles.forgot} to='#'>
+              <label htmlFor="password">Password</label>
+              <Link className={styles.forgot} to="#">
                 Forgot your password?
               </Link>
             </div>
             <input
-              id='password'
+              id="password"
               required
-              type='password'
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -74,12 +74,12 @@ function Login() {
         </div>
         <div className={styles.pass}>
           Don&apos;t have an account? &nbsp;
-          <Link className={styles.underline} to='/signup'>
+          <Link className={styles.underline} to="/signup">
             Sign up
           </Link>
         </div>
       </form>
-      {/* {loading && <Spinner />} */}
+      {loading && <Spinner />}
     </main>
   );
 }
