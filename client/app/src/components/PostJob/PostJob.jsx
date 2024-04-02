@@ -16,7 +16,7 @@ function PostJob() {
     status: '',
     expiry_date: '',
     user_id: user.id,
-    category_id: 1,
+    category_id: '',
   });
   console.log(user);
   // console.log(formData.status);
@@ -41,6 +41,10 @@ function PostJob() {
     }
     if (isEmpty(formData.description)) {
       toast.error('Please enter a description');
+      return;
+    }
+    if (isEmpty(formData.category_id)) {
+      toast.error('Please select a category');
       return;
     }
     if (isEmpty(formData.price_negotiable)) {
@@ -166,6 +170,35 @@ function PostJob() {
               onChange={handleChange}
               required
             />
+          </div>
+        </div>
+        <div className={styles.input_box}>
+          <div className={styles.label_box}>
+            <label htmlFor='category_id' className={styles.label}>
+              Status
+            </label>
+          </div>
+          <div className={styles.input}>
+            <select
+              id='category_id'
+              name='category_id'
+              onChange={handleChange}
+              required
+            >
+              <option value=''>Select a Category</option>
+              <option value='1'>Agriculture</option>
+              <option value='2'>Arts & Crafts</option>
+              <option value='3'>Education</option>
+              <option value='4'>Electronics & Gadgets</option>
+              <option value='5'>Fashion & Beauty</option>
+              <option value='6'>Food & Groceries</option>
+              <option value='7'>For Sale</option>
+              <option value='8'>Health & Wellness</option>
+              <option value='9'>Home Appliaces</option>
+              <option value='10'>Jobs</option>
+              <option value='11'>Real Estate</option>
+              <option value='12'>Services</option>
+            </select>
           </div>
         </div>
         <div className={styles.input_box}>

@@ -1,13 +1,13 @@
 import './Header.css';
 import { NavLink } from 'react-router-dom';
-
+import logo from '../../assets/logo_white_bg.jpg';
 function LandNav() {
   return (
     <nav>
       <header className='header'>
         <div className='container'>
           <NavLink to='/' className='logo'>
-            HANDSHAKE
+            <img src={logo} alt='Handshake' className='logo-img' />
           </NavLink>
 
           <input className='menu-btn' type='checkbox' id='menu-btn' />
