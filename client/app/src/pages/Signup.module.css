@@ -23,6 +23,13 @@
   margin-block: 1rem;
   text-align: center;
 }
+.logo_img {
+  width: 4rem;
+  height: 4rem;
+}
+.center {
+  text-align: center;
+}
 .h1 {
   font-size: 1.875rem;
   font-weight: bold;

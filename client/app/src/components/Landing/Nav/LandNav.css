@@ -42,7 +42,6 @@
   display: block;
   float: left;
   font-size: 2em;
-  /* padding: 10px 20px 10px 20px; */
   text-decoration: none;
 }
 
@@ -66,7 +65,7 @@
 }
 
 .header .menu-icon .navicon {
-  background: #333;
+  background: var(--accent);
   display: block;
   height: 2px;
   position: relative;
@@ -76,7 +75,7 @@
 
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
-  background: #333;
+  background: var(--accent);
   content: "";
   display: block;
   height: 100%;
