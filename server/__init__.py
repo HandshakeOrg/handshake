@@ -6,6 +6,7 @@ push app context
 
 import os
 from flask import Flask
+import secrets
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
@@ -52,7 +53,8 @@ login_manager.login_message = 'Please log in to access this page.'
 # Set up secret key for signing sessions
 # import secrets
 # secrets.token_hex() will generate a new token
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = secrets.token_hex()
 # print(os.environ.get('SECRET_KEY'))
 # Prevent JavaScript access to the cookie
 app.config['SESSION_COOKIE_HTTPONLY'] = True

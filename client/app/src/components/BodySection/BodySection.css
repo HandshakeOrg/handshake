@@ -8,7 +8,7 @@
 
 /** Search field**/
 .main {
-  margin-top: 7rem;
+  margin-top: 5rem;
 }
 .search-field:focus-within {
   border: 0.01rem solid #2557a7;
@@ -100,89 +100,89 @@
   padding: 2rem;
   border: 0.1rem solid #e4e2e0;
   border-radius: 0.5rem;
+  min-height: 20rem;
   position: relative;
   margin-bottom: 1rem;
+  width: 32%;
+  background-color: #f6f7fa;
+  box-shadow: 0 0.5rem 1rem rgba(103, 85, 85, 0.12),
+    0 0.25rem 0.5rem rgba(45, 45, 45, 0.16), 0 0 0.125rem rgba(45, 45, 45, 0.2);
 }
 section.jobs {
-  display: flex;
-  padding-top: 2rem;
-  width: 60%;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* padding-top: 2rem; */
+  width: 90%;
   margin: 0 auto;
   position: relative;
-  background-color: #fff;
+  /* background-color: #fff; */
 }
-.job-listings,
-.job-description {
-  width: 50%;
-}
+
 .job-listings {
-  padding-right: 3rem;
+  /* padding-right: 3rem;
+   */
+  display: flex;
+  flex-wrap: wrap;
+  /* left: 50%; */
+  gap: 1rem;
 }
-.job-description {
-  /* border: 0.1rem solid #e4e2e0;
-  height: calc(100vh -2rem);
-  border-radius: 0.5rem; */
-  /* position: sticky; 
-  top: 1rem;
-  margin-top: 2rem; */
-  /* position: sticky;
-  min-height: 7rem;
-  position: -webkit-sticky;
-  top: 10px; */
-}
-.job-description-main-fixed {
-  border: 0.1rem solid #e4e2e0;
-  border-radius: 0.5rem;
-  top: 10px;
-  position: sticky;
-  min-height: 40rem;
-  position: -webkit-sticky;
-  /* overflow-y: hidden; */
-}
-.job-description-fixed .title {
-  margin-bottom: 1rem;
+
+.job-card .title {
+  margin-top: 2rem;
 }
 .job-location,
 .company-name {
-  color: #6f6f6f;
+  color: #000;
   /* line-height: 1.35; */
   padding-bottom: 0;
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: 400;
+  /* margin-top: 5rem; */
   margin-bottom: 0.5rem;
 }
 .job-salary {
-  font-size: 1.4rem;
+  font-size: 1rem;
   color: #000;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 }
 .job-salary .amount {
-  padding: 0.3rem;
-  background-color: #f3f2f1;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 4;
+  font-size: 1rem;
 }
 
 .job-mode {
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   padding: 0.3rem;
-  background-color: #f3f2f1;
+
+  position: absolute;
+  right: 1rem;
+  top: 2rem;
+  display: inline-block;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.job-mode.active {
+  background-color: #079718;
+  color: #fff;
+}
+.job-mode.inactive {
+  background-color: #f60b0b;
+  color: #fff;
 }
 .job-short-description {
-  padding-top: 2rem;
-  list-style-type: circle;
   margin-top: 0px;
   margin-bottom: 2rem;
-  padding-left: 20px;
-
-  box-sizing: border-box;
-
-  line-height: 1.25rem;
-  color: #6f6f6f;
-  font-size: 1.4rem;
+  color: #000;
+  font-size: 1rem;
 }
 .date-posted {
   font-weight: 400;
-  color: #6f6f6f;
-  font-size: 1.2rem;
+  color: #000;
+  font-size: 1rem;
   position: absolute;
   left: 2rem;
   bottom: 2rem;
@@ -198,124 +198,19 @@ section.jobs {
 .job-description .company-name {
   color: rgb(37, 87, 167);
   font-size: 1.4rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 .job-description .salary {
   color: #2d2d2d;
 }
-.job-description .title {
-  color: #2d2d2d;
-  margin: 1rem 0 1rem;
-  font-size: 1.4rem;
+.pagination {
+  width: 20rem;
+  margin: 0 auto;
 }
-.job-description .cta {
-  margin: 1.6rem 0 0;
-}
-.job-description .cta a {
-  /* padding: 2rem; */
-  box-sizing: border-box;
-  background: none rgb(37, 87, 167);
-
-  text-decoration: none;
-  border: 1px solid rgb(37, 87, 167);
-  cursor: pointer;
-  padding: 0.7rem 1.6rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-  border-radius: 0.8rem;
-  transition: border-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s,
-    background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s,
-    opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s,
-    box-shadow 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s,
-    color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
-
-  color: rgb(255, 255, 255);
-  box-shadow: none;
-}
-.job-location-box {
-  border-bottom: 0.1rem solid rgb(228, 226, 224);
-  border-top-color: rgb(228, 226, 224);
-  border-right-color: rgb(228, 226, 224);
-  border-left-color: rgb(228, 226, 224);
-  padding: 2rem 1.6rem 2.4rem 1.4rem;
-}
-.job-location-box h2 {
-  color: #2d2d2d;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.5;
-  margin: 0 0 1.2rem;
-}
-.job-location-box p {
-  color: #2d2d2d;
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.4;
-}
-.job-description-fixed {
-  height: 70vh;
-  overflow-y: scroll;
-  /* -ms-overflow-style: none; /* Internet Explorer 10+ */
-  /* scrollbar-width: none; Firefox */
-}
-.container::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
-}
-.job-details {
-  padding: 0px 1.6rem 1rem 1.4rem;
-  margin-top: 2rem;
-  border-bottom: 0.1rem solid rgb(228, 226, 224);
-}
-.job-details h2 {
-  color: #2d2d2d;
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.5;
-}
-.job-details h3 {
-  color: #2d2d2d;
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-.job-details span {
-  padding: 0.3rem;
-  background-color: #f3f2f1;
-  font-size: 1.4rem;
-  color: #000;
-  margin-bottom: 2rem;
-  display: inline-block;
-}
-.job-full-description-box {
-  padding: 2rem 1.6rem 2.4rem 1.4rem;
-}
-.job-full-description-box h2 {
-  color: #2d2d2d;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.5;
-}
-.job-full-description-box .description {
-  color: #2d2d2d;
-  line-height: 2.4rem;
-  font-size: 1.4rem;
-  margin: 1.6rem 0;
-  text-align: justify;
-}
-.job-full-description-box h3 {
-  color: #2d2d2d;
-  font-weight: 700;
-  font-size: 1.4rem;
-}
-
-.job-full-description-box .responsibilities {
-  color: #2d2d2d;
-  list-style-type: disc;
-  line-height: 2.4rem;
-  padding: 0 0 0 4rem;
-  margin: 1.6rem 0;
-  font-size: 1.4rem;
-  text-align: justify;
+.pagination button {
+  width: 5rem;
 }
 @media screen and (max-width: 767px) {
   .form-container {
@@ -352,7 +247,7 @@ section.jobs {
     padding: 0;
     /* display: none; */
   }
-  .job-description {
+  /* .job-description {
     position: absolute;
     display: none;
     top: 0;
@@ -363,12 +258,15 @@ section.jobs {
     margin: 1rem;
     height: 100vh;
     margin-bottom: 3rem;
-  }
+  } */
   section.jobs {
     width: 100%;
     padding: 2rem;
   }
-  .job-description-fixed {
-    height: 50vh;
+  .job-card {
+    width: 46%;
   }
+  /* .job-description-fixed {
+    height: 50vh;
+  } */
 }

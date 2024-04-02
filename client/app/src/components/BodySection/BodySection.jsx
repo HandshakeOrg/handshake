@@ -6,26 +6,33 @@ import Spinner from '../Spinners/Spinner';
 export default function BodySection() {
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState([]);
-  // const [selectedListingId, setSelectedListingId] = useState(null);
-  // const [selectedListing, setSelectedListing] = useState(null);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   // const BASE_URL = 'https://handshake-edac.onrender.com/api';
   const BASE_URL = 'http://127.0.0.1:5000/api';
   useEffect(() => {
     const fetchListings = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${BASE_URL}/get_listings`, {
-          credentials: 'include',
-        });
+        const response = await fetch(
+          `${BASE_URL}/get_listings?page=${currentPage}`,
+          {
+            credentials: 'include',
+          }
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch listings');
         }
         const data = await response.json();
         setLoading(false);
         setListings(data.listings);
-        console.log(data);
+        setTotalPages(data.total_pages);
+        // console.log(data);
+        // console.log(data.total_pages);
       } catch (error) {
         setLoading(false);
         console.error('Error fetching listings:', error);
@@ -33,33 +40,21 @@ export default function BodySection() {
     };
 
     fetchListings();
-  }, []);
-  // useEffect(() => {
-  //   if (selectedListingId) {
-  //     const listing = listings.find(
-  //       (listing) => listing.user_id === selectedListingId
-  //     );
-  //     setSelectedListing(listing);
-  //   } else {
-  //     setSelectedListing(null);
-  //   }
-  // }, [selectedListingId, listings]);
+  }, [currentPage]);
 
-  // const handleListingSelect = (listingId) => {
-  //   setSelectedListingId(listingId);
-  // };
   // For search listings
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await fetch(
-        `${BASE_URL}/listings_search?${searchType}=${searchQuery}`,
+        `${BASE_URL}/listings_search?${searchType}=${searchQuery}&page=${currentPage}`,
         { credentials: 'include' }
       );
       if (response.ok) {
         const data = await response.json();
         setListings(data.listings);
+        setTotalPages(data.total_pages);
       } else {
         console.error('Failed to search listings:', response.statusText);
       }
@@ -74,6 +69,18 @@ export default function BodySection() {
 
   const handleSelectChange = (event) => {
     setSearchType(event.target.value);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
   return (
     <main className='main'>
@@ -122,16 +129,24 @@ export default function BodySection() {
                 status={listing.status}
                 description={listing.description}
                 expiry_date={listing.expiry_date}
-                // onSelect={handleListingSelect}
               />
             ))}
           </div>
-          {/* <div className='job-description'>
-            {selectedListing && (
-              <ListingDescription listing={selectedListing} />
-            )}
-          </div> */}
         </section>
+        <div className='pagination'>
+          <button onClick={handlePrevPage} disabled={currentPage === 1}>
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
         {loading && <Spinner />}
       </div>
     </main>
