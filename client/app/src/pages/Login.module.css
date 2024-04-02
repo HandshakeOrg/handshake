@@ -29,6 +29,10 @@
   font-size: 1.875rem;
   font-weight: bold;
 }
+.logo_img {
+  width: 4rem;
+  height: 4rem;
+}
 .sub_title {
   color: var(--primary);
 }
