@@ -58,49 +58,56 @@ function LandingHero() {
         </div>
       </section>
       <section className={styles.second}>
-        <div className={styles.seek_text}>
-          <h2>For Job Seekers</h2>
-          <p>Find Your Perfect Fit</p>
-          <p>
-            Discover intriguing work possibilities based on your talents,
-            experience, and goals. Whether you&apos;re looking for a tough new
-            role, a career shift, or your first job out of college, JobSeekerHub
-            offers a diverse choice of job ads to choose from. Our user-friendly
-            website allows you to effortlessly browse for jobs, save your
-            favourite ads, and apply directly to employers—all in one location.
-          </p>
-          <Link to="/signup" className={styles.apply_btns}>
-            Apply to Listing/Job
-          </Link>
-        </div>
-        <div className={styles.seek_img}>
-          <img
-            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGpvYiUyMHNlZWtlcnxlbnwwfHwwfHx8MA%3D%3D"
-            alt="job seeker"
-          />
-        </div>
-      </section>
-      <section className={styles.third}>
-        <div className={styles.employers}>
-          <h2>For Employers</h2>
-          <p>Attract Top Talent</p>
-          <p>
-            Connect with eligible prospects from our huge list of job seekers.
-            Post your job openings on JobSeekerHub to attract a specific
-            community of motivated individuals who are actively seeking new
-            possibilities. Our powerful platform enables you to manage job ads,
-            examine candidate profiles, and expedite the recruiting process, all
-            while saving time and resources.
-          </p>
-          <Link to="/signup" className={styles.apply_btns}>
-            Post a Listing
-          </Link>
-        </div>
-        <div className={styles.seek_img}>
-          <img
-            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGpvYiUyMHNlZWtlcnxlbnwwfHwwfHx8MA%3D%3D"
-            alt="job seeker"
-          />
+        <div className={styles.full_width}>
+          <div className={styles.second_container}>
+            <div className={styles.flex_container}>
+              <h2>Find your next opportunity</h2>
+              <p>
+                Discover a wide variety of job openings and classified ads
+                effortlessly on our platform. Browse through listings and find
+                the perfect opportunity that suits your needs.
+              </p>
+              <Link to="/app" className={styles.btns}>
+                Browse listings
+              </Link>
+            </div>
+            <div className={styles.flex_container}>
+              <h2>Post your listings with ease</h2>
+              <p>
+                Whether you&apos;re looking to hire or sell, our platform
+                provides a seamless experience for creating and publishing
+                listings in just a few minutes. Post your listings with ease and
+                reach a wide audience.
+              </p>
+              <Link to="/app/postjob" className={styles.btns}>
+                Post a job
+              </Link>
+            </div>
+          </div>
+          <div className={styles.second_container}>
+            <div className={styles.flex_container}>
+              <h2>Manage your listings with ease</h2>
+              <p>
+                Whether you&apos;re looking to hire or sell, our platform
+                provides a seamless experience for creating and publishing
+                listings in just a few minutes. Post your listings with ease and
+                reach a wide audience.
+              </p>
+              <Link to="/app" className={styles.btns}>
+                Manage listings
+              </Link>
+            </div>
+            <div className={styles.flex_container}>
+              <h2>Join the vibrant community</h2>
+              <p>
+                Ready to take the first step? Sign up now and start exploring
+                the endless possibilities!
+              </p>
+              <Link to="/signup" className={styles.btns}>
+                Sign up
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>
