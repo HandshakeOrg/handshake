@@ -1,5 +1,5 @@
 /* FONT */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 :root {
   --text: #0b0d15;
@@ -35,11 +35,9 @@ textarea {
 body {
   background: var(--background);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: "Roboto Mono", monospace;
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings: 'slnt' 0;
-  font-size: 16px;
 }
 
 /* Style links */
@@ -56,7 +54,7 @@ ol {
 
 /* Style buttons */
 button,
-input[type='submit'] {
+input[type="submit"] {
   background-color: var(--primary);
   color: #fff;
   border: none;
@@ -65,15 +63,15 @@ input[type='submit'] {
   cursor: pointer;
 }
 button:hover,
-input[type='submit'] {
+input[type="submit"] {
   background-color: var(--secondary);
   color: var(--text);
 }
 
 /* Style form inputs */
-input[type='text'],
-input[type='email'],
-input[type='password'],
+input[type="text"],
+input[type="email"],
+input[type="password"],
 input,
 textarea,
 select {
