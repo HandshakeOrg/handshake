@@ -59,6 +59,7 @@ function LandingHero() {
       </section>
       <section className={styles.second}>
         <div className={styles.full_width}>
+          <h2 className={styles.features}>Our Key Features</h2>
           <div className={styles.second_container}>
             <div className={styles.flex_container}>
               <h2>Find your next opportunity</h2>

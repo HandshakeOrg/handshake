@@ -14,6 +14,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   text-transform: capitalize;
+  color: var(--accent);
 }
 .h3 {
   font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
@@ -21,7 +22,6 @@
   letter-spacing: -0.05em;
 }
 .sub_title {
-  /* color: #6b7280; */
   color: var(--accent);
   font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
   line-height: 1.75;
@@ -30,8 +30,6 @@
 
 .top {
   margin: 0 auto;
-  max-width: 600px;
-  padding: 20px;
 }
 
 .btns {
@@ -62,7 +60,6 @@
 
 /* first */
 .first {
-  /* padding: 1.5rem 40px; */
   text-align: center;
   color: var(--text);
 }
@@ -78,6 +75,12 @@
 .first p {
   font-size: clamp(1rem, 0.5vw + 1rem, 1.25rem);
   padding: 0.5rem 0;
+}
+.features {
+  font-size: (1.5rem, 3vw, 3rem);
+  font-size: clamp(2.25rem, 0.5vw + 1rem, 4rem);
+  padding: 2rem 0;
+  text-align: center;
 }
 
 .card_wrap {
