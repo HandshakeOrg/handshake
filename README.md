@@ -1,6 +1,8 @@
 # Introduction
 Welcome to handshake!
 
+![logo_no_bg](https://github.com/dominic-source/handshake/assets/68060853/e3d0eabe-d6d7-45d6-80c2-c73065d53fd3)
+
 This README serves as a guide to understand and utilize the features of our web application effectively.
 Handshake is a dynamic and versatile web-based application poised to redefine the job search and classified ad experience. It combines the functionalities of a job board and classified ads platform, enabling and empowering users to effortlessly browse, post, and manage listings for employment opportunities and transactions.
 
@@ -8,7 +10,7 @@ Handshake is a dynamic and versatile web-based application poised to redefine th
 - Clone this repository to your local machine.
 - Ensure that python and node is install on your system
 
-## Setting up the backend
+# Setting up the backend
 - Use the terminal or command prompt and navigate to the server directory
 - Create a virtual environment in handshake directory using this code:
 
@@ -37,9 +39,10 @@ mysql -u your_username -p < setup_mysql_test.sql
 ```bash
 python -m server.app
 ```
+**Usage**
 - Your server api is now accessible on port 5000, http://localhost:5000/api/{endpoint}
 
-## Setting up the frontend
+# Setting up the frontend
 
 - Use the terminal or command prompt and navigate the the client directory
 - Install dependencies using
@@ -53,31 +56,25 @@ npm run dev
 - Access the application in your browser at http://localhost:5173.
 
 # Endpoints
-Below are the endpoints available in handshake:
+Below is an endpoints available in handshake:
 - /api/signup: This endpoint signs up user.
 
-> Method: POST
+Method: POST
+URL: localhost:5000/api/signup
 
-> URL: localhost:5000/api/signup
+**Mandatory Parameters:**
 
-> Mandatory Parameters:
-
-> > 'firstname': firstname,
-
-> > 'lastname': lastname,
-
-> > 'email': email,
-
-> > 'phone_number': phone_number,
-
-> > 'password': password,
-
-> > 'confirm_password': confirm_password
-
-> Response:
-```
+_{'firstname': firstname,
+'lastname': lastname,
+'email': email,
+'phone_number': phone_number,
+'password': password,
+'confirm_password': confirm_password}_
+**Response:**
+```bash
 {
 'user_id': user.id
 }
 ```
-
+# Landing page
+![Screenshot (20)](https://github.com/HandshakeOrg/handshake/assets/68060853/9de2d5ff-f839-4292-9484-8d7b87e341f2)
