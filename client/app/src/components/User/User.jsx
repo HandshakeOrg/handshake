@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
@@ -7,13 +7,13 @@ import Spinner from "../Spinners/Spinner";
 
 function User() {
   const { user, logout, deleteAccount, isAuthenticated, loading } = useAuth();
-  console.log(user);
+
   const navigate = useNavigate();
 
-  function handleLogOut() {
-    logout();
-
-    navigate("/login", { replace: true });
+  async function handleLogOut() {
+    const res = await logout();
+    // console.log("logged out");
+    if (res.success) navigate("/login", { replace: true });
   }
   async function handleDelete(user) {
     if (!isAuthenticated) {
@@ -27,12 +27,12 @@ function User() {
     }
   }
 
-  useEffect(
-    function () {
-      if (user === null) navigate("/", { replace: true });
-    },
-    [user, navigate],
-  );
+  // useEffect(
+  //   function () {
+  //     if (user === null) navigate("/", { replace: true });
+  //   },
+  //   [user, navigate],
+  // );
 
   return (
     <>

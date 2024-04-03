@@ -20,7 +20,7 @@ function reducer(state, action) {
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
-      return { ...state, user: null, isAuthenticated: false };
+      return { ...state, user: action.payload, isAuthenticated: false };
     case "deleteAccount":
       return { ...state, user: action.payload, isAuthenticated: false };
     default:
@@ -81,18 +81,15 @@ function AuthProvider({ children }) {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         dispatch({ type: "login", payload: data.current_user });
         setLoading(false);
       } else {
         const errorData = await response.json();
-        console.log(errorData);
         const errorMessage = errorData?.error;
         setLoading(false);
         toast.error(errorMessage);
       }
     } catch (error) {
-      console.error(error);
       setLoading(false);
       toast.error("Something went wrong. Please try again.");
     }
@@ -119,16 +116,30 @@ function AuthProvider({ children }) {
     }
   }
 
-  function logout() {
-    dispatch({ type: "logout" })
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Logout failed", error);
-        // setLoading(true);
+  async function logout() {
+    try {
+      setLoading(true);
+      console.log("Attempting to log out...");
+
+      const response = await fetch(`${BASE_URL}/logout`, {
+        method: "GET",
       });
+
+      if (!response.ok) {
+        const errorMessage = response.statusText || "An error occurred";
+        throw new Error(errorMessage);
+      }
+
+      dispatch({ type: "logout", payload: {} }); // Empty payload
+      console.log("Logout successful");
+    } catch (error) {
+      console.error("Logout failed", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
+
   return (
     <AuthContext.Provider
       value={{
