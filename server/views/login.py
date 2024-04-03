@@ -18,6 +18,8 @@ def login():
     """
     Log in a user
     """
+    if current_user.is_authenticated:
+        return jsonify({'success': 'User is logged in alreardy'}), 200
 
     email = request.form.get('email')
     password = request.form.get('password')
