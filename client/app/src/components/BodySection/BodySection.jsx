@@ -31,7 +31,7 @@ export default function BodySection() {
         setLoading(false);
         setListings(data.listings);
         setTotalPages(data.total_pages);
-        // console.log(data);
+        console.log(data.listings);
         // console.log(data.total_pages);
       } catch (error) {
         setLoading(false);
@@ -146,6 +146,7 @@ export default function BodySection() {
                 status={listing.status}
                 description={listing.description}
                 expiry_date={formatDateFromString(listing.expiry_date)}
+                user_id={listing.user_id}
               />
             ))}
           </div>

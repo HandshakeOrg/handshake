@@ -166,11 +166,11 @@ section.jobs {
   font-size: 1rem;
   font-weight: 600;
 }
-.job-mode.active {
+.job-mode.Active {
   background-color: #079718;
   color: #fff;
 }
-.job-mode.inactive {
+.job-mode.Inactive {
   background-color: #f60b0b;
   color: #fff;
 }
