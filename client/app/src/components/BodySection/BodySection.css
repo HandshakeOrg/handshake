@@ -212,8 +212,14 @@ section.jobs {
   margin: 0 auto;
 }
 .pagination button {
-  width: 5rem;
+  width: 6rem;
 }
+.pagination button:disabled,
+button[disabled] {
+  opacity: 0.5; /* Dim the button */
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 767px) {
   .form-container {
     width: 100%;
