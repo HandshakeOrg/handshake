@@ -13,6 +13,8 @@ const Login = lazy(() => import('./pages/Login'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 const PostJob = lazy(() => import('./components/PostJob/PostJob'));
 const BodySection = lazy(() => import('./components/BodySection/BodySection'));
+const CallToAction = lazy(() => import('./pages/CallToAction'));
+
 function App() {
   return (
     <AuthProvider>
@@ -31,6 +33,10 @@ function App() {
               <Route
                 path='/app/profile'
                 element={<ProtectedRoute element={<User />} />}
+              />
+              <Route
+                path='/app/apply/:user_id'
+                element={<ProtectedRoute element={<CallToAction />} />}
               />
             </Route>
 
