@@ -8,6 +8,7 @@ import Spinner from "../Spinners/Spinner";
 function User() {
   const { user, logout, deleteAccount, isAuthenticated, loading } = useAuth();
 
+
   const navigate = useNavigate();
 
   async function handleLogOut() {
@@ -82,7 +83,7 @@ function User() {
           <button onClick={handleLogOut}>Logout</button>
           <button onClick={handleDelete}>Delete Account</button>
         </div>
-        {loading && <Spinner />}
+        {/* {loading && <Spinner />} */}
       </main>
     </>
   );

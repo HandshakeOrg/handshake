@@ -158,7 +158,7 @@ function PostJob() {
         <div className={styles.input_box}>
           <div className={styles.label_box}>
             <label htmlFor='description' className={styles.label}>
-              Job description
+              Description
             </label>
           </div>
           <div className={styles.input}>

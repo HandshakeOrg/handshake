@@ -21,10 +21,15 @@ python -m venv venv
 ```
 **For Linux**
 ```bash
+sudo apt-get update
+pip install --upgrade pip
+sudo apt-get install libmysqlclient-dev
+sudo apt-get install libpq-dev
 python -m venv venv
 source venv/bin/activate
 ```
 - Install all dependencies
+- cd into the server directory
 ```bash
 pip install -r requirement.txt
 ```
