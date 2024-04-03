@@ -15,11 +15,13 @@ from server.models.message import Message
 
 
 @app_views.route('/dashboard', methods=['GET'], strict_slashes=False)
-@login_required
 def profile():
     """
     Displays the user's dashboard
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     if current_user.is_authenticated:
         return jsonify({
             'id': current_user.id,
@@ -32,11 +34,13 @@ def profile():
         return jsonify({'error': 'You are not authorized to get this information'}), 401
 
 @app_views.route('/dashboard/listings', methods=['GET'], strict_slashes=False)
-@login_required
 def profile_listings():
     """
     displays all the listings  posted by the user
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     if current_user.is_authenticated:
         listings = []
         for list in current_user.listings:
@@ -55,11 +59,13 @@ def profile_listings():
 
 
 @app_views.route('/dashboard/messages', methods=['GET'], strict_slashes=False)
-@login_required
 def profile_messages():
     """
     display all conversations under a listing
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     if current_user.is_authenticated:
 
         # Messages sent and recieved by user

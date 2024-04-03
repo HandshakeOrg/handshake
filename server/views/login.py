@@ -12,7 +12,6 @@ from server.views import app_views
 from flask_login import login_user, current_user
 
 
-
 @app_views.route('/login', methods=['POST'], strict_slashes=False)
 def login():
     """
