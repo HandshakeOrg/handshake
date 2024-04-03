@@ -14,7 +14,7 @@ const AuthContext = createContext();
 // const BASE_URL = 'https://handshake-edac.onrender.com/api';
 const BASE_URL = 'http://localhost:5000/api';
 
-let initialState = {
+const initialState = {
   user: null,
   isAuthenticated: false,
 };
@@ -129,7 +129,7 @@ function AuthProvider({ children }) {
           dispatch({ type: 'deleteAccount', payload: data });
           toast.success('Account deleted successfully');
         })
-        .catch((error) => console.log(error)); // This is a general catch block for any errors that might occur during the fetch request.
+        .catch((error) => console.log(error));
     } catch (error) {
       console.error(error); // This line logs the error to the console.
       toast.error('Something went wrong. Please try again.'); // This line shows a toast error message.
