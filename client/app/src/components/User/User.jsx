@@ -69,7 +69,7 @@ function User() {
             </div>
             <div className={styles.item}>
               <label htmlFor="phone">Phone number</label>
-              <input id="phone" readOnly disabled value={user?.phone} />
+              <input id="phone" readOnly disabled value={user?.phone_number} />
             </div>
             <div className={styles.item}>
               <label htmlFor="password">Password</label>
