@@ -4,13 +4,47 @@ able to create post and listings
 """
 
 from server.views import app_views
-from server.models import Listing, User, Listing_attribute, Listing_image, conversation
+from server.models import Listing, User, Listing_attribute, Listing_image, conversation, City, State
 from flask import request, jsonify, abort
 from flask_login import current_user
 from werkzeug.utils import secure_filename
 from server import allowed_file, UPLOAD_LIST_IMAGE_FOLDER, db
 import os
 from datetime import datetime
+
+
+# provide user info of a listing
+# from the listing, check for the user_id in the listing and send it
+@app_views.route('/listings/user/<user_id>', strict_slashes=False, methods=['GET'])
+def get_listing_user(user_id):
+    """Get a users info"""
+    if not user_id:
+        return jsonify({'error': 'please include the user_id'}), 400
+    user = User.query.filter_by(id=int(user_id)).first()
+    if not user:
+        return jsonify({'error': 'Not found'}), 400
+
+    state = None
+    city = None
+    if user.city_id:
+        city = City.query.filter_by(id=int(user.city_id)).first()
+        if city:
+            city = city.name
+
+    if user.state_id:
+        state = State.query.filter_by(id=int(user.state_id)).first()
+        if state:
+            state = state.name
+    data = {
+        'firstname': user.firstname,
+        'lastname': user.lastname,
+        'email': user.email,
+        'phone_number': user.phone_number,
+        'city': city if city else 'Not stated',
+        'state': state if state else 'Not stated'
+    }
+
+    return jsonify(data), 200
 
 
 # Users must be able to create a listing
@@ -233,6 +267,7 @@ def delete_listings(listing_id):
             return jsonify({'error': 'An error occured while trying to delete listing!'}), 500
     return jsonify({'error': 'Could not find the listing id!'})
 
+
 # Users must be able to get all the listings page by page
 @app_views.route('/get_listings', strict_slashes=False, methods=['GET'])
 def get_listings():
@@ -243,7 +278,7 @@ def get_listings():
 
     # This sets the number of listings per page
     listing_per_page = 10
-    listings = Listing.query.paginate(page=page, per_page=listing_per_page, count=False)
+    listings = Listing.query.paginate(page=page, per_page=listing_per_page)
     total_pages = listings.pages
 
     if listings.has_next:

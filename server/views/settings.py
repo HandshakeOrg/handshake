@@ -148,7 +148,10 @@ def delete_account():
     """
     deletes a user account
     """
-    user = User.query.get(current_user.id)
-    db.session.delete(user)
-    db.session.commit()
-    return jsonify({'error': 'You account has been deleted.'}), 200
+    try:
+        user = User.query.get(current_user.id)
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({'success': 'You account has been deleted.'}), 200
+    except Exception as e:
+        return jsonify({'error': 'server error'}), 500
