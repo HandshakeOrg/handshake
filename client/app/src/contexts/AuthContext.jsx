@@ -22,7 +22,7 @@ function reducer(state, action) {
     case "logout":
       return { ...state, user: null, isAuthenticated: false };
     case "deleteAccount":
-      return { ...state, user: null, isAuthenticated: false };
+      return { ...state, user: action.payload, isAuthenticated: false };
     default:
       throw new Error("Unknown action");
   }
@@ -58,6 +58,7 @@ function AuthProvider({ children }) {
       console.log(ResponseData);
       dispatch({ type: "createAccount", payload: ResponseData });
       toast.success("Account created successfully");
+      setLoading(false);
     } catch (error) {
       console.error(error);
       toast.error(error);
@@ -82,6 +83,7 @@ function AuthProvider({ children }) {
         const data = await response.json();
         console.log(data);
         dispatch({ type: "login", payload: data.current_user });
+        setLoading(false);
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -95,73 +97,37 @@ function AuthProvider({ children }) {
       toast.error("Something went wrong. Please try again.");
     }
   }
-
   async function deleteAccount(user) {
     try {
-      setLoading(true);
+      setLoading(true); // This line is good, it sets the loading state to true before making the API call.
+
       const formData = new FormData();
       formData.append("user", user.id);
 
-      const response = await fetch(`${BASE_URL}/settings/delete`, {
+      fetch(`${BASE_URL}/settings/delete`, {
         method: "DELETE",
         body: formData,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        console.log(result);
-        dispatch({ type: "deleteAccount" });
-      } else {
-        const errorMessage = result?.error?.message || "An error occurred";
-        toast.error(errorMessage);
-      }
+      })
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: "deleteAccount", payload: data }))
+        .catch((error) => console.log(error)); // This is a general catch block for any errors that might occur during the fetch request.
     } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong. Please try again.");
+      console.error(error); // This line logs the error to the console.
+      toast.error("Something went wrong. Please try again."); // This line shows a toast error message.
     } finally {
-      setLoading(false);
+      setLoading(false); // This line sets the loading state to false after the API call, regardless of whether it was successful or not.
     }
   }
 
-  // async function deleteAccount(user) {
-  //   try {
-  //     setLoading(true);
-  //     const formData = new FormData();
-  //     formData.append("user", user.id);
-
-  //     const response = await fetch(`${BASE_URL}/settings/delete`, {
-  //       method: "DELETE",
-  //       body: formData,
-  //     });
-  //     if (response.ok) {
-  //       const result = await response.json();
-  //       console.log(result);
-  //       dispatch({ type: "deleteAccount" });
-  //     } else {
-  //       const errorData = await response.json();
-  //       const errorMessage = errorData?.error?.message || "An error occurred";
-  //       setLoading(false);
-  //       toast.error(errorMessage);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     setLoading(false);
-  //     toast.error("Invalid credentials. Please try again.");
-  //   }
-  // }
-
   function logout() {
-    setLoading(true);
     dispatch({ type: "logout" })
       .then(() => {
         setLoading(false);
       })
       .catch((error) => {
         console.error("Logout failed", error);
-        setLoading(false);
+        // setLoading(true);
       });
-    setLoading(false);
   }
   return (
     <AuthContext.Provider
