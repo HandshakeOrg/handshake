@@ -18,7 +18,7 @@ function PostJob() {
     user_id: user.id,
     category_id: '',
   });
-  console.log(user);
+  // console.log(user);
   // console.log(formData.status);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,7 +84,7 @@ function PostJob() {
         status: '',
         expiry_date: '',
         user_id: user.id,
-        category_id: 1,
+        category_id: '',
       });
       // Handle successful response
       toast.success('Listing created successfully');
@@ -175,7 +175,7 @@ function PostJob() {
         <div className={styles.input_box}>
           <div className={styles.label_box}>
             <label htmlFor='category_id' className={styles.label}>
-              Status
+              Category
             </label>
           </div>
           <div className={styles.input}>
@@ -253,8 +253,8 @@ function PostJob() {
           </div>
         </div>
         <input type='hidden' name='user_id' value={formData.user_id} />
-        <input type='hidden' name='category_id' value={formData.category_id} />
-        <button className={styles.button}>Post job</button>
+        {/* <input type='hidden' name='category_id' value={formData.category_id} /> */}
+        <button className={styles.button}>Post listing</button>
       </form>
     </main>
   );
