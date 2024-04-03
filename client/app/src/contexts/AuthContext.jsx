@@ -96,8 +96,7 @@ function AuthProvider({ children }) {
   }
   async function deleteAccount(user) {
     try {
-      setLoading(true); // This line is good, it sets the loading state to true before making the API call.
-
+      setLoading(true);
       const formData = new FormData();
       formData.append("user", user.id);
 
@@ -107,7 +106,10 @@ function AuthProvider({ children }) {
         body: formData,
       })
         .then((response) => response.json())
-        .then((data) => dispatch({ type: "deleteAccount", payload: data }))
+        .then((data) => {
+          dispatch({ type: "deleteAccount", payload: data });
+          toast.success("Account deleted successfully");
+        })
         .catch((error) => console.log(error)); // This is a general catch block for any errors that might occur during the fetch request.
     } catch (error) {
       console.error(error); // This line logs the error to the console.

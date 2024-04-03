@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
@@ -7,7 +7,6 @@ import Spinner from "../Spinners/Spinner";
 
 function User() {
   const { user, logout, deleteAccount, isAuthenticated, loading } = useAuth();
-
 
   const navigate = useNavigate();
 
@@ -23,17 +22,16 @@ function User() {
     }
     const deletionResult = await deleteAccount(user);
     if (deletionResult.success) {
-      toast.success("Account deleted successfully");
       navigate("/", { replace: true });
     }
   }
 
-  // useEffect(
-  //   function () {
-  //     if (user === null) navigate("/", { replace: true });
-  //   },
-  //   [user, navigate],
-  // );
+  useEffect(
+    function () {
+      if (user === null) navigate("/", { replace: true });
+    },
+    [user, navigate],
+  );
 
   return (
     <>
@@ -83,7 +81,7 @@ function User() {
           <button onClick={handleLogOut}>Logout</button>
           <button onClick={handleDelete}>Delete Account</button>
         </div>
-        {/* {loading && <Spinner />} */}
+        {loading && <Spinner />}
       </main>
     </>
   );
