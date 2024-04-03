@@ -37,12 +37,14 @@ def validate_phone(phone_number):
 
 
 @app_views.route('/settings', methods=['GET'], strict_slashes=False)
-@login_required
 def load_settings():
     """
     loads up the settings page
     with the current_user data
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     if current_user.is_authenticated:
         return jsonify ({
             'current_user': {
@@ -59,11 +61,13 @@ def load_settings():
 
 
 @app_views.route('/settings/changelocaton', methods=['POST'], strict_slashes=False)
-@login_required
 def change_location():
     """
     change the location of a user
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     city_name = request.form.get('city')
     if not city:
         return jsonify({'error': 'Please enter a city'}), 400
@@ -92,11 +96,13 @@ def change_location():
 
 
 @app_views.route('/settings/changepass', methods=['POST'], strict_slashes=False)
-@login_required
 def change_password():
     """
     change a user's password
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     password = request.form.get('password')
     if not password:
         return jsonify({'error': 'You did not enter a password'}), 400
@@ -107,11 +113,13 @@ def change_password():
 
 
 @app_views.route('/settings/changeemail', methods=['POST'], strict_slashes=False)
-@login_required
 def update_email():
     """
     change/update a user email address
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     email = request.form.get('email')
     if not email:
         return jsonify({'error': 'Please provide an email address'}), 400
@@ -125,11 +133,13 @@ def update_email():
 
 
 @app_views.route('/settings/changephone', methods=['POST'], strict_slashes=False)
-@login_required
 def update_phone():
     """
     change/update a user phone number
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     phone = request.form.get('phone_number')
     if not phone:
         return jsonify({'error': 'Please provide a valid phone number'}), 400
@@ -143,11 +153,13 @@ def update_phone():
 
 
 @app_views.route('/settings/delete', methods=['DELETE'], strict_slashes=False)
-@login_required
 def delete_account():
     """
     deletes a user account
     """
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Please login to your account!'}), 403
+
     try:
         user = User.query.get(current_user.id)
         db.session.delete(user)

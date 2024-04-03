@@ -8,7 +8,7 @@ const AuthContext = createContext();
 // const BASE_URL = 'https://handshake-edac.onrender.com/api';
 const BASE_URL = "http://localhost:5000/api";
 
-const initialState = {
+let initialState = {
   user: null,
   isAuthenticated: false,
 };
@@ -20,9 +20,9 @@ function reducer(state, action) {
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
-      return { ...state, user: null, isAuthenticated: false };
+      return { ...state, user: action.payload, isAuthenticated: false };
     case "deleteAccount":
-      return { ...state, user: null, isAuthenticated: false };
+      return { ...state, user: action.payload, isAuthenticated: false };
     default:
       throw new Error("Unknown action");
   }
@@ -58,6 +58,7 @@ function AuthProvider({ children }) {
       console.log(ResponseData);
       dispatch({ type: "createAccount", payload: ResponseData });
       toast.success("Account created successfully");
+      setLoading(false);
     } catch (error) {
       console.error(error);
       toast.error(error);
@@ -80,61 +81,65 @@ function AuthProvider({ children }) {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         dispatch({ type: "login", payload: data.current_user });
+        setLoading(false);
       } else {
         const errorData = await response.json();
-        console.log(errorData);
         const errorMessage = errorData?.error;
         setLoading(false);
         toast.error(errorMessage);
       }
     } catch (error) {
-      console.error(error);
       setLoading(false);
       toast.error("Something went wrong. Please try again.");
     }
   }
-
   async function deleteAccount(user) {
     try {
-      setLoading(true);
+      setLoading(true); // This line is good, it sets the loading state to true before making the API call.
+
       const formData = new FormData();
       formData.append("user", user.id);
 
-      const response = await fetch(`${BASE_URL}/settings/delete`, {
+      fetch(`${BASE_URL}/settings/delete`, {
+        credentials: "include",
         method: "DELETE",
         body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: "deleteAccount", payload: data }))
+        .catch((error) => console.log(error)); // This is a general catch block for any errors that might occur during the fetch request.
+    } catch (error) {
+      console.error(error); // This line logs the error to the console.
+      toast.error("Something went wrong. Please try again."); // This line shows a toast error message.
+    } finally {
+      setLoading(false); // This line sets the loading state to false after the API call, regardless of whether it was successful or not.
+    }
+  }
+
+  async function logout() {
+    try {
+      setLoading(true);
+      console.log("Attempting to log out...");
+
+      const response = await fetch(`${BASE_URL}/logout`, {
+        credentials: "include",
+        method: "GET",
       });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        console.log(result);
-        dispatch({ type: "deleteAccount" });
-      } else {
-        const errorMessage = result?.error?.message || "An error occurred";
-        toast.error(errorMessage);
+      if (!response.ok) {
+        const errorMessage = response.statusText || "An error occurred";
+        throw new Error(errorMessage);
       }
+
+      dispatch({ type: "logout", payload: {} }); // Empty payload
+      console.log("Logout successful");
     } catch (error) {
-      console.error(error);
+      console.error("Logout failed", error);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
-  }
-
-  function logout() {
-    setLoading(true);
-    dispatch({ type: "logout" })
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Logout failed", error);
-        setLoading(false);
-      });
-    setLoading(false);
   }
   return (
     <AuthContext.Provider

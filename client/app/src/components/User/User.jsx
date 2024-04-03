@@ -1,36 +1,39 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useAuth } from '../../contexts/AuthContext';
-import styles from './User.module.css';
-// import Spinner from '../Spinners/Spinner';
+// import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "../../contexts/AuthContext";
+import styles from "./User.module.css";
+import Spinner from "../Spinners/Spinner";
 
 function User() {
-  const { user, logout, deleteAccount, isAuthenticated } = useAuth();
-  console.log(user);
+  const { user, logout, deleteAccount, isAuthenticated, loading } = useAuth();
+
+
   const navigate = useNavigate();
 
   async function handleLogOut() {
-    await logout();
-
-    navigate('/login', { replace: true });
+    const res = await logout();
+    console.log(res);
+    if (res.success) navigate("/login", { replace: true });
   }
-  function handleDelete(user) {
+  async function handleDelete(user) {
     if (!isAuthenticated) {
-      toast.error('You are not authenticated');
+      toast.error("You are not authenticated");
       return;
     }
-    deleteAccount(user);
-    if (user === null) navigate('/', { replace: true });
-    toast.success('Account deleted successfully');
+    const deletionResult = await deleteAccount(user);
+    if (deletionResult.success) {
+      toast.success("Account deleted successfully");
+      navigate("/", { replace: true });
+    }
   }
 
-  useEffect(
-    function () {
-      if (user === null) navigate('/', { replace: true });
-    },
-    [user, navigate]
-  );
+  // useEffect(
+  //   function () {
+  //     if (user === null) navigate("/", { replace: true });
+  //   },
+  //   [user, navigate],
+  // );
 
   return (
     <>
@@ -44,35 +47,35 @@ function User() {
         <div>
           <div>
             <div className={styles.item}>
-              <label htmlFor='first-name'>First name</label>
+              <label htmlFor="first-name">First name</label>
               <input
-                id='first-name'
+                id="first-name"
                 readOnly
                 disabled
                 value={user?.firstname}
               />
             </div>
             <div className={styles.item}>
-              <label htmlFor='last-name'>Last name</label>
-              <input id='last-name' readOnly disabled value={user?.lastname} />
+              <label htmlFor="last-name">Last name</label>
+              <input id="last-name" readOnly disabled value={user?.lastname} />
             </div>
             <div className={styles.item}>
-              <label htmlFor='email'>Email</label>
+              <label htmlFor="email">Email</label>
               <input
-                id='email'
+                id="email"
                 readOnly
-                type='email'
+                type="email"
                 value={user?.email}
                 disabled
               />
             </div>
             <div className={styles.item}>
-              <label htmlFor='phone'>Phone number</label>
-              <input id='phone' readOnly disabled value={user?.phone} />
+              <label htmlFor="phone">Phone number</label>
+              <input id="phone" readOnly disabled value={user?.phone} />
             </div>
             <div className={styles.item}>
-              <label htmlFor='password'>Password</label>
-              <input id='password' type='password' disabled />
+              <label htmlFor="password">Password</label>
+              <input id="password" type="password" disabled />
             </div>
           </div>
         </div>
