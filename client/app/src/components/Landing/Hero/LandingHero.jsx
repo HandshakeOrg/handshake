@@ -81,7 +81,7 @@ function LandingHero() {
                 reach a wide audience.
               </p>
               <Link to="/app/postjob" className={styles.btns}>
-                Post a job
+                Post a List
               </Link>
             </div>
           </div>
