@@ -124,33 +124,6 @@ function AuthProvider({ children }) {
     }
   }
 
-  // async function deleteAccount(user) {
-  //   try {
-  //     setLoading(true);
-  //     const formData = new FormData();
-  //     formData.append("user", user.id);
-
-  //     const response = await fetch(`${BASE_URL}/settings/delete`, {
-  //       method: "DELETE",
-  //       body: formData,
-  //     });
-  //     if (response.ok) {
-  //       const result = await response.json();
-  //       console.log(result);
-  //       dispatch({ type: "deleteAccount" });
-  //     } else {
-  //       const errorData = await response.json();
-  //       const errorMessage = errorData?.error?.message || "An error occurred";
-  //       setLoading(false);
-  //       toast.error(errorMessage);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     setLoading(false);
-  //     toast.error("Invalid credentials. Please try again.");
-  //   }
-  // }
-
   function logout() {
     setLoading(true);
     dispatch({ type: "logout" })
