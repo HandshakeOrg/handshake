@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
-import './BodySection.css';
-import ListingCard from './ListingCard';
+import { useEffect, useState } from "react";
+import "./BodySection.css";
+import ListingCard from "./ListingCard";
 // import ListingDescription from './ListingDescription';
-import Spinner from '../Spinners/Spinner';
+import Spinner from "../Spinners/Spinner";
 export default function BodySection() {
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState([]);
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchType, setSearchType] = useState('title');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchType, setSearchType] = useState("title");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   // const BASE_URL = 'https://handshake-edac.onrender.com/api';
-  const BASE_URL = 'http://127.0.0.1:5000/api';
+  const BASE_URL = "http://127.0.0.1:5000/api";
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -21,21 +21,19 @@ export default function BodySection() {
         const response = await fetch(
           `${BASE_URL}/get_listings?page=${currentPage}`,
           {
-            credentials: 'include',
-          }
+            credentials: "include",
+          },
         );
         if (!response.ok) {
-          throw new Error('Failed to fetch listings');
+          throw new Error("Failed to fetch listings");
         }
         const data = await response.json();
         setLoading(false);
         setListings(data.listings);
         setTotalPages(data.total_pages);
-        console.log(data.listings);
-        // console.log(data.total_pages);
       } catch (error) {
         setLoading(false);
-        console.error('Error fetching listings:', error);
+        console.error("Error fetching listings:", error);
       }
     };
 
@@ -49,17 +47,17 @@ export default function BodySection() {
     try {
       const response = await fetch(
         `${BASE_URL}/listings_search?${searchType}=${searchQuery}&page=${currentPage}`,
-        { credentials: 'include' }
+        { credentials: "include" },
       );
       if (response.ok) {
         const data = await response.json();
         setListings(data.listings);
         setTotalPages(data.total_pages);
       } else {
-        console.error('Failed to search listings:', response.statusText);
+        console.error("Failed to search listings:", response.statusText);
       }
     } catch (error) {
-      console.error('An error occurred while searching listings:', error);
+      console.error("An error occurred while searching listings:", error);
     }
   };
 
@@ -81,7 +79,7 @@ export default function BodySection() {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
-    console.log('Previous being pressed');
+    console.log("Previous being pressed");
   };
 
   function formatDateFromString(dateString) {
@@ -90,7 +88,7 @@ export default function BodySection() {
 
     // Get the day, month, and year from the date object
     const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'long' }); // Get month as a string
+    const month = date.toLocaleString("default", { month: "long" }); // Get month as a string
     const year = date.getFullYear();
 
     // Format the date as "day month year"
@@ -100,32 +98,32 @@ export default function BodySection() {
   }
 
   return (
-    <main className='main'>
+    <main className="main">
       <div>
-        <section className='search'>
-          <div className='form-container'>
+        <section className="search">
+          <div className="form-container">
             <form onSubmit={handleSubmit}>
-              <div className='form'>
-                <div className='search-field'>
+              <div className="form">
+                <div className="search-field">
                   <input
-                    type='text'
-                    placeholder='Search listings'
+                    type="text"
+                    placeholder="Search listings"
                     value={searchQuery}
                     onChange={handleInputChange}
-                    className='input'
+                    className="input"
                   />
                   <select
                     value={searchType}
                     onChange={handleSelectChange}
-                    className='select'
+                    className="select"
                   >
-                    <option value='title'>By Title</option>
-                    <option value='status'>By Status</option>
-                    <option value='location'>By Location</option>
+                    <option value="title">By Title</option>
+                    <option value="status">By Status</option>
+                    <option value="location">By Location</option>
                   </select>
                 </div>
-                <div className='search-button-box'>
-                  <button type='submit' className='search-button'>
+                <div className="search-button-box">
+                  <button type="submit" className="search-button">
                     Find listings
                   </button>
                 </div>
@@ -134,8 +132,8 @@ export default function BodySection() {
           </div>
         </section>
 
-        <section className='jobs'>
-          <div className='job-listings'>
+        <section className="jobs">
+          <div className="job-listings">
             {listings.map((listing) => (
               <ListingCard
                 key={listing.id}
@@ -151,7 +149,7 @@ export default function BodySection() {
             ))}
           </div>
         </section>
-        <div className='pagination'>
+        <div className="pagination">
           <button onClick={handlePrevPage} disabled={currentPage === 1}>
             Previous
           </button>
