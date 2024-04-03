@@ -102,6 +102,7 @@ function AuthProvider({ children }) {
       formData.append("user", user.id);
 
       fetch(`${BASE_URL}/settings/delete`, {
+        credentials: "include",
         method: "DELETE",
         body: formData,
       })
