@@ -81,6 +81,7 @@ export default function BodySection() {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
+    console.log('Previous being pressed');
   };
 
   function formatDateFromString(dateString) {
