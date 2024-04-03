@@ -1,4 +1,10 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useState,
+  useEffect,
+} from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
@@ -8,7 +14,7 @@ const AuthContext = createContext();
 // const BASE_URL = 'https://handshake-edac.onrender.com/api';
 const BASE_URL = "http://localhost:5000/api";
 
-const initialState = {
+let initialState = {
   user: null,
   isAuthenticated: false,
 };
