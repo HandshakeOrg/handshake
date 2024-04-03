@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import styles from './Signup.module.css';
@@ -13,7 +13,7 @@ import Spinner from '../components/Spinners/Spinner';
 import logo from '../assets/logo_white_bg.jpg';
 
 function Signup() {
-  const { createAccount, user, loading } = useAuth();
+  const { createAccount, loading } = useAuth();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
@@ -57,15 +57,21 @@ function Signup() {
       toast.error('Please enter your phone number.');
       return;
     }
-
-    createAccount(data);
+    try {
+      createAccount(data);
+      toast.success('Account created successfully!');
+      navigate('/login'); // Redirect to login page after successful signup
+    } catch (error) {
+      // Handle any errors occurred during signup
+      toast.error('Failed to create account. Please try again.');
+    }
   };
-  useEffect(
-    function () {
-      if (user) navigate('/login', { replace: true });
-    },
-    [user, navigate]
-  );
+  // useEffect(
+  //   function () {
+  //     if (user) navigate('/app', { replace: true });
+  //   },
+  //   [user, navigate]
+  // );
 
   return (
     <main className={styles.main}>
