@@ -75,7 +75,7 @@ function AuthProvider({ children }) {
       const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         credentials: "include",
-        body: formData, // FormData will set the Content-Type to 'multipart/form-data' automatically
+        body: formData,
       });
 
       if (response.ok) {
@@ -92,7 +92,7 @@ function AuthProvider({ children }) {
     } catch (error) {
       console.error(error);
       setLoading(false);
-      toast.error("Invalid credentials. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   }
 
@@ -106,22 +106,50 @@ function AuthProvider({ children }) {
         method: "DELETE",
         body: formData,
       });
+
+      const result = await response.json();
+
       if (response.ok) {
-        const result = await response.json();
         console.log(result);
         dispatch({ type: "deleteAccount" });
       } else {
-        const errorData = await response.json();
-        const errorMessage = errorData?.error?.message || "An error occurred";
-        setLoading(false);
+        const errorMessage = result?.error?.message || "An error occurred";
         toast.error(errorMessage);
       }
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
       setLoading(false);
-      toast.error("Invalid credentials. Please try again.");
     }
   }
+
+  // async function deleteAccount(user) {
+  //   try {
+  //     setLoading(true);
+  //     const formData = new FormData();
+  //     formData.append("user", user.id);
+
+  //     const response = await fetch(`${BASE_URL}/settings/delete`, {
+  //       method: "DELETE",
+  //       body: formData,
+  //     });
+  //     if (response.ok) {
+  //       const result = await response.json();
+  //       console.log(result);
+  //       dispatch({ type: "deleteAccount" });
+  //     } else {
+  //       const errorData = await response.json();
+  //       const errorMessage = errorData?.error?.message || "An error occurred";
+  //       setLoading(false);
+  //       toast.error(errorMessage);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setLoading(false);
+  //     toast.error("Invalid credentials. Please try again.");
+  //   }
+  // }
 
   function logout() {
     setLoading(true);
