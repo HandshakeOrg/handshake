@@ -161,6 +161,7 @@ function AuthProvider({ children }) {
         console.error("Logout failed", error);
         setLoading(false);
       });
+    setLoading(false);
   }
   return (
     <AuthContext.Provider
