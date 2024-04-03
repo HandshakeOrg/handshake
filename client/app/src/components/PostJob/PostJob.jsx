@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { isEmpty } from '../../utils/validation/AuthValidation';
+import { useNavigate } from 'react-router-dom';
 const BASE_URL = 'http://localhost:5000/api';
 // const BASE_URL = 'https://handshake-edac.onrender.com/api';
 function PostJob() {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [formData, setFormData] = useState({
     title: '',
@@ -88,6 +90,7 @@ function PostJob() {
       });
       // Handle successful response
       toast.success('Listing created successfully');
+      navigate('/app');
     } catch (error) {
       console.error('Error creating listing:', error.message);
     }
