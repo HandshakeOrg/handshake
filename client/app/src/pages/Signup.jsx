@@ -60,7 +60,7 @@ function Signup() {
     try {
       createAccount(data);
       toast.success('Account created successfully!');
-      navigate('/login'); // Redirect to login page after successful signup
+      navigate('/login');
     } catch (error) {
       // Handle any errors occurred during signup
       toast.error('Failed to create account. Please try again.');
