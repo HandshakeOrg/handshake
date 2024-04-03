@@ -12,7 +12,7 @@ function User() {
 
   async function handleLogOut() {
     const res = await logout();
-    // console.log("logged out");
+    console.log(res);
     if (res.success) navigate("/login", { replace: true });
   }
   async function handleDelete(user) {

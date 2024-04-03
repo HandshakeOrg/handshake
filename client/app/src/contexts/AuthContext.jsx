@@ -122,6 +122,7 @@ function AuthProvider({ children }) {
       console.log("Attempting to log out...");
 
       const response = await fetch(`${BASE_URL}/logout`, {
+        credentials: "include",
         method: "GET",
       });
 
