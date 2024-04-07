@@ -76,7 +76,11 @@ URL: localhost:5000/api/signup
 
 _{'firstname': firstname,
 'lastname': lastname,
-'email': email,
+'email': email,![Screenshot (26)](https://github.com/HandshakeOrg/handshake/assets/68060853/edfdd578-1ab6-408d-9ad6-54e7f9734576)
+![Screenshot (25)](https://github.com/HandshakeOrg/handshake/assets/68060853/edcf5e95-3dc2-4a37-926c-a0798ebf2dc6)
+![Screenshot (25)](https://github.com/HandshakeOrg/handshake/assets/68060853/de5c622c-4773-45ce-abe1-d68bd6782000)
+![Screenshot (24)](https://github.com/HandshakeOrg/handshake/assets/68060853/8e2557c7-a662-4f2a-b519-5e456b5107c8)
+
 'phone_number': phone_number,
 'password': password,
 'confirm_password': confirm_password}_
@@ -87,4 +91,15 @@ _{'firstname': firstname,
 }
 ```
 # Landing page
-![Screenshot (20)](https://github.com/HandshakeOrg/handshake/assets/68060853/9de2d5ff-f839-4292-9484-8d7b87e341f2)
+![Screenshot (21)](https://github.com/HandshakeOrg/handshake/assets/68060853/92400906-d2e0-4b27-b626-6c9ad9061485)
+![Screenshot (22)](https://github.com/HandshakeOrg/handshake/assets/68060853/11f778a0-24b7-4f85-8515-84dc742dd975)
+![Screenshot (23)](https://github.com/HandshakeOrg/handshake/assets/68060853/4d17cb2d-bce4-4c85-942a-98f63617f27c)
+
+# Listing Page
+![Screenshot (25)](https://github.com/HandshakeOrg/handshake/assets/68060853/2cf3fff9-8efd-4578-ae3c-22d18ed91b2a)
+
+# SignUp Page
+![Screenshot (26)](https://github.com/HandshakeOrg/handshake/assets/68060853/965827e7-d42a-474f-88ed-0b83298ab8d7)
+
+#Login Page
+![Screenshot (24)](https://github.com/HandshakeOrg/handshake/assets/68060853/c133ff58-de90-4bb0-8cae-ce42dd93b18b)
