@@ -76,11 +76,7 @@ URL: localhost:5000/api/signup
 
 _{'firstname': firstname,
 'lastname': lastname,
-'email': email,![Screenshot (26)](https://github.com/HandshakeOrg/handshake/assets/68060853/edfdd578-1ab6-408d-9ad6-54e7f9734576)
-![Screenshot (25)](https://github.com/HandshakeOrg/handshake/assets/68060853/edcf5e95-3dc2-4a37-926c-a0798ebf2dc6)
-![Screenshot (25)](https://github.com/HandshakeOrg/handshake/assets/68060853/de5c622c-4773-45ce-abe1-d68bd6782000)
-![Screenshot (24)](https://github.com/HandshakeOrg/handshake/assets/68060853/8e2557c7-a662-4f2a-b519-5e456b5107c8)
-
+'email': email,
 'phone_number': phone_number,
 'password': password,
 'confirm_password': confirm_password}_
