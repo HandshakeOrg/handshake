@@ -101,5 +101,5 @@ _{'firstname': firstname,
 # SignUp Page
 ![Screenshot (26)](https://github.com/HandshakeOrg/handshake/assets/68060853/965827e7-d42a-474f-88ed-0b83298ab8d7)
 
-#Login Page
+# Login Page
 ![Screenshot (24)](https://github.com/HandshakeOrg/handshake/assets/68060853/c133ff58-de90-4bb0-8cae-ce42dd93b18b)
